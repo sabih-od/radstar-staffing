@@ -33,7 +33,7 @@ class UserFrontRegisterFormRequest extends Request
             'email' => 'required|unique:users,email|email|max:100',
             'password' => 'required|confirmed|min:6|max:50',
             'terms_of_use' => 'required',
-            //'g-recaptcha-response' => 'required|captcha',
+//            'g-recaptcha-response' => 'required|captcha',
         ];
     }
 

@@ -246,7 +246,7 @@ class CompanyController extends Controller
 
 		$company->is_subscribed = $request->input('is_subscribed', 0);
 
-		
+
 
         $company->slug = Str::slug($company->name, '-') . '-' . $company->id;
 
@@ -258,7 +258,7 @@ class CompanyController extends Controller
 
 		if((bool)$company->is_subscribed)
 
-		{			
+		{
 
 			$subscription = new Subscription();
 
@@ -290,7 +290,7 @@ class CompanyController extends Controller
 
 
 
-        
+
 
         flash(__('Company has been updated'))->success();
 
@@ -346,7 +346,7 @@ class CompanyController extends Controller
 
         return \Redirect::route('applicant.profile', $application_id);
 
-    } 
+    }
 
 
 
@@ -372,7 +372,7 @@ class CompanyController extends Controller
 
         $fev->status = 'hired';
 
-        $fev->update();        
+        $fev->update();
 
 
 
@@ -404,7 +404,7 @@ class CompanyController extends Controller
 
         $fev->status = null;
 
-        $fev->update();        
+        $fev->update();
 
 
 
@@ -456,7 +456,7 @@ class CompanyController extends Controller
 
             'to_id' => 'required',
 
-            'g-recaptcha-response' => 'required|captcha',
+//            'g-recaptcha-response' => 'required|captcha',
 
         );
 
@@ -920,7 +920,7 @@ class CompanyController extends Controller
 
 
 
-    
+
 
     public function resume_search_packages()
 
@@ -1042,16 +1042,16 @@ class CompanyController extends Controller
         }
 
 
-            
+
         }else{
 
             flash(__('Your Package has been expired!'))->error();
 
             return redirect('/company-packages');
-            
+
         }
 
-        
+
 
     }
 
