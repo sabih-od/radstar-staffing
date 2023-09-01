@@ -53,7 +53,7 @@ class CompaniesController extends Controller
      */
     public function __construct()
     {
-        
+
     }
 
     public function index()
@@ -67,7 +67,7 @@ class CompaniesController extends Controller
         if ($search != '') {
             $query->where('name', 'like', '%' . $search . '%');
         }
-       
+
 
         $data['companies'] = $query->paginate(20);
         return view('company.listing')->with($data);
@@ -124,13 +124,13 @@ class CompaniesController extends Controller
         $company->state_id = $request->input('state_id');
         $company->city_id = $request->input('city_id');
 		$company->is_subscribed = $request->input('is_subscribed', 0);
-		
+
         $company->slug = Str::slug($company->name, '-') . '-' . $company->id;
         $company->update();
 		/*************************/
 		Subscription::where('email', 'like', $company->email)->delete();
 		if((bool)$company->is_subscribed)
-		{			
+		{
 			$subscription = new Subscription();
 			$subscription->email = $company->email;
 			$subscription->name = $company->name;
@@ -146,7 +146,7 @@ class CompaniesController extends Controller
 			/*************************/
 		}
 
-        
+
         flash(__('Company has been updated'))->success();
         return \Redirect::route('company.profile');
     }
@@ -196,7 +196,7 @@ class CompaniesController extends Controller
             'subject' => 'required|max:200',
             'message' => 'required',
             'to_id' => 'required',
-            'g-recaptcha-response' => 'required|captcha',
+//            'g-recaptcha-response' => 'required|captcha',
         );
         $rules_messages = array(
             'from_name.required' => __('Name is required'),
