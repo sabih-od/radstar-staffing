@@ -83,9 +83,9 @@ class IndexController extends Controller
 						->with('sliders', $sliders)
                         ->with('video', $video)
                         ->with('testimonials', $testimonials)
-                        ->with('jobsCount', $jobsCount)     
-                        ->with('seekerCount', $seekerCount)     
-                        ->with('companyCount', $companyCount)                        
+                        ->with('jobsCount', $jobsCount)
+                        ->with('seekerCount', $seekerCount)
+                        ->with('companyCount', $companyCount)
                         ->with('seo', $seo);
     }
 
@@ -101,7 +101,7 @@ class IndexController extends Controller
 
         return Redirect::to($return_url);
     }
-	
+
 	public function checkTime()
 
     {
@@ -120,8 +120,8 @@ class IndexController extends Controller
         }
 
     }
-	
-	
-	
+
+
+
 
 }

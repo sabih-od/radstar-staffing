@@ -186,9 +186,9 @@ class CustomConfigServiceProvider extends ServiceProvider
 
                 'stripe_secret' => env('stripe_secret', $settings->stripe_secret),
 
-            ]; 
+            ];
 
-            
+
 
            /* $this->app['config']['payu'] = [
 
@@ -208,13 +208,13 @@ class CustomConfigServiceProvider extends ServiceProvider
 
             ];
 
-			$this->app['config']['company'] = [ 
+			$this->app['config']['company'] = [
 
 				'is_company_package_active' => $settings->is_company_package_active,
 
 			];
 
-			
+
 
 			$this->app['config']['newsletter'] = [
 
@@ -234,7 +234,7 @@ class CustomConfigServiceProvider extends ServiceProvider
 
             if ($lang !== null) {
 
-                $this->app['config']['default_lang'] = $lang->iso_code;				
+                $this->app['config']['default_lang'] = $lang->iso_code;
 
             }
 

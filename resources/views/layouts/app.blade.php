@@ -8,10 +8,10 @@ if (!isset($seo)) {
 
 ?>
 
-<!DOCTYPE html>
+    <!DOCTYPE html>
 
-<html lang="{{ app()->getLocale() }}" class="{{ (session('localeDir', 'ltr'))}}" dir="{{ (session('localeDir', 'ltr'))}}">
-
+<html lang="{{ app()->getLocale() }}" class="{{ (session('localeDir', 'ltr'))}}"
+      dir="{{ (session('localeDir', 'ltr'))}}">
 
 
 <head>
@@ -28,9 +28,9 @@ if (!isset($seo)) {
 
     <meta name="Keywords" content="{!! $seo->seo_keywords !!}">
 
-    {!! $seo->seo_other !!}
+{!! $seo->seo_other !!}
 
-    <!-- Fav Icon -->
+<!-- Fav Icon -->
 
     <link rel="shortcut icon" href="{{asset('/')}}favicon.ico">
 
@@ -54,23 +54,26 @@ if (!isset($seo)) {
 
     <link href="{{asset('/')}}css/main.css" rel="stylesheet">
 
-    @if((session('localeDir', 'ltr') == 'rtl'))
+@if((session('localeDir', 'ltr') == 'rtl'))
 
     <!-- Rtl Style -->
 
-    <link href="{{asset('/')}}css/rtl-style.css" rel="stylesheet">
+        <link href="{{asset('/')}}css/rtl-style.css" rel="stylesheet">
 
     @endif
 
-    <link href="{{ asset('/') }}admin_assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('/') }}admin_assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css"
+          rel="stylesheet" type="text/css"/>
 
-    <link href="{{ asset('/') }}admin_assets/global/plugins/select2/css/select2.min.css" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('/') }}admin_assets/global/plugins/select2/css/select2.min.css" rel="stylesheet"
+          type="text/css"/>
 
-    <link href="{{ asset('/') }}admin_assets/global/plugins/select2/css/select2-bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('/') }}admin_assets/global/plugins/select2/css/select2-bootstrap.min.css" rel="stylesheet"
+          type="text/css"/>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 
-    <!--[if lt IE 9]>
+<!--[if lt IE 9]>
 
           <script src="{{asset('/')}}js/html5shiv.min.js"></script>
 
@@ -89,70 +92,71 @@ if (!isset($seo)) {
 </head>
 
 
-
 <body>
 
-    @yield('content')
-<script src="https://cdnjs.cloudflare.com/ajax/libs/turbolinks/5.0.0/turbolinks.min.js" data-turbolinks-eval="false" data-turbo-eval="false"></script>
-    <!-- Bootstrap's JavaScript -->
+@yield('content')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/turbolinks/5.0.0/turbolinks.min.js" data-turbolinks-eval="false"
+        data-turbo-eval="false"></script>
+<!-- Bootstrap's JavaScript -->
 
-    <script src="{{asset('/')}}js/jquery.min.js"></script>
+<script src="{{asset('/')}}js/jquery.min.js"></script>
 
-    <script src="{{asset('/')}}js/bootstrap.bundle.min.js"></script>
+<script src="{{asset('/')}}js/bootstrap.bundle.min.js"></script>
 
-    <script src="{{asset('/')}}js/popper.js"></script>
+<script src="{{asset('/')}}js/popper.js"></script>
 
-    <!-- Owl carousel -->
+<!-- Owl carousel -->
 
-    <script src="{{asset('/')}}js/owl.carousel.js"></script>
+<script src="{{asset('/')}}js/owl.carousel.js"></script>
 
-    <script src="{{ asset('/') }}admin_assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js" type="text/javascript"></script>
+<script src="{{ asset('/') }}admin_assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"
+        type="text/javascript"></script>
 
-    <script src="{{ asset('/') }}admin_assets/global/plugins/Bootstrap-3-Typeahead/bootstrap3-typeahead.min.js" type="text/javascript"></script>
+<script src="{{ asset('/') }}admin_assets/global/plugins/Bootstrap-3-Typeahead/bootstrap3-typeahead.min.js"
+        type="text/javascript"></script>
 
-    <!-- END PAGE LEVEL PLUGINS -->
+<!-- END PAGE LEVEL PLUGINS -->
 
-    <script src="{{ asset('/') }}admin_assets/global/plugins/select2/js/select2.full.min.js" type="text/javascript"></script>
+<script src="{{ asset('/') }}admin_assets/global/plugins/select2/js/select2.full.min.js"
+        type="text/javascript"></script>
 
-    <script src="{{ asset('/') }}admin_assets/global/plugins/jquery.scrollTo.min.js" type="text/javascript"></script>
+<script src="{{ asset('/') }}admin_assets/global/plugins/jquery.scrollTo.min.js" type="text/javascript"></script>
 
-    <!-- Revolution Slider -->
+<!-- Revolution Slider -->
 
-    <script type="text/javascript" src="{{ asset('/') }}js/revolution-slider/js/jquery.themepunch.tools.min.js"></script>
+<script type="text/javascript" src="{{ asset('/') }}js/revolution-slider/js/jquery.themepunch.tools.min.js"></script>
 
-    <script type="text/javascript" src="{{ asset('/') }}js/revolution-slider/js/jquery.themepunch.revolution.min.js"></script>
+<script type="text/javascript"
+        src="{{ asset('/') }}js/revolution-slider/js/jquery.themepunch.revolution.min.js"></script>
 
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/additional-methods.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/additional-methods.min.js"></script>
 
-    {!! NoCaptcha::renderJs() !!}
+@stack('scripts')
 
-    @stack('scripts')
+<!-- Custom js -->
 
-    <!-- Custom js -->
+<script src="{{asset('/')}}js/script.js"></script>
 
-    <script src="{{asset('/')}}js/script.js"></script>
-
-    <script type="text/JavaScript">
-
-        $(document).ready(function(){
+<script type="text/JavaScript">
+    $(document).ready(function(){
 
             $(document).scrollTo('.has-error', 2000);
 
             });
 
-            function showProcessingForm(btn_id){		
+            function showProcessingForm(btn_id){
 
             $("#"+btn_id).val( 'Processing .....' );
 
-            $("#"+btn_id).attr('disabled','disabled');		
+            $("#"+btn_id).attr('disabled','disabled');
 
             }
 
-		
+
 
 		setInterval("hide_savedAlert()",7000);
 
@@ -167,29 +171,17 @@ if (!isset($seo)) {
         $(document).ready(function(){
 
             $.ajax({
-
                 type: 'get',
-
                 url: "{{route('check-time')}}",
-
                 success: function(res) {
-
                         $('.notification').html(res);
-
-                   
-
                 }
-
             });
 
         });
-
-		
-
-        </script>
+</script>
 
 </body>
-
 
 
 </html>
