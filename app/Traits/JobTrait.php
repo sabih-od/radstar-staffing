@@ -442,43 +442,44 @@ trait JobTrait
 
         $company = Auth::guard('company')->user();
 
-		
 
-		if ((bool)$company->is_active === false) {
 
-            flash(__('Your account is inactive contact site admin to activate it'))->error();
-
-            return \Redirect::route('company.home');
-
-            exit;
-
-        }
+//		if ((bool)$company->is_active === false) {
+//
+//            flash(__('Your account is inactive contact site admin to activate it'))->error();
+//
+//            return \Redirect::route('company.home');
+//
+//            exit;
+//
+//        }
 
 		if((bool)config('company.is_company_package_active')){
 
-			if(
-
-				($company->package_end_date === null) || 
-
-				($company->package_end_date->lt(Carbon::now())) ||
-
-				($company->jobs_quota <= $company->availed_jobs_quota)
-
-				)
-
-			{
-
-				flash(__('Please subscribe to package first'))->error();
-
-				return \Redirect::route('company.home');
-
-				exit;
-
-			}
+//		    disable subscription on 'post a job'
+//			if(
+//
+//				($company->package_end_date === null) ||
+//
+//				($company->package_end_date->lt(Carbon::now())) ||
+//
+//				($company->jobs_quota <= $company->availed_jobs_quota)
+//
+//				)
+//
+//			{
+//
+//				flash(__('Please subscribe to package first'))->error();
+//
+//				return \Redirect::route('company.home');
+//
+//				exit;
+//
+//			}
 
 		}
 
-        
+
 
 		$countries = DataArrayHelper::langCountriesArray();
 
@@ -756,7 +757,7 @@ trait JobTrait
 
     }
 
-    
+
 
     public function isJobExpired()
 
