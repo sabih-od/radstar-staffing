@@ -7,16 +7,16 @@
                 </div>
                 <div class="clearfix"></div>
             </div>
-            <div class="col-lg-10 col-md-12 col-12"> 
+            <div class="col-lg-10 col-md-12 col-12">
 
                 <!-- Nav start -->
                 <nav class="navbar navbar-expand-lg navbar-light">
-					
+
                     <div class="navbar-collapse collapse" id="nav-main">
                         <ul class="navbar-nav ml-auto">
                             <li class="nav-item {{ Request::url() == route('index') ? 'active' : '' }}"><a href="{{url('/')}}" class="nav-link">{{__('Home')}}</a> </li>
-							
-                            
+
+
 							@if(Auth::guard('company')->check())
 							<li class="nav-item"><a href="{{url('/job-seekers')}}" class="nav-link">{{__('Seekers')}}</a> </li>
 							@else
@@ -27,7 +27,8 @@
                             @foreach($show_in_top_menu as $top_menu) @php $cmsContent = App\CmsContent::getContentBySlug($top_menu->page_slug); @endphp
                             <li class="nav-item {{ Request::url() == route('cms', $top_menu->page_slug) ? 'active' : '' }}"><a href="{{ route('cms', $top_menu->page_slug) }}" class="nav-link">{{ $cmsContent->page_title }}</a> </li>
                             @endforeach
-							<li class="nav-item {{ Request::url() == route('blogs') ? 'active' : '' }}"><a href="{{ route('blogs') }}" class="nav-link">{{__('Blog')}}</a> </li>
+                            {{--blogs--}}
+{{--							<li class="nav-item {{ Request::url() == route('blogs') ? 'active' : '' }}"><a href="{{ route('blogs') }}" class="nav-link">{{__('Blog')}}</a> </li>--}}
                             <li class="nav-item {{ Request::url() == route('contact.us') ? 'active' : '' }}"><a href="{{ route('contact.us') }}" class="nav-link">{{__('Contact us')}}</a> </li>
                             @if(Auth::check())
                             <li class="nav-item dropdown userbtn"><a href="">{{Auth::user()->printUserImage()}}</a>
@@ -58,40 +59,41 @@
                             </li>
                             @endif @if(!Auth::user() && !Auth::guard('company')->user())
                             <li class="nav-item"><a href="{{route('login')}}" class="nav-link">{{__('Sign in')}}</a> </li>
-							<li class="nav-item"><a href="{{route('register')}}" class="nav-link register">{{__('Register')}}</a> </li>                            
+							<li class="nav-item"><a href="{{route('register')}}" class="nav-link register">{{__('Register')}}</a> </li>
                             @endif
-                            <li class="dropdown userbtn"><a href="{{url('/')}}"><img src="{{asset('/')}}images/lang.png" alt="" class="userimg" /></a>
-                                <ul class="dropdown-menu">
-                                    @foreach($siteLanguages as $siteLang)
-                                    <li><a href="javascript:;" onclick="event.preventDefault(); document.getElementById('locale-form-{{$siteLang->iso_code}}').submit();" class="nav-link">{{$siteLang->native}}</a>
-                                        <form id="locale-form-{{$siteLang->iso_code}}" action="{{ route('set.locale') }}" method="POST" style="display: none;">
-                                            {{ csrf_field() }}
-                                            <input type="hidden" name="locale" value="{{$siteLang->iso_code}}"/>
-                                            <input type="hidden" name="return_url" value="{{url()->full()}}"/>
-                                            <input type="hidden" name="is_rtl" value="{{$siteLang->is_rtl}}"/>
-                                        </form>
-                                    </li>
-                                    @endforeach
-                                </ul>
-                            </li>
+                            {{--localization button--}}
+{{--                            <li class="dropdown userbtn"><a href="{{url('/')}}"><img src="{{asset('/')}}images/lang.png" alt="" class="userimg" /></a>--}}
+{{--                                <ul class="dropdown-menu">--}}
+{{--                                    @foreach($siteLanguages as $siteLang)--}}
+{{--                                    <li><a href="javascript:;" onclick="event.preventDefault(); document.getElementById('locale-form-{{$siteLang->iso_code}}').submit();" class="nav-link">{{$siteLang->native}}</a>--}}
+{{--                                        <form id="locale-form-{{$siteLang->iso_code}}" action="{{ route('set.locale') }}" method="POST" style="display: none;">--}}
+{{--                                            {{ csrf_field() }}--}}
+{{--                                            <input type="hidden" name="locale" value="{{$siteLang->iso_code}}"/>--}}
+{{--                                            <input type="hidden" name="return_url" value="{{url()->full()}}"/>--}}
+{{--                                            <input type="hidden" name="is_rtl" value="{{$siteLang->is_rtl}}"/>--}}
+{{--                                        </form>--}}
+{{--                                    </li>--}}
+{{--                                    @endforeach--}}
+{{--                                </ul>--}}
+{{--                            </li>--}}
                         </ul>
 
-                        <!-- Nav collapes end --> 
+                        <!-- Nav collapes end -->
 
                     </div>
                     <div class="clearfix"></div>
                 </nav>
 
-                <!-- Nav end --> 
+                <!-- Nav end -->
 
             </div>
         </div>
 
-        <!-- row end --> 
+        <!-- row end -->
 
     </div>
 
-    <!-- Header container end --> 
+    <!-- Header container end -->
 
 </div>
 
