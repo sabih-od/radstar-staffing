@@ -96,14 +96,14 @@ class UserController extends Controller
         $user = User::findOrFail(Auth::user()->id);
 
         //documents
-        $drug_test_form_url = $user->getMedia('drug_test_forms')->first()?->getUrl() ?? null;
-        $education_verification_form_url = $user->getMedia('education_verification_forms')->first()?->getUrl() ?? null;
-        $employment_history_record_url = $user->getMedia('employment_history_records')->first()?->getUrl() ?? null;
-        $release_authorization_record_url = $user->getMedia('release_authorization_records')->first()?->getUrl() ?? null;
-        $hipaa_url = $user->getMedia('hipaas')->first()?->getUrl() ?? null;
-        $physician_health_statement_url = $user->getMedia('physician_health_statements')->first()?->getUrl() ?? null;
-        $photo_id_url = $user->getMedia('photo_ids')->first()?->getUrl() ?? null;
-        $us_passport_url = $user->getMedia('us_passports')->first()?->getUrl() ?? null;
+        $drug_test_form_url = $user->getMedia('drug_test_forms')->count() > 0 ? $user->getMedia('drug_test_forms')->first()->getUrl() : null;
+        $education_verification_form_url = $user->getMedia('education_verification_forms')->count() > 0 ? $user->getMedia('education_verification_forms')->first()->getUrl() : null;
+        $employment_history_record_url = $user->getMedia('employment_history_records')->count() > 0 ? $user->getMedia('employment_history_records')->first()->getUrl() : null;
+        $release_authorization_record_url = $user->getMedia('release_authorization_records')->count() > 0 ? $user->getMedia('release_authorization_records')->first()->getUrl() : null;
+        $hipaa_url = $user->getMedia('hipaas')->count() > 0 ? $user->getMedia('hipaas')->first()->getUrl() : null;
+        $physician_health_statement_url = $user->getMedia('physician_health_statements')->count() > 0 ? $user->getMedia('physician_health_statements')->first()->getUrl() : null;
+        $photo_id_url = $user->getMedia('photo_ids')->count() > 0 ? $user->getMedia('photo_ids')->first()->getUrl() : null;
+        $us_passport_url = $user->getMedia('us_passports')->count() > 0 ? $user->getMedia('us_passports')->first()->getUrl() : null;
 
         return view('user.edit_profile', compact(
             'drug_test_form_url',
