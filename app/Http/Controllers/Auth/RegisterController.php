@@ -49,7 +49,6 @@ use RegistersUsers;
 
     public function register(UserFrontRegisterFormRequest $request)
     {
-        dd('here');
         $user = new User();
         $user->first_name = $request->input('first_name');
         $user->middle_name = $request->input('middle_name');
