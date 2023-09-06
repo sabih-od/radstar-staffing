@@ -82,14 +82,14 @@ class JobController extends Controller
         $salary_to = $request->query('salary_to', '');
         $salary_currency = $request->query('salary_currency', '');
         $is_featured = $request->query('is_featured', 2);
-        $order_by = $request->query('order_by', 'id');        
+        $order_by = $request->query('order_by', 'id');
         $limit = 16;
         $feature_jobs = Job::where('is_featured', 1)->notExpire()->get();
-        
 
-        
+
+
         $jobs = $this->fetchJobs($search, $job_titles, $company_ids, $industry_ids, $job_skill_ids, $functional_area_ids, $country_ids, $state_ids, $city_ids, $is_freelance, $career_level_ids, $job_type_ids, $job_shift_ids, $gender_ids, $degree_level_ids, $job_experience_ids, $salary_from, $salary_to, $salary_currency, $is_featured, $order_by, $limit);
-        
+
 
         /*         * ************************************************** */
 
@@ -185,7 +185,7 @@ class JobController extends Controller
                         ->with('degreeLevelIdsArray', $degreeLevelIdsArray)
                         ->with('jobExperienceIdsArray', $jobExperienceIdsArray)
                         ->with('feature_jobs', $feature_jobs)
-                        ->with('seo', $seo);                        
+                        ->with('seo', $seo);
     }
 
     public function jobDetail(Request $request, $job_slug)
@@ -256,14 +256,21 @@ class JobController extends Controller
     public function applyJob(Request $request, $job_slug)
     {
         $user = Auth::user();
+
+        //document check
+        if (!user_has_uploaded_all_documents($user)) {
+            flash(__('Please upload all documents'))->error();
+            return \Redirect::route('my.profile');
+        }
+
         $job = Job::where('slug', 'like', $job_slug)->first();
-        
+
         if ((bool)$user->is_active === false) {
             flash(__('Your account is inactive contact site admin to activate it'))->error();
             return \Redirect::route('job.detail', $job_slug);
             exit;
         }
-        
+
         if ((bool) config('jobseeker.is_jobseeker_package_active')) {
             if (
                     ($user->jobs_quota <= $user->availed_jobs_quota) ||
@@ -279,8 +286,8 @@ class JobController extends Controller
             return \Redirect::route('job.detail', $job_slug);
             exit;
         }
-        
-        
+
+
 
         $myCvs = ProfileCv::where('user_id', '=', $user->id)->pluck('title', 'id')->toArray();
 

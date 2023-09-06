@@ -141,6 +141,74 @@ if(null!==($package)){
                     </div>
                 </div>
 
+                <!-- Experience start -->
+                <div class="job-header">
+                    <div class="contentbox">
+                        <h3>Documents</h3>
+                        <div class="" id="documents_div"></div>
+                        <table class="table">
+                            <thead>
+                                @if ($drug_test_form_url)
+                                    <tr>
+                                        <th>
+                                            <a href="{{$drug_test_form_url}}">Drug Test Form</a>
+                                        </th>
+                                    </tr>
+                                @endif
+                                @if ($education_verification_form_url)
+                                    <tr>
+                                        <th>
+                                            <a href="{{$education_verification_form_url}}">Education Verification Form</a>
+                                        </th>
+                                    </tr>
+                                @endif
+                                @if ($employment_history_record_url)
+                                    <tr>
+                                        <th>
+                                            <a href="{{$employment_history_record_url}}">Employment History Record</a>
+                                        </th>
+                                    </tr>
+                                @endif
+                                @if ($release_authorization_record_url)
+                                    <tr>
+                                        <th>
+                                            <a href="{{$release_authorization_record_url}}">Release Authorization Record</a>
+                                        </th>
+                                    </tr>
+                                @endif
+                                @if ($hipaa_url)
+                                    <tr>
+                                        <th>
+                                            <a href="{{$hipaa_url}}">HIPAA</a>
+                                        </th>
+                                    </tr>
+                                @endif
+                                @if ($physician_health_statement_url)
+                                    <tr>
+                                        <th>
+                                            <a href="{{$physician_health_statement_url}}">Health Statement From Physician</a>
+                                        </th>
+                                    </tr>
+                                @endif
+                                @if ($photo_id_url)
+                                    <tr>
+                                        <th>
+                                            <a href="{{$photo_id_url}}">Identification Photo</a>
+                                        </th>
+                                    </tr>
+                                @endif
+                                @if ($us_passport_url)
+                                    <tr>
+                                        <th>
+                                            <a href="{{$us_passport_url}}">U.S. Passport</a>
+                                        </th>
+                                    </tr>
+                                @endif
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+
 
             </div>
             <div class="col-md-4">

@@ -94,7 +94,27 @@ class UserController extends Controller
 
         $upload_max_filesize = UploadedFile::getMaxFilesize() / (1048576);
         $user = User::findOrFail(Auth::user()->id);
-        return view('user.edit_profile')
+
+        //documents
+        $drug_test_form_url = $user->getMedia('drug_test_forms')->first()->getUrl() ?? null;
+        $education_verification_form_url = $user->getMedia('education_verification_forms')->first()?->getUrl() ?? null;
+        $employment_history_record_url = $user->getMedia('employment_history_records')->first()?->getUrl() ?? null;
+        $release_authorization_record_url = $user->getMedia('release_authorization_records')->first()?->getUrl() ?? null;
+        $hipaa_url = $user->getMedia('hipaas')->first()?->getUrl() ?? null;
+        $physician_health_statement_url = $user->getMedia('physician_health_statements')->first()?->getUrl() ?? null;
+        $photo_id_url = $user->getMedia('photo_ids')->first()?->getUrl() ?? null;
+        $us_passport_url = $user->getMedia('us_passports')->first()?->getUrl() ?? null;
+
+        return view('user.edit_profile', compact(
+            'drug_test_form_url',
+            'education_verification_form_url',
+            'employment_history_record_url',
+            'release_authorization_record_url',
+            'hipaa_url',
+            'physician_health_statement_url',
+            'photo_id_url',
+            'us_passport_url',
+        ))
                         ->with('genders', $genders)
                         ->with('maritalStatuses', $maritalStatuses)
                         ->with('nationalities', $nationalities)
@@ -117,16 +137,16 @@ class UserController extends Controller
             $fileName = ImgUploader::UploadImage('user_images', $image, $request->input('name'), 300, 300, false);
             $user->image = $fileName;
         }
-		
+
 		if ($request->hasFile('cover_image')) {
 			$is_deleted = $this->deleteUserCoverImage($user->id);
             $cover_image = $request->file('cover_image');
             $fileName_cover_image = ImgUploader::UploadImage('user_images', $cover_image, $request->input('name'), 1140, 250, false);
             $user->cover_image = $fileName_cover_image;
         }
-		
-		
-		
+
+
+
         /*         * ************************************** */
         $user->first_name = $request->input('first_name');
         $user->middle_name = $request->input('middle_name');
@@ -159,19 +179,19 @@ class UserController extends Controller
         $user->video_link = $request->video_link;
         $user->street_address = $request->input('street_address');
 		$user->is_subscribed = $request->input('is_subscribed', 0);
-		
+
         $user->update();
 
         $this->updateUserFullTextSearch($user);
 		/*************************/
 		Subscription::where('email', 'like', $user->email)->delete();
 		if((bool)$user->is_subscribed)
-		{			
+		{
 			$subscription = new Subscription();
 			$subscription->email = $user->email;
 			$subscription->name = $user->name;
 			$subscription->save();
-			
+
 			/*************************/
 			Newsletter::subscribeOrUpdate($subscription->email, ['FNAME'=>$subscription->name]);
 			/*************************/
@@ -182,7 +202,7 @@ class UserController extends Controller
 			Newsletter::unsubscribe($user->email);
 			/*************************/
 		}
-		
+
         flash(__('You have updated your profile successfully'))->success();
         return \Redirect::route('my.profile');
     }
@@ -264,6 +284,31 @@ class UserController extends Controller
                          ->with('profileCv', $profileCv)
                          ->with('page_title', $user->getName())
                          ->with('form_title', 'Contact ' . $user->getName());
+    }
+
+    public function uploadDocuments (Request $request)
+    {
+        $user = User::find(Auth::id());
+
+        $this->updateMedia($request, $user, 'drug_test_form');
+        $this->updateMedia($request, $user, 'education_verification_form');
+        $this->updateMedia($request, $user, 'employment_history_record');
+        $this->updateMedia($request, $user, 'release_authorization_record');
+        $this->updateMedia($request, $user, 'hipaa');
+        $this->updateMedia($request, $user, 'physician_health_statement');
+        $this->updateMedia($request, $user, 'photo_id');
+        $this->updateMedia($request, $user, 'us_passport');
+
+        flash(__('Documents have been uploaded successfully!'))->success();
+        return \Redirect::to(route('my.profile') . '#cvs');
+//        return \Redirect::route('my.profile');
+    }
+
+    public function updateMedia($request, $user, $media_name) {
+        if ($request->has($media_name)) {
+            $user->clearMediaCollection($media_name . 's');
+            $user->addMediaFromRequest($media_name)->toMediaCollection($media_name . 's');
+        }
     }
 
 }
