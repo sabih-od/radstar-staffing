@@ -1,4 +1,4 @@
-{{--<div class="paypackages">--}}
+{{--<div class="paypackages"> --}}
 {{--    <!---four-paln-->--}}
 {{--    <div class="four-plan">--}}
 {{--        <h3>{{__('Our Packages')}}</h3>--}}
@@ -14,14 +14,14 @@
 {{--                        </div>--}}
 {{--                    </li>--}}
 {{--                    <li class="plan-pages">{{__('Can post jobs')}} : {{$package->package_num_listings}}</li>--}}
-{{--                    <li class="plan-pages">{{__('Package Duration')}} : {{$package->package_num_days}} {{__('Days')}}</li>--}}
-
+{{--                    <li class="plan-pages">{{__('Package Duration')}} : {{$package->package_num_days}} {{__('Days')}}</li>           --}}
+{{--					--}}
 {{--					<li class="order paypal"><a href="javascript:void(0)" data-toggle="modal" data-target="#buypack{{$package->id}}" class="reqbtn">{{__('Buy Now')}}</a></li>--}}
-
-
+{{--					--}}
+{{--                    --}}
 {{--                </ul>--}}
-
-
+{{--				--}}
+{{--				--}}
 {{--				<div class="modal fade" id="buypack{{$package->id}}" tabindex="-1" role="dialog" aria-hidden="true">--}}
 {{--		<div class="modal-dialog modal-dialog-centered">--}}
 {{--		<div class="modal-content">--}}
@@ -30,12 +30,12 @@
 {{--		<i class="fas fa-times"></i>--}}
 {{--		</button>--}}
 {{--		<div class="invitereval">--}}
-{{--		<h3>Please Choose Your Payment Method to Pay</h3>--}}
-
+{{--		<h3>Please Choose Your Payment Method to Pay</h3>	--}}
+{{--			--}}
 {{--		<div class="totalpay">{{__('Total Amount to pay')}}: <strong>{{ $siteSetting->default_currency_code }}{{$package->package_price}}</strong></div>--}}
-
+{{--			--}}
 {{--		<ul class="btn2s">--}}
-{{--		@if($package->package_price > 0)--}}
+{{--		@if($package->package_price > 0)                        --}}
 {{--		@if((bool)$siteSetting->is_paypal_active)--}}
 {{--		<li class="order paypal"><a href="{{route('order.package', $package->id)}}"><i class="fab fa-cc-paypal" aria-hidden="true"></i> {{__('pay with paypal')}}</a></li>--}}
 {{--		@endif--}}
@@ -46,7 +46,7 @@
 {{--		@if((bool)$siteSetting->is_payu_active)--}}
 {{--		   <li class="order payu"><a href="{{route('payu.order.package', ['package_id='.$package->id, 'type=new'])}}">{{__('pay with PayU')}}</a></li>--}}
 {{--		@endif--}}
-
+{{--                        --}}
 {{--		@else--}}
 {{--		<li class="order paypal"><a href="{{route('order.free.package', $package->id)}}"> {{__('Subscribe Free Package')}}</a></li>--}}
 {{--		@endif--}}
@@ -56,10 +56,10 @@
 {{--		</div>--}}
 {{--		</div>--}}
 {{--		</div>--}}
-
-
+{{--				--}}
+{{--				--}}
 {{--            </div>--}}
 {{--            @endforeach </div>--}}
 {{--    </div>--}}
-{{--    <!---end four-paln-->--}}
+{{--    <!---end four-paln--> --}}
 {{--</div>--}}

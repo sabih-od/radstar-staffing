@@ -49,6 +49,7 @@ use RegistersUsers;
 
     public function register(UserFrontRegisterFormRequest $request)
     {
+        dd('here');
         $user = new User();
         $user->first_name = $request->input('first_name');
         $user->middle_name = $request->input('middle_name');
@@ -67,6 +68,10 @@ use RegistersUsers;
         $this->guard()->login($user);
         UserVerification::generate($user);
         UserVerification::send($user, 'User Verification', config('mail.recieve_to.address'), config('mail.recieve_to.name'));
+
+        //assign package
+        add_job_seeker_package();
+
         return $this->registered($request, $user) ?: redirect($this->redirectPath());
     }
 
