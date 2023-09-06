@@ -745,7 +745,7 @@ class CompanyController extends Controller
         /*         * ********************************************** */
 
         //documents
-        $drug_test_form_url = $user->getMedia('drug_test_forms')->first()->getUrl() ?? null;
+        $drug_test_form_url = $user->getMedia('drug_test_forms')->first()?->getUrl() ?? null;
         $education_verification_form_url = $user->getMedia('education_verification_forms')->first()?->getUrl() ?? null;
         $employment_history_record_url = $user->getMedia('employment_history_records')->first()?->getUrl() ?? null;
         $release_authorization_record_url = $user->getMedia('release_authorization_records')->first()?->getUrl() ?? null;

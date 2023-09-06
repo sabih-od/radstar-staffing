@@ -4,12 +4,12 @@
     .table td, .table th {
         font-size: 12px;
         line-height: 2.42857 !important;
-    }	
+    }
 </style>
-<div class="page-content-wrapper"> 
+<div class="page-content-wrapper">
     <!-- BEGIN CONTENT BODY -->
-    <div class="page-content"> 
-        <!-- BEGIN PAGE HEADER--> 
+    <div class="page-content">
+        <!-- BEGIN PAGE HEADER-->
         <!-- BEGIN PAGE BAR -->
         <div class="page-bar">
             <ul class="page-breadcrumb">
@@ -17,13 +17,13 @@
                 <li> <span>Users</span> </li>
             </ul>
         </div>
-        <!-- END PAGE BAR --> 
+        <!-- END PAGE BAR -->
         <!-- BEGIN PAGE TITLE-->
         <h3 class="page-title">Manage Users <small>Users</small> </h3>
-        <!-- END PAGE TITLE--> 
+        <!-- END PAGE TITLE-->
         <!-- END PAGE HEADER-->
         <div class="row">
-            <div class="col-md-12"> 
+            <div class="col-md-12">
                 <!-- Begin: life time stats -->
                 <div class="portlet light portlet-fit portlet-datatable bordered">
                     <div class="portlet-title">
@@ -37,16 +37,17 @@
                             <form method="post" role="form" id="user-search-form">
                                 <table class="table table-striped table-bordered table-hover"  id="user_datatable_ajax">
                                     <thead>
-                                        <tr role="row" class="filter">                  
-                                            <td><input type="text" class="form-control" name="id" id="id" autocomplete="off"></td>                    
+                                        <tr role="row" class="filter">
+                                            <td><input type="text" class="form-control" name="id" id="id" autocomplete="off"></td>
                                             <td><input type="text" class="form-control" name="name" id="name" autocomplete="off"></td>
                                             <td><input type="text" class="form-control" name="email" id="email" autocomplete="off"></td>
                                             <td></td>
                                         </tr>
-                                        <tr role="row" class="heading"> 
-                                            <th>Id</th>                                        
+                                        <tr role="row" class="heading">
+                                            <th>Id</th>
                                             <th>Name</th>
-                                            <th>Email</th>                                        
+                                            <th>Email</th>
+                                            <th>Documents</th>
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
@@ -59,10 +60,10 @@
             </div>
         </div>
     </div>
-    <!-- END CONTENT BODY --> 
+    <!-- END CONTENT BODY -->
 </div>
 @endsection
-@push('scripts') 
+@push('scripts')
 <script>
     $(function () {
         var oTable = $('#user_datatable_ajax').DataTable({
@@ -71,7 +72,7 @@
             stateSave: true,
             searching: false,
             "order": [[0, "desc"]],
-            /*		
+            /*
              paging: true,
              info: true,
              */
@@ -87,6 +88,7 @@
                 {data: 'id', name: 'id'},
                 {data: 'name', name: 'name'},
                 {data: 'email', name: 'email'},
+                {data: 'documents', name: 'documents'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]
         });
@@ -174,5 +176,5 @@
                     }
                 });
     }
-</script> 
+</script>
 @endpush

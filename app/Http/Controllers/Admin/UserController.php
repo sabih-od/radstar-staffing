@@ -210,14 +210,14 @@ class UserController extends Controller
             $fileName = ImgUploader::UploadImage('user_images', $image, $request->input('name'), 300, 300, false);
             $user->image = $fileName;
         }
-		
+
 		if ($request->hasFile('cover_image')) {
 			$is_deleted = $this->deleteUserCoverImage($user->id);
             $cover_image = $request->file('cover_image');
             $fileName_cover_image = ImgUploader::UploadImage('user_images', $cover_image, $request->input('name'), 1140, 250, false);
             $user->cover_image = $fileName_cover_image;
         }
-		
+
         /*         * ************************************** */
         $user->first_name = $request->input('first_name');
         $user->middle_name = $request->input('middle_name');
@@ -310,6 +310,35 @@ class UserController extends Controller
                         ->addColumn('name', function ($users) {
                             return $users->first_name . ' ' . $users->middle_name . ' ' . $users->last_name;
                         })
+                        ->addColumn('documents', function ($user) {
+                            $string = "";
+                            if ($user->getMedia('drug_test_forms')->count() > 0) {
+                                $string .= "<a target='_blank' href='".$user->getMedia('drug_test_forms')->first()?->getUrl()."'>Drug Test Form</a> <br/>";
+                            }
+                            if ($user->getMedia('education_verification_forms')->count() > 0) {
+                                $string .= "<a target='_blank' href='".$user->getMedia('education_verification_forms')->first()?->getUrl()."'>Education Verification Form</a> <br/>";
+                            }
+                            if ($user->getMedia('employment_history_records')->count() > 0) {
+                                $string .= "<a target='_blank' href='".$user->getMedia('employment_history_records')->first()?->getUrl()."'>Employment History Record</a> <br/>";
+                            }
+                            if ($user->getMedia('release_authorization_records')->count() > 0) {
+                                $string .= "<a target='_blank' href='".$user->getMedia('release_authorization_records')->first()?->getUrl()."'>Release Authorization Record</a> <br/>";
+                            }
+                            if ($user->getMedia('hipaas')->count() > 0) {
+                                $string .= "<a target='_blank' href='".$user->getMedia('hipaas')->first()?->getUrl()."'>HIPAA</a> <br/>";
+                            }
+                            if ($user->getMedia('physician_health_statements')->count() > 0) {
+                                $string .= "<a target='_blank' href='".$user->getMedia('physician_health_statements')->first()?->getUrl()."'>Health Statement From Physician</a> <br/>";
+                            }
+                            if ($user->getMedia('photo_ids')->count() > 0) {
+                                $string .= "<a target='_blank' href='".$user->getMedia('photo_ids')->first()?->getUrl()."'>Identification Photo</a> <br/>";
+                            }
+                            if ($user->getMedia('us_passports')->count() > 0) {
+                                $string .= "<a target='_blank' href='".$user->getMedia('us_passports')->first()?->getUrl()."'>U.S. Passport</a> <br/>";
+                            }
+
+                            return $string;
+                        })
                         ->addColumn('action', function ($users) {
                             /*                             * ************************* */
                             $active_txt = 'Make Active';
@@ -339,7 +368,7 @@ class UserController extends Controller
 					<ul class="dropdown-menu">
 						<li>
 							<a href="' . route('edit.user', ['id' => $users->id]) . '"><i class="fa fa-pencil" aria-hidden="true"></i>Edit</a>
-						</li>						
+						</li>
 						<li>
 							<a href="javascript:void(0);" onclick="delete_user(' . $users->id . ');" class=""><i class="fa fa-trash-o" aria-hidden="true"></i>Delete</a>
 						</li>
@@ -348,11 +377,11 @@ class UserController extends Controller
 						</li>
 						<li>
 						<a href="javascript:void(0);" onClick="' . $verified_href . '" id="onclick_verified_' . $users->id . '"><i class="fa fa-' . $verified_icon . '" aria-hidden="true"></i>' . $verified_txt . '</a>
-						</li>																																							
+						</li>
 					</ul>
 				</div>';
                         })
-                        ->rawColumns(['action', 'name'])
+                        ->rawColumns(['action', 'name', 'documents'])
                         ->setRowId(function($users) {
                             return 'user_dt_row_' . $users->id;
                         })
