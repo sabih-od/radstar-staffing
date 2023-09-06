@@ -1,6 +1,9 @@
 <?php
 
 /* * ******** UserController ************ */
+
+use App\Http\Controllers\UserController;
+
 Route::get('my-profile', 'UserController@myProfile')->name('my.profile');
 Route::put('my-profile', 'UserController@updateMyProfile')->name('my.profile');
 Route::get('view-public-profile/{id}', 'UserController@viewPublicProfile')->name('view.public.profile');
@@ -27,6 +30,9 @@ Route::post('store-front-profile-cv/{id}', 'UserController@storeProfileCv')->nam
 Route::post('get-front-profile-cv-edit-form/{user_id}', 'UserController@getFrontProfileCvEditForm')->name('get.front.profile.cv.edit.form');
 Route::post('update-front-profile-cv/{id}/{user_id}', 'UserController@updateFrontProfileCv')->name('update.front.profile.cv');
 Route::delete('delete-front-profile-cv', 'UserController@deleteProfileCv')->name('delete.front.profile.cv');
+
+
+Route::post('upload-documents', [UserController::class, 'uploadDocuments'])->name('candidate.documents.upload');
 /* * *********************************** */
 Route::post('show-front-profile-projects/{id}', 'UserController@showFrontProfileProjects')->name('show.front.profile.projects');
 Route::post('show-applicant-profile-projects/{id}', 'UserController@showApplicantProfileProjects')->name('show.applicant.profile.projects');

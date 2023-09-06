@@ -137,6 +137,13 @@
       0 => 'SocialiteProviders\\Manager\\ServiceProvider',
     ),
   ),
+  'spatie/laravel-medialibrary' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Spatie\\MediaLibrary\\MediaLibraryServiceProvider',
+    ),
+  ),
   'spatie/laravel-newsletter' => 
   array (
     'providers' => 

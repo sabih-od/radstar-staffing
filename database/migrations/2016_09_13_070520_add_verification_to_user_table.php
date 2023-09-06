@@ -30,8 +30,12 @@ class AddVerificationToUserTable extends Migration
     public function up()
     {
         Schema::table($this->getUserTableName(), function (Blueprint $table) {
-            $table->boolean('verified')->default(false);
-            $table->string('verification_token')->nullable();
+            if (!Schema::hasColumn('users', 'verified')) {
+                $table->boolean('verified')->default(false);
+            }
+            if (!Schema::hasColumn('users', 'verification_token')) {
+                $table->string('verification_token')->nullable();
+            }
         });
     }
 

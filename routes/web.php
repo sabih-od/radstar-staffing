@@ -45,6 +45,9 @@
  */
 
 
+use App\Package;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 $real_path = realpath(__DIR__) . DIRECTORY_SEPARATOR . 'front_routes' . DIRECTORY_SEPARATOR;
 
@@ -363,6 +366,26 @@ Route::get('/clear-cache', function () {
 
 
 
+//use App\Traits\CompanyPackageTrait;
 
 
-
+Route::get('temp', function () {
+//    if (Auth::guard('company')->check()) {
+//        $company = Auth::guard('company')->user();
+//        $package = Package::find(4);
+//        $now = Carbon::now();
+//
+//        $company->package_id = $package->id;
+//        $company->package_start_date = $now;
+//        $company->package_end_date = $now->addDays($package->package_num_days);
+//        $company->jobs_quota = $package->package_num_listings;
+//        $company->availed_jobs_quota = 0;
+//        $company->payment_method = 'Stripe';
+//        $company->update();
+//    }
+//    dd('done');
+////    if (Auth::check()) {
+//        $user = Auth::user();
+//        $this->addJobSeekerPackage($user, $package);
+//    }
+});

@@ -19,10 +19,11 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Traits\CountryStateCity;
 
 use App\Traits\CommonUserFunctions;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
 
-
-class User extends Authenticatable
+class User extends Authenticatable implements HasMedia
 
 {
 
@@ -33,6 +34,8 @@ class User extends Authenticatable
     use CountryStateCity;
 
     use CommonUserFunctions;
+
+    use InteractsWithMedia;
 
 
 
@@ -406,7 +409,7 @@ class User extends Authenticatable
 
     }
 
-	
+
 
 	public function printUserCoverImage($width = 0, $height = 0)
 
@@ -420,7 +423,7 @@ class User extends Authenticatable
 
     }
 
-	
+
 
     public function getName()
 

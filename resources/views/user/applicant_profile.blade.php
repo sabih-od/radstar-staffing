@@ -1,13 +1,13 @@
 @extends('layouts.app')
-@section('content') 
-<!-- Header start --> 
-@include('includes.header') 
-<!-- Header end --> 
-<!-- Inner Page Title start --> 
-@include('includes.inner_page_title', ['page_title'=>__($page_title)]) 
-<?php $true = FALSE; ?>
+@section('content')
+<!-- Header start -->
+@include('includes.header')
+<!-- Header end -->
+<!-- Inner Page Title start -->
+@include('includes.inner_page_title', ['page_title'=>__($page_title)])
+<?php $true = TRUE; ?>
 
-<?php 
+<?php
 if(Auth::guard('company')->user()){
 $package = Auth::guard('company')->user();
 if(null!==($package)){
@@ -20,19 +20,19 @@ if(null!==($package)){
 ?>
 <!-- Inner Page Title end -->
 <div class="listpgWraper">
-    <div class="container">  
-        @include('flash::message')  
-        
+    <div class="container">
+        @include('flash::message')
+
 
 		<div class="usercoverimg">
 
 		 {{$user->printUserCoverImage()}}
-		
-			
+
+
 			<div class="userMaininfo">
-                
+
 						<div class="userPic">{{$user->printUserImage()}}</div>
-					
+
 					<div class="title">
                                 <h3>{{$user->getName()}}
                                 @if((bool)$user->is_immediate_available)
@@ -40,23 +40,23 @@ if(null!==($package)){
                                 @endif
 								</h3>
 						<div class="desi"><i class="fa fa-map-marker" aria-hidden="true"></i> {{$user->getLocation()}}</div>
-						
+
 						<div class="membersinc"><i class="fa fa-history" aria-hidden="true"></i> {{__('Member Since')}}, {{$user->created_at->format('M d, Y')}}</div>
-						
+
                             </div>
-					
-					
-                        
+
+
+
             </div>
-			
+
 		</div>
-		
+
 		<!-- Buttons -->
-            <div class="userlinkstp">  
-                          
+            <div class="userlinkstp">
+
                 <?php if($true == TRUE){ ?>
 
-                @if(isset($job) && isset($company))               
+                @if(isset($job) && isset($company))
 
                 @if(Auth::guard('company')->check() && Auth::guard('company')->user()->isHiredApplicant($user->id, $job->id, $company->id))
                 <a href="{{route('remove.hire.from.favourite.applicant', [$job_application->id, $user->id, $job->id, $company->id])}}" class="btn"><i class="fa fa-floppy-o" aria-hidden="true"></i> {{__('Remove From Hired List')}} </a>
@@ -65,9 +65,9 @@ if(null!==($package)){
 
                 <a href="{{route('remove.from.favourite.applicant', [$job_application->id, $user->id, $job->id, $company->id])}}" class="btn"><i class="fa fa-floppy-o" aria-hidden="true"></i> {{__('Shortlisted')}} </a>
 
-                @if(isset($is_applicant)) 
-                <a style="color:#fff" href="{{route('reject.applicant.profile', [$job_application->id])}}" class="btn btn-warning"><i class="fa fa-floppy-o" aria-hidden="true"></i> {{__('Reject')}}</a>    
-                @endif   
+                @if(isset($is_applicant))
+                <a style="color:#fff" href="{{route('reject.applicant.profile', [$job_application->id])}}" class="btn btn-warning"><i class="fa fa-floppy-o" aria-hidden="true"></i> {{__('Reject')}}</a>
+                @endif
 
                 @else
 
@@ -76,10 +76,12 @@ if(null!==($package)){
                 @endif
 
 
-                <a href="{{route('hire.from.favourite.applicant', [$job_application->id, $user->id, $job->id, $company->id])}}" class="btn"><i class="fa fa-floppy-o" aria-hidden="true"></i> {{__('Hire This Candidate')}} </a>
+                @if(Auth::guard('company')->check() && Auth::guard('company')->user()->isFavouriteApplicant($user->id, $job->id, $company->id))
+                    <a href="{{route('hire.from.favourite.applicant', [$job_application->id, $user->id, $job->id, $company->id])}}" class="btn"><i class="fa fa-floppy-o" aria-hidden="true"></i> {{__('Hire This Candidate')}} </a>
+                @endif
                 @endif
 
-                
+
                 @endif
 
 
@@ -87,10 +89,10 @@ if(null!==($package)){
                 @if(null !== $profileCv)<a href="{{asset('cvs/'.$profileCv->cv_file)}}" class="btn"><i class="fa fa-download" aria-hidden="true"></i> {{__('Download CV')}}</a>@endif
 
                 <a href="javascript:;" onclick="send_message()" class="btn"><i class="fa fa-envelope" aria-hidden="true"></i> {{__('Send Message')}}</a>
-				
+
 				<?php } ?>
                 @if(Auth::guard('company')->user())
-                
+
                  <?php if($true == FALSE){?>
                 <a href="{{route('company.unlock', $user->id)}}" class="btn btn-default report"><i class="fa fa-lock" aria-hidden="true"></i> {{__('Profile Locked')}}</a>
                 <span>Unlock profile to view candidate CV and contact details</span>
@@ -99,28 +101,28 @@ if(null!==($package)){
 
 
             </div>
-		
 
-		
+
+
         <!-- Job Detail start -->
         <div class="row">
-            <div class="col-md-8">               
-                
+            <div class="col-md-8">
+
                 <!-- About Employee start -->
                 <div class="job-header">
                     <div class="contentbox">
                         <h3>{{__('About me')}}</h3>
                         <p>{{$user->getProfileSummary('summary')}}</p>
-						
+
                     </div>
-					
+
 					<div class="ptsklbx">
 					<h3>{{__('Skills')}}</h3>
                     <div id="skill_div"></div>
 					</div>
-					
+
                 </div>
-	
+
 				<!-- Profile Video start -->
                 @if($user->video_link !=='' && null!==($user->video_link))
                 <div class="job-header">
@@ -135,19 +137,87 @@ if(null!==($package)){
                 <div class="job-header">
                     <div class="contentbox">
                         <h3>{{__('Experience')}}</h3>
-                        <div class="" id="experience_div"></div>            
+                        <div class="" id="experience_div"></div>
                     </div>
                 </div>
 
-                
+                <!-- Experience start -->
+                <div class="job-header">
+                    <div class="contentbox">
+                        <h3>Documents</h3>
+                        <div class="" id="documents_div"></div>
+                        <table class="table">
+                            <thead>
+                                @if ($drug_test_form_url)
+                                    <tr>
+                                        <th>
+                                            <a href="{{$drug_test_form_url}}">Drug Test Form</a>
+                                        </th>
+                                    </tr>
+                                @endif
+                                @if ($education_verification_form_url)
+                                    <tr>
+                                        <th>
+                                            <a href="{{$education_verification_form_url}}">Education Verification Form</a>
+                                        </th>
+                                    </tr>
+                                @endif
+                                @if ($employment_history_record_url)
+                                    <tr>
+                                        <th>
+                                            <a href="{{$employment_history_record_url}}">Employment History Record</a>
+                                        </th>
+                                    </tr>
+                                @endif
+                                @if ($release_authorization_record_url)
+                                    <tr>
+                                        <th>
+                                            <a href="{{$release_authorization_record_url}}">Release Authorization Record</a>
+                                        </th>
+                                    </tr>
+                                @endif
+                                @if ($hipaa_url)
+                                    <tr>
+                                        <th>
+                                            <a href="{{$hipaa_url}}">HIPAA</a>
+                                        </th>
+                                    </tr>
+                                @endif
+                                @if ($physician_health_statement_url)
+                                    <tr>
+                                        <th>
+                                            <a href="{{$physician_health_statement_url}}">Health Statement From Physician</a>
+                                        </th>
+                                    </tr>
+                                @endif
+                                @if ($photo_id_url)
+                                    <tr>
+                                        <th>
+                                            <a href="{{$photo_id_url}}">Identification Photo</a>
+                                        </th>
+                                    </tr>
+                                @endif
+                                @if ($us_passport_url)
+                                    <tr>
+                                        <th>
+                                            <a href="{{$us_passport_url}}">U.S. Passport</a>
+                                        </th>
+                                    </tr>
+                                @endif
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+
+
             </div>
-            <div class="col-md-4"> 
+            <div class="col-md-4">
                 <?php if($true == TRUE){?>
                  <!-- Candidate Contact -->
                 <div class="job-header">
                     <div class="jobdetail">
                         <h3>{{__('Candidate Contact')}}</h3>
-                        <div class="candidateinfo">            
+                        <div class="candidateinfo">
                             @if(!empty($user->phone))
                             <div class="loctext"><i class="fa fa-phone" aria-hidden="true"></i> <a href="tel:{{$user->phone}}">{{$user->phone}}</a></div>
                             @endif
@@ -158,11 +228,11 @@ if(null!==($package)){
                             <div class="loctext"><i class="fa fa-envelope" aria-hidden="true"></i> <a href="mailto:{{$user->email}}">{{$user->email}}</a></div>
                             @endif
                             <div class="loctext"><i class="fa fa-map-marker" aria-hidden="true"></i> {{$user->street_address}}</div>
-                        </div>  
+                        </div>
                     </div>
                 </div>
                 <?php } ?>
-                
+
                 <!-- Candidate Detail start -->
                 <div class="job-header">
                     <div class="jobdetail">
@@ -197,7 +267,7 @@ if(null!==($package)){
                             <li class="row">
                                 <div class="col-md-6 col-xs-6">{{__('Career Level')}}</div>
                                 <div class="col-md-6 col-xs-6"><span>{{$user->getCareerLevel('career_level')}}</span></div>
-                            </li>             
+                            </li>
                             <li class="row">
                                 <div class="col-md-6 col-xs-6">{{__('Current Salary')}}</div>
                                 <div class="col-md-6 col-xs-6"><span class="permanent">{{$user->current_salary}} {{$user->salary_currency}}</span></div>
@@ -205,7 +275,7 @@ if(null!==($package)){
                             <li class="row">
                                 <div class="col-md-6 col-xs-6">{{__('Expected Salary')}}</div>
                                 <div class="col-md-6 col-xs-6"><span class="freelance">{{$user->expected_salary}} {{$user->salary_currency}}</span></div>
-                            </li>              
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -214,34 +284,34 @@ if(null!==($package)){
                 <div class="job-header">
                     <div class="contentbox">
                         <h3>{{__('Education')}}</h3>
-                        <div class="" id="education_div"></div>            
+                        <div class="" id="education_div"></div>
                     </div>
                 </div>
 
                 <div class="job-header">
                     <div class="jobdetail">
                         <h3>{{__('Languages')}}</h3>
-                        <div id="language_div"></div>            
+                        <div id="language_div"></div>
                     </div>
                 </div>
-               
+
             </div>
         </div>
-		
+
 		<!-- Portfolio start -->
 		<div class="job-header">
 			<div class="contentbox">
 				<h3>{{__('Portfolio')}}</h3>
-				<div class="" id="projects_div"></div>            
+				<div class="" id="projects_div"></div>
 			</div>
 		</div>
-		
-		
-		
-		
-		
-		
-		
+
+
+
+
+
+
+
     </div>
 </div>
 <div class="modal fade" id="sendmessage" role="dialog">
@@ -252,7 +322,7 @@ if(null!==($package)){
             <form action="" id="send-form">
                 @csrf
                 <input type="hidden" name="seeker_id" id="seeker_id" value="{{$user->id}}">
-                <div class="modal-header">                    
+                <div class="modal-header">
                     <h4 class="modal-title">Send Message</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
@@ -279,7 +349,7 @@ if(null!==($package)){
     }
 </style>
 @endpush
-@push('scripts') 
+@push('scripts')
 <script type="text/javascript">
     $(document).ready(function () {
     $(document).on('click', '#send_applicant_message', function () {
@@ -414,5 +484,5 @@ if(null!==($package)){
             }
         })
     }
-</script> 
+</script>
 @endpush

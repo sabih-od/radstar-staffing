@@ -2,49 +2,49 @@
 @section('content')
 <!-- Header start -->
 @include('includes.header')
-<!-- Header end --> 
+<!-- Header end -->
 <!-- Search start -->
 @include('includes.search')
-<!-- Search End --> 
+<!-- Search End -->
 <!-- Top Employers start -->
 @include('includes.top_employers')
-<!-- Top Employers ends --> 
+<!-- Top Employers ends -->
 <!-- Popular Searches start -->
 @include('includes.popular_searches')
-<!-- Popular Searches ends --> 
+<!-- Popular Searches ends -->
 <!-- Featured Jobs start -->
 @include('includes.featured_jobs')
 <!-- Featured Jobs ends -->
 <!-- Login box start -->
 @include('includes.login_text')
-<!-- Login box ends --> 
+<!-- Login box ends -->
 <!-- How it Works start -->
 @include('includes.how_it_works')
 <!-- How it Works Ends -->
 <!-- Latest Jobs start -->
 @include('includes.latest_jobs')
-<!-- Latest Jobs ends --> 
+<!-- Latest Jobs ends -->
 <!-- Testimonials start -->
-@include('includes.testimonials')
+{{--@include('includes.testimonials')--}}
 <!-- Testimonials End -->
 <!-- Top Cities start -->
 @include('includes.top_cities')
 <!-- Top Cities End -->
 <!-- Video start -->
-@include('includes.video')
-<!-- Video end --> 
+{{--@include('includes.video')--}}
+<!-- Video end -->
 <!-- Login box start -->
 @include('includes.employer_login_text')
-<!-- Login box ends --> 
+<!-- Login box ends -->
 <!-- Testimonials start -->
-@include('includes.home_blogs')
+{{--@include('includes.home_blogs')--}}
 <!-- Testimonials End -->
 <!-- Subscribe start -->
-@include('includes.subscribe')
+{{--@include('includes.subscribe')--}}
 <!-- Subscribe End -->
 @include('includes.footer')
 @endsection
-@push('scripts') 
+@push('scripts')
 <script>
     $(document).ready(function ($) {
         $("form").submit(function () {
