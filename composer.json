@@ -27,6 +27,7 @@
         "spatie/laravel-medialibrary": "^9.12",
         "spatie/laravel-newsletter": "^4.8",
         "stripe/stripe-php": "^7.49",
+        "symfony/symfony": "5.4.x",
         "tzsk/payu": "^5.0",
         "yajra/laravel-datatables": "^1.5"
     },
