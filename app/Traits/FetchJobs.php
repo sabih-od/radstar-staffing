@@ -1,4 +1,4 @@
-<?php 
+<?php
 namespace App\Traits;
 
 use DB;
@@ -74,9 +74,9 @@ trait FetchJobs
 
     public function createQuery($query, $search = '', $job_titles = array(), $company_ids = array(), $industry_ids = array(), $job_skill_ids = array(), $functional_area_ids = array(), $country_ids = array(), $state_ids = array(), $city_ids = array(), $is_freelance = -1, $career_level_ids = array(), $job_type_ids = array(), $job_shift_ids = array(), $gender_ids = array(), $degree_level_ids = array(), $job_experience_ids = array(), $salary_from = 0, $salary_to = 0, $salary_currency = '', $is_featured = -1)
     {
-    
-       
-         
+
+
+
         $active_company_ids_array = Company::where('is_active', 1)->pluck('id')->toArray();
         if (isset($company_ids[0]) && isset($active_company_ids_array[0])) {
             $company_ids = array_intersect($company_ids,$active_company_ids_array);
@@ -90,13 +90,13 @@ trait FetchJobs
             }
             $company_ids = $company_ids_array;
         }
-        
-        
-         
+
+
+
         if (isset($company_ids[0])) {
            // dd($company_ids[0]);
             $query->whereIn('jobs.company_id', $company_ids);
-        }   
+        }
         $query->where('jobs.is_active', 1);
         if ($search != '') {
             $query = $query->whereRaw("MATCH (`search`) AGAINST ('$search*' IN BOOLEAN MODE)");
@@ -104,7 +104,7 @@ trait FetchJobs
         if (isset($job_titles[0])) {
             $query = $query->where('title', 'like', $job_titles[0]);
         }
-             
+
         if (isset($job_skill_ids[0])) {
             $query->whereHas('jobSkills', function($query) use ($job_skill_ids) {
                 $query->whereIn('job_skill_id', $job_skill_ids);
@@ -158,7 +158,7 @@ trait FetchJobs
         if ($is_featured == 1) {
             $query->where('jobs.is_featured', '=', $is_featured);
         }
-        
+
         $query->notExpire();
         return $query;
     }
