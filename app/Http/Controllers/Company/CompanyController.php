@@ -116,7 +116,7 @@ class CompanyController extends Controller
 
     {
 
-        $this->middleware('company', ['except' => ['companyDetail', 'sendContactForm']]);
+        $this->middleware('company', ['except' => ['companyDetail', 'sendContactForm', 'applicantProfile', 'userProfile']]);
 
         $this->runCheckPackageValidity();
 
