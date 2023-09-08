@@ -14,7 +14,7 @@
 
 <hr>
 
-<div class="modal fade" id="add_education_modal" role="dialog"></div>
+<div class="modal" id="add_education_modal" role="dialog"></div>
 
 @push('styles')
 
@@ -30,7 +30,7 @@
 
 @endpush
 
-@push('scripts') 
+@push('scripts')
 
 <script type="text/javascript">
 
@@ -328,6 +328,6 @@
 
     }
 
-</script> 
+</script>
 
 @endpush

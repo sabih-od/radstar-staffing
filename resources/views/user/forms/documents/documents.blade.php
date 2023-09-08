@@ -5,7 +5,7 @@
 
 
 
-        <div class="row" id="projects_div"></div>
+{{--        <div class="row" id="projects_div"></div>--}}
 
 
 <br>

@@ -63,7 +63,7 @@
                                                    value="{{old('first_name')}}">
 
                                             @if ($errors->has('first_name')) <span
-                                                class="help-block"> <strong>{{ $errors->first('first_name') }}</strong> </span> @endif
+                                                class="help-block text-danger"> <strong>{{ $errors->first('first_name') }}</strong> </span> @endif
                                         </div>
 
                                         <div class="formrow{{ $errors->has('middle_name') ? ' has-error' : '' }}">
@@ -72,7 +72,7 @@
                                                    placeholder="{{__('Middle Name')}}" value="{{old('middle_name')}}">
 
                                             @if ($errors->has('middle_name')) <span
-                                                class="help-block"> <strong>{{ $errors->first('middle_name') }}</strong> </span> @endif
+                                                class="help-block text-danger"> <strong>{{ $errors->first('middle_name') }}</strong> </span> @endif
                                         </div>
 
                                         <div class="formrow{{ $errors->has('last_name') ? ' has-error' : '' }}">
@@ -81,7 +81,7 @@
                                                    placeholder="{{__('Last Name')}}" value="{{old('last_name')}}">
 
                                             @if ($errors->has('last_name')) <span
-                                                class="help-block"> <strong>{{ $errors->first('last_name') }}</strong> </span> @endif
+                                                class="help-block text-danger"> <strong>{{ $errors->first('last_name') }}</strong> </span> @endif
                                         </div>
 
                                         <div class="formrow{{ $errors->has('email') ? ' has-error' : '' }}">
@@ -90,7 +90,7 @@
                                                    placeholder="{{__('Email')}}" value="{{old('email')}}">
 
                                             @if ($errors->has('email')) <span
-                                                class="help-block"> <strong>{{ $errors->first('email') }}</strong> </span> @endif
+                                                class="help-block text-danger"> <strong>{{ $errors->first('email') }}</strong> </span> @endif
                                         </div>
 
                                         <div class="formrow{{ $errors->has('password') ? ' has-error' : '' }}">
@@ -99,7 +99,7 @@
                                                    required="required" placeholder="{{__('Password')}}" value="">
 
                                             @if ($errors->has('password')) <span
-                                                class="help-block"> <strong>{{ $errors->first('password') }}</strong> </span> @endif
+                                                class="help-block text-danger"> <strong>{{ $errors->first('password') }}</strong> </span> @endif
                                         </div>
 
                                         <div
@@ -110,7 +110,7 @@
                                                    value="">
 
                                             @if ($errors->has('password_confirmation')) <span
-                                                class="help-block"> <strong>{{ $errors->first('password_confirmation') }}</strong> </span> @endif
+                                                class="help-block text-danger"> <strong>{{ $errors->first('password_confirmation') }}</strong> </span> @endif
                                         </div>
 
 
@@ -133,7 +133,7 @@
                                             {{__('Subscribe to Newsletter')}}
 
                                             @if ($errors->has('is_subscribed')) <span
-                                                class="help-block"> <strong>{{ $errors->first('is_subscribed') }}</strong> </span> @endif
+                                                class="help-block text-danger"> <strong>{{ $errors->first('is_subscribed') }}</strong> </span> @endif
                                         </div>
 
 
@@ -145,13 +145,13 @@
 
 
                                             @if ($errors->has('terms_of_use')) <span
-                                                class="help-block"> <strong>{{ $errors->first('terms_of_use') }}</strong> </span> @endif
+                                                class="help-block text-danger"> <strong>{{ $errors->first('terms_of_use') }}</strong> </span> @endif
                                         </div>
 
                                         <div
                                             class="form-group col-12 col-sm-12 col-md-10 text-center mx-auto mobile-padding-no {{ $errors->has('g-recaptcha-response') ? ' has-error' : '' }}">
                                             {!! app('captcha')->display() !!}
-                                            @if ($errors->has('g-recaptcha-response')) <span class="help-block">
+                                            @if ($errors->has('g-recaptcha-response')) <span class="help-block text-danger">
                              <strong>{{ $errors->first('g-recaptcha-response') }}</strong> </span> @endif
                                         </div>
 
@@ -177,7 +177,7 @@
                                                    placeholder="{{__('Name')}}" value="{{old('name')}}">
 
                                             @if ($errors->has('name')) <span
-                                                class="help-block"> <strong>{{ $errors->first('name') }}</strong> </span> @endif
+                                                class="help-block text-danger"> <strong>{{ $errors->first('name') }}</strong> </span> @endif
                                         </div>
 
                                         <div class="formrow{{ $errors->has('email') ? ' has-error' : '' }}">
@@ -186,7 +186,7 @@
                                                    placeholder="{{__('Email')}}" value="{{old('email')}}">
 
                                             @if ($errors->has('email')) <span
-                                                class="help-block"> <strong>{{ $errors->first('email') }}</strong> </span> @endif
+                                                class="help-block text-danger"> <strong>{{ $errors->first('email') }}</strong> </span> @endif
                                         </div>
 
                                         <div class="formrow{{ $errors->has('password') ? ' has-error' : '' }}">
@@ -195,7 +195,7 @@
                                                    required="required" placeholder="{{__('Password')}}" value="">
 
                                             @if ($errors->has('password')) <span
-                                                class="help-block"> <strong>{{ $errors->first('password') }}</strong> </span> @endif
+                                                class="help-block text-danger"> <strong>{{ $errors->first('password') }}</strong> </span> @endif
                                         </div>
 
                                         <div
@@ -206,7 +206,7 @@
                                                    value="">
 
                                             @if ($errors->has('password_confirmation')) <span
-                                                class="help-block"> <strong>{{ $errors->first('password_confirmation') }}</strong> </span> @endif
+                                                class="help-block text-danger"> <strong>{{ $errors->first('password_confirmation') }}</strong> </span> @endif
                                         </div>
 
                                         <div class="formrow{{ $errors->has('is_subscribed') ? ' has-error' : '' }}">
@@ -228,7 +228,7 @@
                                             {{__('Subscribe to Newsletter')}}
 
                                             @if ($errors->has('is_subscribed')) <span
-                                                class="help-block"> <strong>{{ $errors->first('is_subscribed') }}</strong> </span> @endif
+                                                class="help-block text-danger"> <strong>{{ $errors->first('is_subscribed') }}</strong> </span> @endif
                                         </div>
 
 
@@ -240,13 +240,13 @@
 
 
                                             @if ($errors->has('terms_of_use')) <span
-                                                class="help-block"> <strong>{{ $errors->first('terms_of_use') }}</strong> </span> @endif
+                                                class="help-block text-danger"> <strong>{{ $errors->first('terms_of_use') }}</strong> </span> @endif
                                         </div>
 
                                         <div
                                             class="form-group col-12 col-sm-12 col-md-10 text-center mx-auto mobile-padding-no {{ $errors->has('g-recaptcha-response') ? ' has-error' : '' }}">
                                             {!! app('captcha')->display() !!}
-                                            @if ($errors->has('g-recaptcha-response')) <span class="help-block">
+                                            @if ($errors->has('g-recaptcha-response')) <span class="help-block text-danger">
                              <strong>{{ $errors->first('g-recaptcha-response') }}</strong> </span> @endif
                                         </div>
 

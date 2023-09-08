@@ -402,5 +402,27 @@ class Company extends Authenticatable
         }
     }
 
+
+
+    public function isFavouriteCompany($company_slug)
+
+    {
+
+        $return = false;
+
+        if (Auth::guard('company')->check()) {
+
+            $count = FavouriteCompany::where('user_id', Auth::guard('company')->user()->id)->where('company_slug', 'like', $company_slug)->count();
+
+            if ($count > 0)
+
+                $return = true;
+
+        }
+
+        return $return;
+
+    }
+
 }
 

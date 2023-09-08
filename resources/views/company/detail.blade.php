@@ -90,11 +90,11 @@
 
                             <div class="cadsocial"> {!!$company->getSocialNetworkHtml()!!} </div>
 
-                        </div>						
+                        </div>
 
 						@endif
 
-						
+
 
                     </div>
 
@@ -106,23 +106,31 @@
 
             <!-- Buttons -->
 
-            <div class="jobButtons"> @if(Auth::check() && Auth::user()->isFavouriteCompany($company->slug)) <a
+            <div class="jobButtons">
+                @if (!(Auth::guard('company')->check() && Auth::guard('company')->user()->slug == $company->slug))
+                    @if((Auth::check() && Auth::user()->isFavouriteCompany($company->slug)) || (Auth::guard('company')->check() && Auth::guard('company')->user()->isFavouriteCompany($company->slug)))
+                        <a href="{{route('remove.from.favourite.company', $company->slug)}}" class="btn">
+                            <i class="fa fa-floppy-o" aria-hidden="true"></i>
+                            {{__('Favourite Company')}}
+                        </a>
+                    @else
+                        <a href="{{route('add.to.favourite.company', $company->slug)}}" class="btn">
+                            <i class="fa fa-floppy-o" aria-hidden="true"></i>
+                            {{__('Add to Favourite')}}
+                        </a>
+                    @endif
+                    <a href="{{route('report.abuse.company', $company->slug)}}" class="btn report">
+                        <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                        {{__('Report Abuse')}}
+                    </a>
+                @endif
+{{--                <a href="javascript:;" onclick="send_message()" class="btn">--}}
+{{--                    <i class="fa fa-envelope"--}}
 
-                    href="{{route('remove.from.favourite.company', $company->slug)}}" class="btn"><i
-
-                        class="fa fa-floppy-o" aria-hidden="true"></i> {{__('Favourite Company')}} </a> @else <a
-
-                    href="{{route('add.to.favourite.company', $company->slug)}}" class="btn"><i class="fa fa-floppy-o"
-
-                        aria-hidden="true"></i> {{__('Add to Favourite')}}</a> @endif <a
-
-                    href="{{route('report.abuse.company', $company->slug)}}" class="btn report"><i
-
-                        class="fa fa-exclamation-triangle" aria-hidden="true"></i> {{__('Report Abuse')}}</a> <a
-
-                    href="javascript:;" onclick="send_message()" class="btn"><i class="fa fa-envelope"
-
-                        aria-hidden="true"></i> {{__('Send Message')}}</a> </div>
+{{--                    aria-hidden="true"></i>--}}
+{{--                    {{__('Send Message')}}--}}
+{{--                </a>--}}
+            </div>
 
         </div>
 
@@ -326,7 +334,7 @@
 
                 <input type="hidden" name="company_id" id="company_id" value="{{$company->id}}">
 
-                <div class="modal-header">                    
+                <div class="modal-header">
 
                     <h4 class="modal-title">Send Message</h4>
 
