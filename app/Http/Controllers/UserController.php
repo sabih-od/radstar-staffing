@@ -65,7 +65,7 @@ class UserController extends Controller
     public function __construct()
     {
         //$this->middleware('auth', ['only' => ['myProfile', 'updateMyProfile', 'viewPublicProfile']]);
-        $this->middleware('auth', ['except' => ['showApplicantProfileEducation', 'showApplicantProfileProjects', 'showApplicantProfileExperience', 'showApplicantProfileSkills', 'showApplicantProfileLanguages']]);
+        $this->middleware('auth', ['except' => ['showApplicantProfileEducation', 'showApplicantProfileProjects', 'showApplicantProfileExperience', 'showApplicantProfileSkills', 'showApplicantProfileLanguages', 'addToFavouriteCompany', 'removeFromFavouriteCompany']]);
     }
 
     public function viewPublicProfile($id)
@@ -229,7 +229,7 @@ class UserController extends Controller
     public function addToFavouriteCompany(Request $request, $company_slug)
     {
         $data['company_slug'] = $company_slug;
-        $data['user_id'] = Auth::user()->id;
+        $data['user_id'] = Auth::user()->id ?? Auth::guard('company')->user()->id;
         $data_save = FavouriteCompany::create($data);
         flash(__('Company has been added in favorites list'))->success();
         return \Redirect::route('company.detail', $company_slug);
@@ -237,7 +237,7 @@ class UserController extends Controller
 
     public function removeFromFavouriteCompany(Request $request, $company_slug)
     {
-        $user_id = Auth::user()->id;
+        $user_id = Auth::user()->id ?? Auth::guard('company')->user()->id;
         FavouriteCompany::where('company_slug', 'like', $company_slug)->where('user_id', $user_id)->delete();
 
         flash(__('Company has been removed from favorites list'))->success();
