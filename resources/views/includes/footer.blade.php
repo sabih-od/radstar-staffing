@@ -1,19 +1,20 @@
 <!--Footer-->
-<div class="largebanner shadow3">
-<div class="adin">
-{!! $siteSetting->above_footer_ad !!}
-</div>
-<div class="clearfix"></div>
-</div>
+{{--ads--}}
+{{--<div class="largebanner shadow3">--}}
+{{--<div class="adin">--}}
+{{--{!! $siteSetting->above_footer_ad !!}--}}
+{{--</div>--}}
+{{--<div class="clearfix"></div>--}}
+{{--</div>--}}
 
 
 
 
 
 
-<div class="footerWrap"> 
+<div class="footerWrap">
     <div class="container">
-        <div class="row"> 
+        <div class="row">
 
             <!--Quick Links-->
             <div class="col-md-3 col-sm-6">
@@ -72,16 +73,16 @@
                 <div class="phone"> <a href="tel:{{ $siteSetting->site_phone_primary }}">{{ $siteSetting->site_phone_primary }}</a></div>
                 <!-- Social Icons -->
                 <div class="social">@include('includes.footer_social')</div>
-                <!-- Social Icons end --> 
+                <!-- Social Icons end -->
 
             </div>
-            <!--About us End--> 
+            <!--About us End-->
 
 
         </div>
     </div>
 </div>
-<!--Footer end--> 
+<!--Footer end-->
 <!--Copyright-->
 <div class="copyright">
     <div class="container">
@@ -90,7 +91,7 @@
                 <div class="bttxt">{{__('Copyright')}} &copy; {{date('Y')}} {{ $siteSetting->site_name }}. {{__('All Rights Reserved')}}. {{__('Design by')}}: <a href="{{url('/')}}http://graphicriver.net/user/ecreativesol" target="_blank">eCreativeSolutions</a></div>
             </div>
             <div class="col-md-4">
-                <div class="paylogos"><img src="{{asset('/')}}images/payment-icons.png" alt="" /></div>	
+                <div class="paylogos"><img src="{{asset('/')}}images/payment-icons.png" alt="" /></div>
             </div>
         </div>
 
