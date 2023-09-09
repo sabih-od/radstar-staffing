@@ -11,7 +11,7 @@ Route::post('update-front-profile-summary/{id}', 'UserController@updateProfileSu
 Route::post('update-immediate-available-status', 'UserController@updateImmediateAvailableStatus')->name('update.immediate.available.status');
 Route::get('add-to-favourite-company/{company_slug}', 'UserController@addToFavouriteCompany')->name('add.to.favourite.company');
 Route::get('remove-from-favourite-company/{company_slug}', 'UserController@removeFromFavouriteCompany')->name('remove.from.favourite.company');
-Route::get('my-followings', 'UserController@myFollowings')->name('my.followings');
+Route::get('my-favourite-companies', 'UserController@myFollowings')->name('my.followings');
 /* Route::get('my-messages', 'UserController@myMessages')->name('my.messages'); */
 Route::get('my-messages', 'Job\SeekerSendController@all_messages')->name('my.messages');
 Route::get('seeker-append-messages', 'Job\SeekerSendController@append_messages')->name('seeker-append-messages');
