@@ -68,6 +68,13 @@
       'Flash' => 'Laracasts\\Flash\\Flash',
     ),
   ),
+  'laravel/passport' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Laravel\\Passport\\PassportServiceProvider',
+    ),
+  ),
   'laravel/socialite' => 
   array (
     'providers' => 
@@ -128,6 +135,13 @@
     'providers' => 
     array (
       0 => 'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider',
+    ),
+  ),
+  'prettus/l5-repository' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Prettus\\Repository\\Providers\\RepositoryServiceProvider',
     ),
   ),
   'socialiteproviders/manager' => 
