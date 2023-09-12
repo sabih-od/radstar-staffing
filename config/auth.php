@@ -36,7 +36,6 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
-
         'company' => [
             'driver' => 'session',
             'provider' => 'companies',
@@ -45,9 +44,13 @@ return [
             'driver' => 'session',
             'provider' => 'admins',
         ],
-        'api' => [
+        'user' => [
             'driver' => 'passport',
             'provider' => 'users',
+        ],
+        'company_api' => [
+            'driver' => 'passport',
+            'provider' => 'companies',
         ],
     ],
     /*
