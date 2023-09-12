@@ -69,7 +69,7 @@ use RegistersUsers;
         UserVerification::send($user, 'User Verification', config('mail.recieve_to.address'), config('mail.recieve_to.name'));
 
         //assign package
-        add_job_seeker_package();
+        add_candidate_package();
 
         return $this->registered($request, $user) ?: redirect($this->redirectPath());
     }

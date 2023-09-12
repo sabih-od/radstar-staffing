@@ -1,8 +1,11 @@
 <?php
 
+use App\Events\NewNotification;
+use App\Models\Notification;
 use App\Package;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 function add_company_package () {
     if (!($package = Package::find(1)) || !(Auth::guard('company')->check()) || !($company = Auth::guard('company')->user())) {
@@ -21,7 +24,7 @@ function add_company_package () {
     return true;
 }
 
-function add_job_seeker_package () {
+function add_candidate_package () {
     if (!($package = Package::find(2)) || !(Auth::check()) || !($user = Auth::user())) {
         return false;
     }
@@ -52,4 +55,28 @@ function user_has_uploaded_all_documents ($user) {
     }
 
     return true;
+}
+
+function emit_socket_io_notification ($user_id, $user_type, $icon, $title, $content, $topic, $topic_id) {
+    try {
+        Log::info('emit_socket_io_notification: START');
+        $notification = Notification::create([
+            'user_id' => $user_id,
+            'user_type' => $user_type,
+            'icon' => $icon,
+            'title' => $title,
+            'content' => $content,
+            'topic' => $topic,
+            'topic_id' => $topic_id,
+        ]);
+
+        //emit pusher notification
+        event(new NewNotification($notification));
+
+        Log::info('emit_socket_io_notification: SUCCESS; ' . $notification->toArray());
+        return true;
+    } catch (\Exception $e) {
+        Log::info('emit_socket_io_notification: FAILED; ' . $e->getMessage());
+        return false;
+    }
 }

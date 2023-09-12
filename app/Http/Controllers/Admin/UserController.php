@@ -395,6 +395,17 @@ class UserController extends Controller
             $user = User::findOrFail($id);
             $user->is_active = 1;
             $user->update();
+
+            $socket_io_emitter_res = emit_socket_io_notification(
+                $user->id,
+                'candidate',
+                'icon',
+                'Account Status',
+                'Your account has been activated.',
+                'user',
+                $user->id
+            );
+
             echo 'ok';
         } catch (ModelNotFoundException $e) {
             echo 'notok';
@@ -408,6 +419,17 @@ class UserController extends Controller
             $user = User::findOrFail($id);
             $user->is_active = 0;
             $user->update();
+
+            $socket_io_emitter_res = emit_socket_io_notification(
+                $user->id,
+                'candidate',
+                'icon',
+                'Account Status',
+                'Your account has been de-activated.',
+                'user',
+                $user->id
+            );
+
             echo 'ok';
         } catch (ModelNotFoundException $e) {
             echo 'notok';
@@ -421,6 +443,17 @@ class UserController extends Controller
             $user = User::findOrFail($id);
             $user->verified = 1;
             $user->update();
+
+            $socket_io_emitter_res = emit_socket_io_notification(
+                $user->id,
+                'candidate',
+                'icon',
+                'Account Verification',
+                'Your account has been verified.',
+                'user',
+                $user->id
+            );
+
             echo 'ok';
         } catch (ModelNotFoundException $e) {
             echo 'notok';
@@ -435,6 +468,16 @@ class UserController extends Controller
             $user->verified = 0;
             $user->update();
             echo 'ok';
+
+            $socket_io_emitter_res = emit_socket_io_notification(
+                $user->id,
+                'candidate',
+                'icon',
+                'Account Verification',
+                'Your account has been un-verified.',
+                'user',
+                $user->id
+            );
         } catch (ModelNotFoundException $e) {
             echo 'notok';
         }

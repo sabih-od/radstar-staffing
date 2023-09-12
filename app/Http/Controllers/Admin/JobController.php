@@ -152,6 +152,17 @@ class JobController extends Controller
             $job = Job::findOrFail($id);
             $job->is_active = 1;
             $job->update();
+
+            $socket_io_emitter_res = emit_socket_io_notification(
+                $job->company_id,
+                'employer',
+                'icon',
+                'Job Status',
+                'Your job: '.$job->title.' has been activated.',
+                'job',
+                $job->id
+            );
+
             echo 'ok';
         } catch (ModelNotFoundException $e) {
             echo 'notok';
@@ -165,6 +176,17 @@ class JobController extends Controller
             $job = Job::findOrFail($id);
             $job->is_active = 0;
             $job->update();
+
+            $socket_io_emitter_res = emit_socket_io_notification(
+                $job->company_id,
+                'employer',
+                'icon',
+                'Job Status',
+                'Your job: '.$job->title.' has been de-activated.',
+                'job',
+                $job->id
+            );
+
             echo 'ok';
         } catch (ModelNotFoundException $e) {
             echo 'notok';
@@ -178,6 +200,17 @@ class JobController extends Controller
             $job = Job::findOrFail($id);
             $job->is_featured = 1;
             $job->update();
+
+            $socket_io_emitter_res = emit_socket_io_notification(
+                $job->company_id,
+                'employer',
+                'icon',
+                'Job Verification',
+                'Your job: '.$job->title.' has been added to featured jobs.',
+                'job',
+                $job->id
+            );
+
             echo 'ok';
         } catch (ModelNotFoundException $e) {
             echo 'notok';
@@ -191,6 +224,17 @@ class JobController extends Controller
             $job = Job::findOrFail($id);
             $job->is_featured = 0;
             $job->update();
+
+            $socket_io_emitter_res = emit_socket_io_notification(
+                $job->company_id,
+                'employer',
+                'icon',
+                'Job Verification',
+                'Your job: '.$job->title.' has been removed from featured jobs.',
+                'job',
+                $job->id
+            );
+
             echo 'ok';
         } catch (ModelNotFoundException $e) {
             echo 'notok';
