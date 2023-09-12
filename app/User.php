@@ -21,6 +21,7 @@ use App\Traits\CountryStateCity;
 use App\Traits\CommonUserFunctions;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Laravel\Passport\HasApiTokens;
 
 
 class User extends Authenticatable implements HasMedia
@@ -37,6 +38,8 @@ class User extends Authenticatable implements HasMedia
 
     use InteractsWithMedia;
 
+    use HasApiTokens;
+
 
 
     /**
@@ -51,7 +54,7 @@ class User extends Authenticatable implements HasMedia
 
     protected $fillable = [
 
-        'name', 'email', 'password',
+        'name', 'email', 'password','first_name','last_name','middle_name','date_of_birth','phone',
 
     ];
 

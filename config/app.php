@@ -159,6 +159,8 @@ return [
         Yajra\DataTables\DataTablesServiceProvider::class,
         App\Providers\CustomConfigServiceProvider::class,
         Anhskohbo\NoCaptcha\NoCaptchaServiceProvider::class,
+        Prettus\Repository\Providers\RepositoryServiceProvider::class,
+
     ],
     /*
       |--------------------------------------------------------------------------
