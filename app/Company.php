@@ -27,6 +27,7 @@ use Illuminate\Notifications\Notifiable;
 use App\Notifications\CompanyResetPassword;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Laravel\Passport\HasApiTokens;
 
 
 
@@ -45,6 +46,8 @@ class Company extends Authenticatable
     use JobTrait;
 
     use CountryStateCity;
+
+    use HasApiTokens;
 
 
 
