@@ -312,12 +312,13 @@ class CompanyController extends Controller
         $data['company_id'] = $company_id;
 
         $job = Job::find($job_id);
+        $user = User::find($user_id);
 
         $data_save = FavouriteApplicant::create($data);
 
         flash(__('Job seeker has been added in favorites list'))->success();
 
-        $socket_io_emitter_res = emit_socket_io_notification(
+        $pusher_emitter_res = emit_pusher_notification(
             $user_id,
             'candidate',
             'icon',
@@ -325,6 +326,14 @@ class CompanyController extends Controller
             'You have been shortlisted for job: ' . $job->title,
             'job',
             $job->id
+        );
+
+        //send mail to candidate
+        $mail_res = send_mail(
+            'no-reply@radstarstaffing.com',
+            $user->email,
+            'Radstar Staffing - Job Application',
+            'You have been shortlisted for job: ' . $job->title,
         );
 
         return \Redirect::route('applicant.profile', $application_id);
@@ -374,6 +383,7 @@ class CompanyController extends Controller
         $data['company_id'] = $company_id;
 
         $job = Job::find($job_id);
+        $user = User::find($user_id);
 
         $fev = FavouriteApplicant::where('user_id', $user_id)
 
@@ -391,7 +401,7 @@ class CompanyController extends Controller
 
         flash(__('Job seeker has been Hired from favorites list'))->success();
 
-        $socket_io_emitter_res = emit_socket_io_notification(
+        $pusher_emitter_res = emit_pusher_notification(
             $user_id,
             'candidate',
             'icon',
@@ -399,6 +409,14 @@ class CompanyController extends Controller
             'You have been hired for job: ' . $job->title,
             'job',
             $job->id
+        );
+
+        //send mail to candidate
+        $mail_res = send_mail(
+            'no-reply@radstarstaffing.com',
+            $user->email,
+            'Radstar Staffing - Job Application',
+            'You have been hired for job: ' . $job->title,
         );
 
         return \Redirect::route('applicant.profile', $application_id);
@@ -837,12 +855,13 @@ class CompanyController extends Controller
 
 
         $job = $rej->getJob();
+        $user = User::find($job_application->user_id);
 
 
 
         $job_application->delete();
 
-        Mail::send(new JobSeekerRejectedMailable($job,$rej));
+//        Mail::send(new JobSeekerRejectedMailable($job,$rej));
 
 
 
@@ -850,7 +869,7 @@ class CompanyController extends Controller
 
         flash(__('Job seeker has been rejected successfully'))->success();
 
-        $socket_io_emitter_res = emit_socket_io_notification(
+        $pusher_emitter_res = emit_pusher_notification(
             $job_application->user_id,
             'candidate',
             'icon',
@@ -858,6 +877,14 @@ class CompanyController extends Controller
             'You have been rejected for job: ' . $job->title,
             'job',
             $job->id
+        );
+
+        //send mail to candidate
+        $mail_res = send_mail(
+            'no-reply@radstarstaffing.com',
+            $user->email,
+            'Radstar Staffing - Job Application',
+            'You have been rejected for job: ' . $job->title,
         );
 
         return \Redirect::route('rejected-users',$job->id);

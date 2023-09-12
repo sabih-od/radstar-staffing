@@ -153,7 +153,7 @@ class JobController extends Controller
             $job->is_active = 1;
             $job->update();
 
-            $socket_io_emitter_res = emit_socket_io_notification(
+            $pusher_emitter_res = emit_pusher_notification(
                 $job->company_id,
                 'employer',
                 'icon',
@@ -177,7 +177,7 @@ class JobController extends Controller
             $job->is_active = 0;
             $job->update();
 
-            $socket_io_emitter_res = emit_socket_io_notification(
+            $pusher_emitter_res = emit_pusher_notification(
                 $job->company_id,
                 'employer',
                 'icon',
@@ -201,7 +201,7 @@ class JobController extends Controller
             $job->is_featured = 1;
             $job->update();
 
-            $socket_io_emitter_res = emit_socket_io_notification(
+            $pusher_emitter_res = emit_pusher_notification(
                 $job->company_id,
                 'employer',
                 'icon',
@@ -225,7 +225,7 @@ class JobController extends Controller
             $job->is_featured = 0;
             $job->update();
 
-            $socket_io_emitter_res = emit_socket_io_notification(
+            $pusher_emitter_res = emit_pusher_notification(
                 $job->company_id,
                 'employer',
                 'icon',

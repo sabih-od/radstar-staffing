@@ -235,7 +235,7 @@ class UserController extends Controller
         $favourite_company = FavouriteCompany::create($data);
         flash(__('Company has been added in favorites list'))->success();
 
-        $socket_io_emitter_res = emit_socket_io_notification(
+        $pusher_emitter_res = emit_pusher_notification(
             $company->id,
             'employer',
             'icon',
