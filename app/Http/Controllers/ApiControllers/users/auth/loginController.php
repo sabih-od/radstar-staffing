@@ -30,7 +30,7 @@ class loginController extends Controller
         }
     }
 
-    public function candidateLogin2()
+    public function xyz()
     {
         dd('dsdasdasd');
     }
