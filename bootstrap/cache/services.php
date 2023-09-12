@@ -1,5 +1,5 @@
 <?php return array (
-  'providers' =>
+  'providers' => 
   array (
     0 => 'Illuminate\\Auth\\AuthServiceProvider',
     1 => 'Illuminate\\Broadcasting\\BroadcastServiceProvider',
@@ -50,19 +50,20 @@
     46 => 'Yajra\\DataTables\\DataTablesServiceProvider',
     47 => 'App\\Providers\\AppServiceProvider',
     48 => 'App\\Providers\\AuthServiceProvider',
-    49 => 'App\\Providers\\EventServiceProvider',
-    50 => 'Jrean\\UserVerification\\UserVerificationServiceProvider',
-    51 => 'App\\Providers\\RouteServiceProvider',
-    52 => 'App\\Providers\\ComposerServiceProvider',
-    53 => 'Collective\\Html\\HtmlServiceProvider',
-    54 => 'Laracasts\\Flash\\FlashServiceProvider',
-    55 => 'Intervention\\Image\\ImageServiceProvider',
-    56 => 'Yajra\\DataTables\\DataTablesServiceProvider',
-    57 => 'App\\Providers\\CustomConfigServiceProvider',
-    58 => 'Anhskohbo\\NoCaptcha\\NoCaptchaServiceProvider',
-    59 => 'Prettus\\Repository\\Providers\\RepositoryServiceProvider',
+    49 => 'App\\Providers\\BroadcastServiceProvider',
+    50 => 'App\\Providers\\EventServiceProvider',
+    51 => 'Jrean\\UserVerification\\UserVerificationServiceProvider',
+    52 => 'App\\Providers\\RouteServiceProvider',
+    53 => 'App\\Providers\\ComposerServiceProvider',
+    54 => 'Collective\\Html\\HtmlServiceProvider',
+    55 => 'Laracasts\\Flash\\FlashServiceProvider',
+    56 => 'Intervention\\Image\\ImageServiceProvider',
+    57 => 'Yajra\\DataTables\\DataTablesServiceProvider',
+    58 => 'App\\Providers\\CustomConfigServiceProvider',
+    59 => 'Anhskohbo\\NoCaptcha\\NoCaptchaServiceProvider',
+    60 => 'Prettus\\Repository\\Providers\\RepositoryServiceProvider',
   ),
-  'eager' =>
+  'eager' => 
   array (
     0 => 'Illuminate\\Auth\\AuthServiceProvider',
     1 => 'Illuminate\\Cookie\\CookieServiceProvider',
@@ -97,18 +98,19 @@
     30 => 'Yajra\\DataTables\\DataTablesServiceProvider',
     31 => 'App\\Providers\\AppServiceProvider',
     32 => 'App\\Providers\\AuthServiceProvider',
-    33 => 'App\\Providers\\EventServiceProvider',
-    34 => 'Jrean\\UserVerification\\UserVerificationServiceProvider',
-    35 => 'App\\Providers\\RouteServiceProvider',
-    36 => 'App\\Providers\\ComposerServiceProvider',
-    37 => 'Laracasts\\Flash\\FlashServiceProvider',
-    38 => 'Intervention\\Image\\ImageServiceProvider',
-    39 => 'Yajra\\DataTables\\DataTablesServiceProvider',
-    40 => 'App\\Providers\\CustomConfigServiceProvider',
-    41 => 'Anhskohbo\\NoCaptcha\\NoCaptchaServiceProvider',
-    42 => 'Prettus\\Repository\\Providers\\RepositoryServiceProvider',
+    33 => 'App\\Providers\\BroadcastServiceProvider',
+    34 => 'App\\Providers\\EventServiceProvider',
+    35 => 'Jrean\\UserVerification\\UserVerificationServiceProvider',
+    36 => 'App\\Providers\\RouteServiceProvider',
+    37 => 'App\\Providers\\ComposerServiceProvider',
+    38 => 'Laracasts\\Flash\\FlashServiceProvider',
+    39 => 'Intervention\\Image\\ImageServiceProvider',
+    40 => 'Yajra\\DataTables\\DataTablesServiceProvider',
+    41 => 'App\\Providers\\CustomConfigServiceProvider',
+    42 => 'Anhskohbo\\NoCaptcha\\NoCaptchaServiceProvider',
+    43 => 'Prettus\\Repository\\Providers\\RepositoryServiceProvider',
   ),
-  'deferred' =>
+  'deferred' => 
   array (
     'Illuminate\\Broadcasting\\BroadcastManager' => 'Illuminate\\Broadcasting\\BroadcastServiceProvider',
     'Illuminate\\Contracts\\Broadcasting\\Factory' => 'Illuminate\\Broadcasting\\BroadcastServiceProvider',
@@ -237,54 +239,54 @@
     'Collective\\Html\\HtmlBuilder' => 'Collective\\Html\\HtmlServiceProvider',
     'Collective\\Html\\FormBuilder' => 'Collective\\Html\\HtmlServiceProvider',
   ),
-  'when' =>
+  'when' => 
   array (
-    'Illuminate\\Broadcasting\\BroadcastServiceProvider' =>
+    'Illuminate\\Broadcasting\\BroadcastServiceProvider' => 
     array (
     ),
-    'Illuminate\\Bus\\BusServiceProvider' =>
+    'Illuminate\\Bus\\BusServiceProvider' => 
     array (
     ),
-    'Illuminate\\Cache\\CacheServiceProvider' =>
+    'Illuminate\\Cache\\CacheServiceProvider' => 
     array (
     ),
-    'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider' =>
+    'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider' => 
     array (
     ),
-    'Illuminate\\Hashing\\HashServiceProvider' =>
+    'Illuminate\\Hashing\\HashServiceProvider' => 
     array (
     ),
-    'Illuminate\\Mail\\MailServiceProvider' =>
+    'Illuminate\\Mail\\MailServiceProvider' => 
     array (
     ),
-    'Illuminate\\Pipeline\\PipelineServiceProvider' =>
+    'Illuminate\\Pipeline\\PipelineServiceProvider' => 
     array (
     ),
-    'Illuminate\\Queue\\QueueServiceProvider' =>
+    'Illuminate\\Queue\\QueueServiceProvider' => 
     array (
     ),
-    'Illuminate\\Redis\\RedisServiceProvider' =>
+    'Illuminate\\Redis\\RedisServiceProvider' => 
     array (
     ),
-    'Illuminate\\Auth\\Passwords\\PasswordResetServiceProvider' =>
+    'Illuminate\\Auth\\Passwords\\PasswordResetServiceProvider' => 
     array (
     ),
-    'Illuminate\\Translation\\TranslationServiceProvider' =>
+    'Illuminate\\Translation\\TranslationServiceProvider' => 
     array (
     ),
-    'Illuminate\\Validation\\ValidationServiceProvider' =>
+    'Illuminate\\Validation\\ValidationServiceProvider' => 
     array (
     ),
-    'Laravel\\Socialite\\SocialiteServiceProvider' =>
+    'Laravel\\Socialite\\SocialiteServiceProvider' => 
     array (
     ),
-    'Laravel\\Tinker\\TinkerServiceProvider' =>
+    'Laravel\\Tinker\\TinkerServiceProvider' => 
     array (
     ),
-    'Collective\\Html\\HtmlServiceProvider' =>
+    'Collective\\Html\\HtmlServiceProvider' => 
     array (
     ),
-    'SocialiteProviders\\Manager\\ServiceProvider' =>
+    'SocialiteProviders\\Manager\\ServiceProvider' => 
     array (
     ),
   ),
