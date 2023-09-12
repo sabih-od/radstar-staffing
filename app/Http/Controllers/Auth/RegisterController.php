@@ -75,6 +75,22 @@ use RegistersUsers;
         //assign package
         add_candidate_package();
 
+        //send mail to admin
+        $mail_res = send_mail(
+            'no-reply@radstarstaffing.com',
+            'admin@radstarstaffing.com',
+            'New Candidate Registration',
+            ($user->name ?? '') . ' has registered as candidate. Head on to admin panel to activate/deactivate account.',
+        );
+
+        //send mail to user
+        $mail_res = send_mail(
+            'no-reply@radstarstaffing.com',
+            $user->email,
+            'Radstar Staffing - Candidate Registration',
+            'Welcome on the portal. We appreciate your patience please wait for the admin approval.',
+        );
+
         return $this->registered($request, $user) ?: redirect($this->redirectPath());
     }
 

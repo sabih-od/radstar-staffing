@@ -396,7 +396,7 @@ class UserController extends Controller
             $user->is_active = 1;
             $user->update();
 
-            $socket_io_emitter_res = emit_socket_io_notification(
+            $pusher_emitter_res = emit_pusher_notification(
                 $user->id,
                 'candidate',
                 'icon',
@@ -404,6 +404,14 @@ class UserController extends Controller
                 'Your account has been activated.',
                 'user',
                 $user->id
+            );
+
+            //send mail to user
+            $mail_res = send_mail(
+                'no-reply@radstarstaffing.com',
+                $user->email,
+                'Radstar Staffing - Account Status',
+                'Your account has been activated.',
             );
 
             echo 'ok';
@@ -420,7 +428,7 @@ class UserController extends Controller
             $user->is_active = 0;
             $user->update();
 
-            $socket_io_emitter_res = emit_socket_io_notification(
+            $pusher_emitter_res = emit_pusher_notification(
                 $user->id,
                 'candidate',
                 'icon',
@@ -444,7 +452,7 @@ class UserController extends Controller
             $user->verified = 1;
             $user->update();
 
-            $socket_io_emitter_res = emit_socket_io_notification(
+            $pusher_emitter_res = emit_pusher_notification(
                 $user->id,
                 'candidate',
                 'icon',
@@ -469,7 +477,7 @@ class UserController extends Controller
             $user->update();
             echo 'ok';
 
-            $socket_io_emitter_res = emit_socket_io_notification(
+            $pusher_emitter_res = emit_pusher_notification(
                 $user->id,
                 'candidate',
                 'icon',

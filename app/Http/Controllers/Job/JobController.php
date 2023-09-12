@@ -245,7 +245,7 @@ class JobController extends Controller
         $data_save = FavouriteJob::create($data);
         flash(__('Job has been added in favorites list'))->success();
 
-        $socket_io_emitter_res = emit_socket_io_notification(
+        $pusher_emitter_res = emit_pusher_notification(
             $job->company_id,
             'employer',
             'icon',
@@ -316,6 +316,7 @@ class JobController extends Controller
         $user = Auth::user();
         $user_id = $user->id;
         $job = Job::where('slug', 'like', $job_slug)->first();
+        $company = Company::find($job->company_id);
 
         $jobApply = new JobApply();
         $jobApply->user_id = $user_id;
@@ -336,7 +337,7 @@ class JobController extends Controller
 
         flash(__('You have successfully applied for this job'))->success();
 
-        $socket_io_emitter_res = emit_socket_io_notification(
+        $pusher_emitter_res = emit_pusher_notification(
             $job->company_id,
             'employer',
             'icon',
@@ -344,6 +345,14 @@ class JobController extends Controller
             'User: '.($user->name ?? '').' has applied for job: '.($job->title ?? '').'.',
             'job',
             $job->id
+        );
+
+        //send mail to employer
+        $mail_res = send_mail(
+            'no-reply@radstarstaffing.com',
+            $company->email,
+            'Radstar Staffing - New Job Application',
+            'User: '.($user->name ?? '').' has applied for job: '.($job->title ?? '').'.',
         );
 
         return \Redirect::route('job.detail', $job_slug);

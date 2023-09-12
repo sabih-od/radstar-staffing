@@ -714,7 +714,7 @@ class CompanyController extends Controller
 
             $company->update();
 
-            $socket_io_emitter_res = emit_socket_io_notification(
+            $pusher_emitter_res = emit_pusher_notification(
                 $company->id,
                 'employer',
                 'icon',
@@ -722,6 +722,14 @@ class CompanyController extends Controller
                 'Your account has been activated.',
                 'company',
                 $company->id
+            );
+
+            //send mail to employer
+            $mail_res = send_mail(
+                'no-reply@radstarstaffing.com',
+                $company->email,
+                'Radstar Staffing - Account Status',
+                'Your account has been activated.',
             );
 
             echo 'ok';
@@ -750,7 +758,7 @@ class CompanyController extends Controller
 
             $company->update();
 
-            $socket_io_emitter_res = emit_socket_io_notification(
+            $pusher_emitter_res = emit_pusher_notification(
                 $company->id,
                 'employer',
                 'icon',
@@ -786,7 +794,7 @@ class CompanyController extends Controller
 
             $company->update();
 
-            $socket_io_emitter_res = emit_socket_io_notification(
+            $pusher_emitter_res = emit_pusher_notification(
                 $company->id,
                 'employer',
                 'icon',
@@ -822,7 +830,7 @@ class CompanyController extends Controller
 
             $company->update();
 
-            $socket_io_emitter_res = emit_socket_io_notification(
+            $pusher_emitter_res = emit_pusher_notification(
                 $company->id,
                 'employer',
                 'icon',

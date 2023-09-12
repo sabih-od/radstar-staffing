@@ -6,6 +6,7 @@ use App\Package;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 
 function add_company_package () {
     if (!($package = Package::find(1)) || !(Auth::guard('company')->check()) || !($company = Auth::guard('company')->user())) {
@@ -57,9 +58,9 @@ function user_has_uploaded_all_documents ($user) {
     return true;
 }
 
-function emit_socket_io_notification ($user_id, $user_type, $icon, $title, $content, $topic, $topic_id) {
+function emit_pusher_notification ($user_id, $user_type, $icon, $title, $content, $topic, $topic_id) {
     try {
-        Log::info('emit_socket_io_notification: START');
+        Log::info('emit_pusher_notification: START');
         $notification = Notification::create([
             'user_id' => $user_id,
             'user_type' => $user_type,
@@ -73,10 +74,34 @@ function emit_socket_io_notification ($user_id, $user_type, $icon, $title, $cont
         //emit pusher notification
         event(new NewNotification($notification));
 
-        Log::info('emit_socket_io_notification: SUCCESS; ' . $notification->toArray());
+        Log::info('emit_pusher_notification: SUCCESS; ' . $notification->toArray());
         return true;
     } catch (\Exception $e) {
-        Log::info('emit_socket_io_notification: FAILED; ' . $e->getMessage());
+        Log::info('emit_pusher_notification: FAILED; ' . $e->getMessage());
         return false;
     }
+}
+
+function send_mail ($from, $to, $subject, $html) {
+    // To send HTML mail, the Content-type header must be set
+    $headers = 'MIME-Version: 1.0' . "\r\n";
+    $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+
+    // Create email headers
+    $headers .= 'From: ' . $from . "\r\n" .
+        'Reply-To: ' . $from . "\r\n" .
+        'X-Mailer: PHP/' . phpversion();
+
+    // Sending email
+    Mail::send([], [], function ($message) use ($to, $subject, $html) {
+        $message->to($to)
+            ->subject($subject)
+            ->setBody($html, 'text/html'); // for HTML rich messages
+    });
+
+    if (Mail::failures()) {
+        return false;
+    }
+
+    return true;
 }

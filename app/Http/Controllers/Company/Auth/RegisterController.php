@@ -86,6 +86,22 @@ use RegistersUsers;
         //assign package
         add_company_package();
 
+        //send mail to admin
+        $mail_res = send_mail(
+            'no-reply@radstarstaffing.com',
+            'admin@radstarstaffing.com',
+            'New Employer Registration',
+            ($company->name ?? '') . ' has registered as employer. Head on to admin panel to activate/deactivate account.',
+        );
+
+        //send mail to user
+        $mail_res = send_mail(
+            'no-reply@radstarstaffing.com',
+            $company->email,
+            'Radstar Staffing - Employer Registration',
+            'Welcome on the portal. We appreciate your patience please wait for the admin approval.',
+        );
+
         return $this->registered($request, $company) ?: redirect($this->redirectPath());
     }
 
