@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Job;
 
+use App\User;
 use Auth;
 use DB;
 use Input;
@@ -239,8 +240,21 @@ class JobController extends Controller
     {
         $data['job_slug'] = $job_slug;
         $data['user_id'] = Auth::user()->id;
+        $user = User::find(Auth::user()->id);
+        $job = Job::where('slug', $job_slug)->firstOrFail();
         $data_save = FavouriteJob::create($data);
         flash(__('Job has been added in favorites list'))->success();
+
+        $socket_io_emitter_res = emit_socket_io_notification(
+            $job->company_id,
+            'employer',
+            'icon',
+            'Job Favourited',
+            'User: '.($user->name ?? '').' has added your job: '.($job->title ?? '').' to the favourites.',
+            'job',
+            $job->id
+        );
+
         return \Redirect::route('job.detail', $job_slug);
     }
 
@@ -321,6 +335,17 @@ class JobController extends Controller
         event(new JobApplied($job, $jobApply));
 
         flash(__('You have successfully applied for this job'))->success();
+
+        $socket_io_emitter_res = emit_socket_io_notification(
+            $job->company_id,
+            'employer',
+            'icon',
+            'New Job Application',
+            'User: '.($user->name ?? '').' has applied for job: '.($job->title ?? '').'.',
+            'job',
+            $job->id
+        );
+
         return \Redirect::route('job.detail', $job_slug);
     }
 

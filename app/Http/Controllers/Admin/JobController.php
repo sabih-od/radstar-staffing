@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\FavouriteApplicant;
+use App\JobApply;
+use App\JobApplyRejected;
 use Auth;
 use DB;
 use Input;
@@ -109,7 +112,7 @@ class JobController extends Controller
 					<ul class="dropdown-menu">
 						<li>
 							<a href="' . route('edit.job', ['id' => $jobs->id]) . '"><i class="fa fa-pencil" aria-hidden="true"></i>Edit</a>
-						</li>						
+						</li>
 						<li>
 							<a href="javascript:void(0);" onclick="deleteJob(' . $jobs->id . ', ' . $jobs->is_default . ');" class=""><i class="fa fa-trash-o" aria-hidden="true"></i>Delete</a>
 						</li>
@@ -118,7 +121,18 @@ class JobController extends Controller
 						</li>
 						<li>
 						<a href="javascript:void(0);" onClick="' . $featuredHref . '" id="onclickFeatured' . $jobs->id . '"><i class="fa fa-' . $featuredIcon . '" aria-hidden="true"></i>' . $featuredTxt . '</a>
-						</li>																																		
+						</li>
+
+
+						<li>
+							<a href="javascript:void(0);" data-job="'.$jobs->id.'" class="btn_list_shortlisted_candidates">List Shortlisted Candidates</a>
+						</li>
+						<li>
+							<a href="javascript:void(0);" data-job="'.$jobs->id.'" class="btn_list_hired_candidates">List Hired Candidates</a>
+						</li>
+						<li>
+							<a href="javascript:void(0);" data-job="'.$jobs->id.'" class="btn_list_rejected_candidates">List Rejected Candidates</a>
+						</li>
 					</ul>
 				</div>';
                         })
@@ -138,6 +152,17 @@ class JobController extends Controller
             $job = Job::findOrFail($id);
             $job->is_active = 1;
             $job->update();
+
+            $socket_io_emitter_res = emit_socket_io_notification(
+                $job->company_id,
+                'employer',
+                'icon',
+                'Job Status',
+                'Your job: '.$job->title.' has been activated.',
+                'job',
+                $job->id
+            );
+
             echo 'ok';
         } catch (ModelNotFoundException $e) {
             echo 'notok';
@@ -151,6 +176,17 @@ class JobController extends Controller
             $job = Job::findOrFail($id);
             $job->is_active = 0;
             $job->update();
+
+            $socket_io_emitter_res = emit_socket_io_notification(
+                $job->company_id,
+                'employer',
+                'icon',
+                'Job Status',
+                'Your job: '.$job->title.' has been de-activated.',
+                'job',
+                $job->id
+            );
+
             echo 'ok';
         } catch (ModelNotFoundException $e) {
             echo 'notok';
@@ -164,6 +200,17 @@ class JobController extends Controller
             $job = Job::findOrFail($id);
             $job->is_featured = 1;
             $job->update();
+
+            $socket_io_emitter_res = emit_socket_io_notification(
+                $job->company_id,
+                'employer',
+                'icon',
+                'Job Verification',
+                'Your job: '.$job->title.' has been added to featured jobs.',
+                'job',
+                $job->id
+            );
+
             echo 'ok';
         } catch (ModelNotFoundException $e) {
             echo 'notok';
@@ -177,10 +224,71 @@ class JobController extends Controller
             $job = Job::findOrFail($id);
             $job->is_featured = 0;
             $job->update();
+
+            $socket_io_emitter_res = emit_socket_io_notification(
+                $job->company_id,
+                'employer',
+                'icon',
+                'Job Verification',
+                'Your job: '.$job->title.' has been removed from featured jobs.',
+                'job',
+                $job->id
+            );
+
             echo 'ok';
         } catch (ModelNotFoundException $e) {
             echo 'notok';
         }
+    }
+
+    public function fetch_shortlisted_candidates (Request $request, $job_id)
+    {
+//        $user_ids = FavouriteApplicant::where('job_id', '=', $job_id)->where('company_id', '=', $company_id)->where('status',null)->pluck('user_id')->toArray();
+        $user_ids = FavouriteApplicant::where('job_id', '=', $job_id)->where('status',null)->pluck('user_id')->toArray();
+        $job_applications = JobApply::with('user')->where('job_id', '=', $job_id)->whereIn('user_id', $user_ids)->get();
+
+        $array = [];
+        foreach ($job_applications as $job_application) {
+            $array []= [
+                'name' => $job_application->user->name ?? '',
+                'application_id' => $job_application->id ?? ''
+            ];
+        }
+
+        return response()->json($array);
+    }
+
+    public function fetch_hired_candidates (Request $request, $job_id)
+    {
+//        $user_ids = FavouriteApplicant::where('job_id', '=', $job_id)->where('company_id', '=', $company_id)->where('status','hired')->pluck('user_id')->toArray();
+        $user_ids = FavouriteApplicant::where('job_id', '=', $job_id)->where('status','hired')->pluck('user_id')->toArray();
+
+        $job_applications = JobApply::where('job_id', '=', $job_id)->whereIn('user_id', $user_ids)->get();
+
+        $array = [];
+        foreach ($job_applications as $job_application) {
+            $array []= [
+                'name' => $job_application->user->name ?? '',
+                'application_id' => $job_application->id ?? ''
+            ];
+        }
+
+        return response()->json($array);
+    }
+
+    public function fetch_rejected_candidates (Request $request, $job_id)
+    {
+        $job_applications = JobApplyRejected::where('job_id', '=', $job_id)->get();
+
+        $array = [];
+        foreach ($job_applications as $job_application) {
+            $array []= [
+                'name' => $job_application->user->name ?? '',
+                'application_id' => $job_application->user->id ?? ''
+            ];
+        }
+
+        return response()->json($array);
     }
 
 }

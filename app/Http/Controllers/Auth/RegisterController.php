@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Repositories\Users\Auth\UserRegisterRepository;
 use App\User;
 use App\Http\Requests;
 use Illuminate\Http\Request;
@@ -42,22 +43,25 @@ use RegistersUsers;
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(UserRegisterRepository $userRegisterRepository)
     {
         $this->middleware('guest', ['except' => ['getVerification', 'getVerificationError']]);
+        $this->userRegisterRepository = $userRegisterRepository;
     }
+
 
     public function register(UserFrontRegisterFormRequest $request)
     {
-        $user = new User();
-        $user->first_name = $request->input('first_name');
-        $user->middle_name = $request->input('middle_name');
-        $user->last_name = $request->input('last_name');
-        $user->email = $request->input('email');
-        $user->password = bcrypt($request->input('password'));
-        $user->is_active = 0;
-        $user->verified = 0;
-        $user->save();
+//        $user = new User();
+//        $user->first_name = $request->input('first_name');
+//        $user->middle_name = $request->input('middle_name');
+//        $user->last_name = $request->input('last_name');
+//        $user->email = $request->input('email');
+//        $user->password = bcrypt($request->input('password'));
+//        $user->is_active = 0;
+//        $user->verified = 0;
+//        $user->save();
+        $user = $this->userRegisterRepository->createUser($request->all());
         /*         * *********************** */
         $user->name = $user->getName();
         $user->update();
@@ -69,7 +73,7 @@ use RegistersUsers;
         UserVerification::send($user, 'User Verification', config('mail.recieve_to.address'), config('mail.recieve_to.name'));
 
         //assign package
-        add_job_seeker_package();
+        add_candidate_package();
 
         return $this->registered($request, $user) ?: redirect($this->redirectPath());
     }

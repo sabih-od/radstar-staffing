@@ -6,6 +6,7 @@ namespace App\Http\Controllers\Company;
 
 
 
+use App\Job;
 use Mail;
 
 use Hash;
@@ -116,7 +117,7 @@ class CompanyController extends Controller
 
     {
 
-        $this->middleware('company', ['except' => ['companyDetail', 'sendContactForm']]);
+        $this->middleware('company', ['except' => ['companyDetail', 'sendContactForm', 'applicantProfile', 'userProfile']]);
 
         $this->runCheckPackageValidity();
 
@@ -310,11 +311,21 @@ class CompanyController extends Controller
 
         $data['company_id'] = $company_id;
 
-
+        $job = Job::find($job_id);
 
         $data_save = FavouriteApplicant::create($data);
 
         flash(__('Job seeker has been added in favorites list'))->success();
+
+        $socket_io_emitter_res = emit_socket_io_notification(
+            $user_id,
+            'candidate',
+            'icon',
+            'Job Application',
+            'You have been shortlisted for job: ' . $job->title,
+            'job',
+            $job->id
+        );
 
         return \Redirect::route('applicant.profile', $application_id);
 
@@ -362,6 +373,8 @@ class CompanyController extends Controller
 
         $data['company_id'] = $company_id;
 
+        $job = Job::find($job_id);
+
         $fev = FavouriteApplicant::where('user_id', $user_id)
 
                 ->where('job_id', '=', $job_id)
@@ -377,6 +390,16 @@ class CompanyController extends Controller
 
 
         flash(__('Job seeker has been Hired from favorites list'))->success();
+
+        $socket_io_emitter_res = emit_socket_io_notification(
+            $user_id,
+            'candidate',
+            'icon',
+            'Job Application',
+            'You have been hired for job: ' . $job->title,
+            'job',
+            $job->id
+        );
 
         return \Redirect::route('applicant.profile', $application_id);
 
@@ -826,6 +849,16 @@ class CompanyController extends Controller
 
 
         flash(__('Job seeker has been rejected successfully'))->success();
+
+        $socket_io_emitter_res = emit_socket_io_notification(
+            $job_application->user_id,
+            'candidate',
+            'icon',
+            'Job Application',
+            'You have been rejected for job: ' . $job->title,
+            'job',
+            $job->id
+        );
 
         return \Redirect::route('rejected-users',$job->id);
 

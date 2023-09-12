@@ -229,9 +229,22 @@ class UserController extends Controller
     public function addToFavouriteCompany(Request $request, $company_slug)
     {
         $data['company_slug'] = $company_slug;
+        $user = Auth::user() ?? Auth::guard('company')->user();
         $data['user_id'] = Auth::user()->id ?? Auth::guard('company')->user()->id;
-        $data_save = FavouriteCompany::create($data);
+        $company = Company::where('slug', $company_slug)->firstOrFail();
+        $favourite_company = FavouriteCompany::create($data);
         flash(__('Company has been added in favorites list'))->success();
+
+        $socket_io_emitter_res = emit_socket_io_notification(
+            $company->id,
+            'employer',
+            'icon',
+            'New Follower',
+            ($user->name ?? '') . ' has started following you.',
+            'favourite_company',
+            $favourite_company->id
+        );
+
         return \Redirect::route('company.detail', $company_slug);
     }
 

@@ -21,6 +21,12 @@ class RedirectIfCompanyNotAuthenticated
         if (!Auth::guard($guard)->check()) {
             return redirect('/login');
         }
+
+        //inactive check
+        if (!Auth::guard($guard)->user()->is_active) {
+            return redirect('/login')->withErrors(['email' => 'Your account is inactive. Contact administration to activate your account.']);
+        }
+
         return $next($request);
     }
 

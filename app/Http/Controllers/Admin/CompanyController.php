@@ -138,8 +138,8 @@ class CompanyController extends Controller
 
                             $query->where('package_start_date','!=','')->orderBy('package_start_date', 'DESC');
 
-                            
-                           
+
+
 
                         })
 
@@ -156,13 +156,13 @@ class CompanyController extends Controller
                         })
 
                         ->addColumn('package_start_date', function ($companies) {
-                            
+
                             return date('d-m-Y',strtotime($companies->package_start_date));
 
                         })
 
                         ->addColumn('package_end_date', function ($companies) {
-                            
+
                             return date('d-m-Y',strtotime($companies->package_end_date));
 
                         })
@@ -654,13 +654,13 @@ class CompanyController extends Controller
 
 						</li>
 
-						
+
 
 						<li>
 
 							<a href="' . route('edit.company', ['id' => $companies->id]) . '"><i class="fa fa-pencil" aria-hidden="true"></i>Edit</a>
 
-						</li>						
+						</li>
 
 						<li>
 
@@ -668,11 +668,11 @@ class CompanyController extends Controller
 
 						</li>
 
-						
+
 
 <li><a href="javascript:void(0);" onClick="' . $activeHref . '" id="onclickActive' . $companies->id . '"><i class="fa fa-' . $activeIcon . '" aria-hidden="true"></i>' . $activeTxt . '</a></li>
 
-						
+
 
 <li><a href="javascript:void(0);" onClick="' . $featuredHref . '" id="onclickFeatured' . $companies->id . '"><i class="fa fa-' . $featuredIcon . '" aria-hidden="true"></i>' . $featuredTxt . '</a></li>
 
@@ -714,6 +714,16 @@ class CompanyController extends Controller
 
             $company->update();
 
+            $socket_io_emitter_res = emit_socket_io_notification(
+                $company->id,
+                'employer',
+                'icon',
+                'Account Status',
+                'Your account has been activated.',
+                'company',
+                $company->id
+            );
+
             echo 'ok';
 
         } catch (ModelNotFoundException $e) {
@@ -739,6 +749,16 @@ class CompanyController extends Controller
             $company->is_active = 0;
 
             $company->update();
+
+            $socket_io_emitter_res = emit_socket_io_notification(
+                $company->id,
+                'employer',
+                'icon',
+                'Account Status',
+                'Your account has been de-activated.',
+                'company',
+                $company->id
+            );
 
             echo 'ok';
 
@@ -766,6 +786,16 @@ class CompanyController extends Controller
 
             $company->update();
 
+            $socket_io_emitter_res = emit_socket_io_notification(
+                $company->id,
+                'employer',
+                'icon',
+                'Account Verification',
+                'Your account has been added to featured companies.',
+                'company',
+                $company->id
+            );
+
             echo 'ok';
 
         } catch (ModelNotFoundException $e) {
@@ -791,6 +821,16 @@ class CompanyController extends Controller
             $company->is_featured = 0;
 
             $company->update();
+
+            $socket_io_emitter_res = emit_socket_io_notification(
+                $company->id,
+                'employer',
+                'icon',
+                'Account Verification',
+                'Your account has been removed from featured companies.',
+                'company',
+                $company->id
+            );
 
             echo 'ok';
 

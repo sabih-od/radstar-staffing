@@ -1,21 +1,21 @@
 @extends('layouts.app')
-@section('content') 
-<!-- Header start --> 
-@include('includes.header') 
-<!-- Header end --> 
-<!-- Inner Page Title start --> 
-@include('includes.inner_page_title', ['page_title'=>__('My Followings')]) 
+@section('content')
+<!-- Header start -->
+@include('includes.header')
+<!-- Header end -->
+<!-- Inner Page Title start -->
+@include('includes.inner_page_title', ['page_title'=>__('My Favourite Companies')])
 <!-- Inner Page Title end -->
 <div class="listpgWraper">
     <div class="container">
         <div class="row">
             @include('includes.user_dashboard_menu')
 
-            <div class="col-md-9 col-sm-8"> 
+            <div class="col-md-9 col-sm-8">
                 <div class="myads">
-                    <h3>{{__('My Followings')}}</h3>
+                    <h3>{{__('My Favourite Companies')}}</h3>
                     <ul class="searchList">
-                        <!-- job start --> 
+                        <!-- job start -->
                         @if(isset($companies) && count($companies))
                         @foreach($companies as $company)
                         <li>
@@ -36,7 +36,7 @@
                             </div>
                             <p>{{\Illuminate\Support\Str::limit(strip_tags($company->description), 150, '...')}}</p>
                         </li>
-                        <!-- job end --> 
+                        <!-- job end -->
                         @endforeach
                         @endif
                     </ul>
