@@ -4,15 +4,24 @@ namespace App\Http\Requests\Front;
 
 use Auth;
 use App\Http\Requests\Request;
+use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class CompanyFrontRegisterFormRequest extends Request
 {
-
     /**
      * Determine if the user is authorized to make this request.
      *
      * @return bool
      */
+    protected function failedValidation(Validator $validator)
+    {
+        throw new HttpResponseException(response()->json([
+            'message' => 'Validation failed',
+            'errors' => $validator->errors(),
+        ], 422));
+    }
+
     public function authorize()
     {
         return true;
@@ -29,8 +38,8 @@ class CompanyFrontRegisterFormRequest extends Request
         return [
             'name' => 'required|max:150',
             'email' => 'required|unique:companies,email|email|max:100',
-            'password' => 'required|confirmed|min:6|max:50',
-            'terms_of_use' => 'required',
+            'password' => 'required|min:6|max:50',
+//            'terms_of_use' => 'required',
 //            'g-recaptcha-response' => 'required|captcha',
         ];
     }

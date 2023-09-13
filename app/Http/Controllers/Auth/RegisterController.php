@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Repositories\Users\Auth\UserRegisterRepository;
+use App\Repositories\Users\Auth\UserRepository;
 use App\User;
 use App\Http\Requests;
 use Illuminate\Http\Request;
@@ -43,12 +43,12 @@ use RegistersUsers;
      *
      * @return void
      */
-    public function __construct(UserRegisterRepository $userRegisterRepository)
+
+    public function __construct(UserRepository $userRepository)
     {
         $this->middleware('guest', ['except' => ['getVerification', 'getVerificationError']]);
-        $this->userRegisterRepository = $userRegisterRepository;
+        $this->userRepository = $userRepository;
     }
-
 
     public function register(UserFrontRegisterFormRequest $request)
     {
@@ -61,7 +61,7 @@ use RegistersUsers;
 //        $user->is_active = 0;
 //        $user->verified = 0;
 //        $user->save();
-        $user = $this->userRegisterRepository->createUser($request->all());
+        $user = $this->userRepository->createUser($request->all());
         /*         * *********************** */
         $user->name = $user->getName();
         $user->update();

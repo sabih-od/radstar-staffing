@@ -1,9 +1,10 @@
 <?php
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\ApiControllers\users\auth\registerController;
-use App\Http\Controllers\ApiControllers\users\auth\loginController;
-
+use App\Http\Controllers\ApiControllers\users\auth\RegisterController as UserRegisterController;
+use App\Http\Controllers\ApiControllers\users\auth\LoginController as UserLoginController;
+use App\Http\Controllers\ApiControllers\companies\auth\RegisterController as CompanyRegisterController;
+use App\Http\Controllers\ApiControllers\companies\auth\LoginController as CompanyLoginController;
 /*
   |--------------------------------------------------------------------------
   | API Routes
@@ -19,20 +20,20 @@ use App\Http\Controllers\ApiControllers\users\auth\loginController;
 //});
 
 // Routes for user authentication
-Route::post('candidate-register', [registerController::class, 'candidateRegister']);
-Route::post('candidate-login', [loginController::class, 'candidateLogin']);
+Route::post('candidate-register', [UserRegisterController::class, 'candidateRegister']);
+Route::post('candidate-login', [UserLoginController::class, 'candidateLogin']);
 
 
 //This for candidates which have User model
-Route::middleware('auth:user')->group( function () {
-    Route::get('hee', [loginController::class, 'xyz']);
+Route::middleware(['redirectIfUser', 'auth:user'])->group(function () {
+        Route::get('hee', [UserLoginController::class, 'xyz']);
 });
 
-//// Routes for company authentication
-//Route::post('company-register', [CompanyController::class, 'register']);
-//Route::post('company-login', [CompanyController::class, 'login']);
+// Routes for company authentication
+Route::post('company-register', [CompanyRegisterController::class, 'companyRegister']);
+Route::post('company-login', [CompanyLoginController::class, 'companyLogin']);
 
 //This for companies which have Company model
-Route::middleware('auth:company')->group(function () {
+Route::middleware(['redirectIfCompany', 'auth:company_api'])->group(function () {
     // Company-specific routes here
 });

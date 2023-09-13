@@ -3,9 +3,10 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use App\Repositories\Users\Auth\UserRegisterRepository;
-use App\Repositories\Users\Auth\UserRegisterRepositoryEloquent;
-
+use App\Repositories\Users\Auth\UserRepository;
+use App\Repositories\Users\Auth\UserRepositoryEloquent;
+use App\Repositories\Companies\Auth\CompanyRepository;
+use App\Repositories\Companies\Auth\CompanyRepositoryEloquent;
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -16,7 +17,6 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
     }
-
     /**
      * Register any application services.
      *
@@ -24,7 +24,14 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind(UserRegisterRepository::class, UserRegisterRepositoryEloquent::class);
+//        $this->app->bind([
+//            UserRepository::class => UserRepositoryEloquent::class,
+//            CompanyRepository::class => CompanyRepositoryEloquent::class,
+//        ]);
+        // Bind UserRepository interface to UserRepositoryEloquent implementation
+        $this->app->bind(UserRepository::class, UserRepositoryEloquent::class);
+        // Bind CompanyRepository interface to CompanyRepositoryEloquent implementation
+        $this->app->bind(CompanyRepository::class, CompanyRepositoryEloquent::class);
     }
 
 }
