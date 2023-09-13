@@ -30,13 +30,14 @@ class RegisterController extends Controller
             // Add other fields and their values as needed
         ];
         $user = $this->userRepository->create($array);
-        $success['token'] =  $user->createToken('MyApp')->accessToken;
+        $token =  $user->createToken('MyApp')->accessToken;
         return response()
             ->json(
                 [
-                'message' => 'User Register Successfully',
-                'user' => $user,
-                'access_token' => $success
+                    'success' => true,
+                    'message' => 'User Register Successfully',
+                    'user' => $user,
+                    'access_token' => $token
                ]
                );
     }

@@ -27,13 +27,14 @@ class RegisterController extends Controller
             // Add other fields and their values as needed
         ];
         $company = $this->companyRepository->create($array);
-        $success['token'] =  $company->createToken('MyApp')->accessToken;
+        $token =  $company->createToken('MyApp')->accessToken;
         return response()
             ->json(
                 [
+                    'success' => true,
                     'Message' => 'Company Register Successfully',
-                    'user' => $company,
-                    'access_token' => $success
+                    'data' => $company,
+                    'access_token' => $token
                 ]
             );
     }
