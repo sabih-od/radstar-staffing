@@ -5,11 +5,11 @@ namespace App\Repositories\Users\Auth;
 use Prettus\Repository\Contracts\RepositoryInterface;
 
 /**
- * Interface UserRegisterRepository.
+ * Interface UserRepository.
  *
  * @package namespace App\Repositories\Users\Auth;
  */
-interface UserRegisterRepository extends RepositoryInterface
+interface UserRepository extends RepositoryInterface
 {
-    public function createUser(array $data);
+    public function authenticateUser(array $credentials);
 }
