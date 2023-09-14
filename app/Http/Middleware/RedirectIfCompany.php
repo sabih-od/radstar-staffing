@@ -18,14 +18,14 @@ class RedirectIfCompany
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::guard('company')->check()) {
+        if (Auth::guard('company_api')->check()) {
             return $next($request);
         }
         return response()
             ->json(
                 [
-                    'Error' => 'Unauthorized - Company',
-                    401
+                    'success' => false,
+                    'message' => 'Unauthorized - Company',
                 ]
             );
     }

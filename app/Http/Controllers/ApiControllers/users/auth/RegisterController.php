@@ -18,7 +18,7 @@ class RegisterController extends Controller
         $this->userRepository = $userRepository;
     }
 
-    public function candidateRegister(UserFrontRegisterFormRequest $request)
+    public function register(UserFrontRegisterFormRequest $request)
     {
         $password = Hash::make($request->input('password'));
         $array = [
