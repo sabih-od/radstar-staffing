@@ -16,7 +16,7 @@ class RegisterController extends Controller
         $this->companyRepository = $companyRepository;
     }
 
-    public function companyRegister(CompanyFrontRegisterFormRequest $request)
+    public function register(CompanyFrontRegisterFormRequest $request)
     {
         $password = Hash::make($request->input('password'));
         $array = [

@@ -23,8 +23,8 @@ class RedirectIfUser
         return response()
             ->json(
                 [
-                    'Error' => 'Unauthorized - User',
-                    401
+                    'success' => false,
+                    'message' => 'Unauthorized - User',
                 ]
             );
 

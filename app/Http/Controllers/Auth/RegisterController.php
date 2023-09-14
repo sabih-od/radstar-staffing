@@ -2,12 +2,8 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Repositories\Users\Auth\UserRepository;
 use App\User;
-use App\Http\Requests;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Jrean\UserVerification\Traits\VerifiesUsers;
 use Jrean\UserVerification\Facades\UserVerification;
@@ -28,7 +24,7 @@ class RegisterController extends Controller
       |
      */
 
-use RegistersUsers;
+    use RegistersUsers;
     use VerifiesUsers;
 
     /**
@@ -44,24 +40,22 @@ use RegistersUsers;
      * @return void
      */
 
-    public function __construct(UserRepository $userRepository)
+    public function __construct()
     {
         $this->middleware('guest', ['except' => ['getVerification', 'getVerificationError']]);
-        $this->userRepository = $userRepository;
     }
 
     public function register(UserFrontRegisterFormRequest $request)
     {
-//        $user = new User();
-//        $user->first_name = $request->input('first_name');
-//        $user->middle_name = $request->input('middle_name');
-//        $user->last_name = $request->input('last_name');
-//        $user->email = $request->input('email');
-//        $user->password = bcrypt($request->input('password'));
-//        $user->is_active = 0;
-//        $user->verified = 0;
-//        $user->save();
-        $user = $this->userRepository->createUser($request->all());
+        $user = new User();
+        $user->first_name = $request->input('first_name');
+        $user->middle_name = $request->input('middle_name');
+        $user->last_name = $request->input('last_name');
+        $user->email = $request->input('email');
+        $user->password = bcrypt($request->input('password'));
+        $user->is_active = 0;
+        $user->verified = 0;
+        $user->save();
         /*         * *********************** */
         $user->name = $user->getName();
         $user->update();

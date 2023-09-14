@@ -5,6 +5,8 @@ namespace App\Http\Controllers\ApiControllers\users\auth;
 use App\Http\Controllers\Controller;
 use App\Repositories\Users\Auth\UserRepository;
 use App\User;
+use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Http\Request;
 
 class LoginController extends Controller
@@ -14,7 +16,15 @@ class LoginController extends Controller
         $this->userRepository = $userRepository;
     }
 
-    public function candidateLogin(Request $request)
+    protected function failedValidation(Validator $validator)
+    {
+        throw new HttpResponseException(response()->json([
+            'message' => 'Validation failed',
+            'errors' => $validator->errors(),
+        ], 422));
+    }
+
+    public function login(Request $request)
     {
         $credentials = $request->validate([
             'email' => 'required|string|email',
@@ -23,12 +33,13 @@ class LoginController extends Controller
         // Attempt to authenticate the user
         $authResult = $this->userRepository->authenticateUser($credentials);
         return response()->json($authResult);
-
     }
 
-    public function xyz()
+    public function logout(Request $request)
     {
-        dd('dsdasdasd');
+        $response = $this->userRepository->logoutUser($request->user());
+        return response()->json($response);
     }
+
 
 }

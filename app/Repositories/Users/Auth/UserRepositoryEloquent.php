@@ -47,6 +47,15 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository
         }
     }
 
+    public function logoutUser($user)
+    {
+        $user->token()->revoke();
+        return [
+        'success' => true,
+        'message' => 'Logout successfully',
+       ];
+    }
+
     /**
      * Boot up the repository, pushing criteria
      */
