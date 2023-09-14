@@ -4,6 +4,7 @@ namespace App\Http\Controllers\ApiControllers\users\auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Front\UserFrontRegisterFormRequest;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Validator;
@@ -13,11 +14,23 @@ use App\Repositories\Users\Auth\UserRepository;
 class RegisterController extends Controller
 {
 
+    /**
+     * @var UserRepository
+     */
+    private $userRepository;
+
+    /**
+     * @param UserRepository $userRepository
+     */
     public function __construct(UserRepository $userRepository)
     {
         $this->userRepository = $userRepository;
     }
 
+    /**
+     * @param UserFrontRegisterFormRequest $request
+     * @return JsonResponse
+     */
     public function candidateRegister(UserFrontRegisterFormRequest $request)
     {
         $password = Hash::make($request->input('password'));

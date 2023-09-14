@@ -5,6 +5,8 @@ use App\Http\Controllers\ApiControllers\users\auth\RegisterController as UserReg
 use App\Http\Controllers\ApiControllers\users\auth\LoginController as UserLoginController;
 use App\Http\Controllers\ApiControllers\companies\auth\RegisterController as CompanyRegisterController;
 use App\Http\Controllers\ApiControllers\companies\auth\LoginController as CompanyLoginController;
+use Illuminate\Support\Facades\Route;
+
 /*
   |--------------------------------------------------------------------------
   | API Routes
@@ -26,7 +28,7 @@ Route::post('candidate-login', [UserLoginController::class, 'candidateLogin']);
 
 //This for candidates which have User model
 Route::middleware(['redirectIfUser', 'auth:user'])->group(function () {
-        Route::get('hee', [UserLoginController::class, 'xyz']);
+    Route::get('hee', [UserLoginController::class, 'xyz']);
 });
 
 // Routes for company authentication
