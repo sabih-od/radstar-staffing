@@ -29,7 +29,7 @@ class CompanyRepositoryEloquent extends BaseRepository implements CompanyReposit
     public function authenticateCompany(array $credentials)
     {
         if (Auth::guard('company')->attempt($credentials)) {
-            $company = Auth::guard('company')->user();
+            $company = Auth::guard('company_api')->user();
             $token = $company->createToken('company_token')->accessToken;
             $selectedFields = $company->only('name', 'email', 'phone');
             return [
@@ -44,6 +44,15 @@ class CompanyRepositoryEloquent extends BaseRepository implements CompanyReposit
                 'error' => 'Unauthorized',
             ];
         }
+    }
+
+    public function logoutCompany($company)
+    {
+        $company->user()->token()->revoke();
+        return [
+            'success' => true,
+            'message' => 'Logout successfully',
+        ];
     }
 
     /**
