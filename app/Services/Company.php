@@ -8,7 +8,8 @@ class Company
 {
     public function authenticateCompany(array $credentials)
     {
-        if (Auth::guard('company')->attempt($credentials)) {
+        config(['auth.guards.company_api.driver' => 'session']);
+        if (Auth::guard('company_api')->attempt($credentials)) {
             $company = Auth::guard('company_api')->user();
             $token = $company->createToken('company_token')->accessToken;
             $selectedFields = $company->only('name', 'email', 'phone');

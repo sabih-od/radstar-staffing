@@ -32,15 +32,29 @@ class LoginController extends Controller
             'email' => 'required|string|email',
             'password' => 'required|string',
         ]);
-        // Attempt to authenticate the user
-        $authResult = $this->user->authenticateUser($credentials);
-        return response()->json($authResult);
+        try {
+            // Attempt to authenticate the user
+            $authResult = $this->user->authenticateUser($credentials);
+            return response()->json($authResult);
+        }catch (\Exception $e){
+            return response()->json([
+                "success" => false,
+                "message" => $e,
+            ]);
+        }
     }
 
     public function logout(Request $request)
     {
-        $response = $this->user->logoutUser($request->user());
-        return response()->json($response);
+        try {
+            $response = $this->user->logoutUser($request->user());
+            return response()->json($response);
+        }catch (\Exception $e){
+            return response()->json([
+                "success" => false,
+                "message" => $e,
+            ]);
+        }
     }
 
 

@@ -39,14 +39,22 @@ class LoginController extends Controller
         }catch (\Exception $e){
             return response()->json([
                 "success" => false,
-                "message" => $e,
+                "message" => $e->getMessage(),
             ]);
         }
     }
 
     public function logout()
     {
-        $response = $this->company->logoutCompany(Auth::guard('company_api'));
-        return response()->json($response);
+        try {
+            $response = $this->company->logoutCompany(Auth::guard('company_api'));
+            return response()->json($response);
+        }catch (\Exception $e){
+            return response()->json([
+                "success" => false,
+                "message" => $e,
+            ]);
+        }
+
     }
 }
