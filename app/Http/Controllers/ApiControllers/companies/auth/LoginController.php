@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\ApiControllers\companies\auth;
 
 use App\Http\Controllers\Controller;
-use App\Repositories\Companies\Auth\CompanyRepository;
+use App\Services\Company;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Http\Request;
@@ -11,9 +11,10 @@ use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
-    public function __construct(CompanyRepository $companyRepository)
+    protected $company;
+    public function __construct(Company $company)
     {
-        $this->companyRepository = $companyRepository;
+        $this->company = $company;
     }
 
     protected function failedValidation(Validator $validator)
@@ -30,14 +31,30 @@ class LoginController extends Controller
             'email' => 'required|string|email',
             'password' => 'required|string',
         ]);
-        // Attempt to authenticate the company
-        $authResult = $this->companyRepository->authenticateCompany($credentials);
-        return response()->json($authResult);
+
+        try {
+            // Attempt to authenticate the company
+            $authResult = $this->company->authenticateCompany($credentials);
+            return response()->json($authResult);
+        }catch (\Exception $e){
+            return response()->json([
+                "success" => false,
+                "message" => $e->getMessage(),
+            ]);
+        }
     }
 
     public function logout()
     {
-        $response = $this->companyRepository->logoutCompany(Auth::guard('company_api'));
-        return response()->json($response);
+        try {
+            $response = $this->company->logoutCompany(Auth::guard('company_api'));
+            return response()->json($response);
+        }catch (\Exception $e){
+            return response()->json([
+                "success" => false,
+                "message" => $e,
+            ]);
+        }
+
     }
 }
