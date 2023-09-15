@@ -11,7 +11,6 @@ use Prettus\Repository\Contracts\RepositoryInterface;
  */
 interface CompanyRepository extends RepositoryInterface
 {
-    public function authenticateCompany(array $credentials);
-    public function logoutCompany($company);
+
 
 }

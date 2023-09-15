@@ -11,6 +11,5 @@ use Prettus\Repository\Contracts\RepositoryInterface;
  */
 interface UserRepository extends RepositoryInterface
 {
-    public function authenticateUser(array $credentials);
-    public function logoutUser($user);
+
 }
