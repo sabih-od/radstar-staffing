@@ -29,7 +29,7 @@ class RegisterController extends Controller
       |
      */
 
-use RegistersUsers;
+    use RegistersUsers;
     use VerifiesUsers;
 
     /**
@@ -64,7 +64,6 @@ use RegistersUsers;
 
     public function register(CompanyFrontRegisterFormRequest $request)
     {
-
         $company = new Company();
         $company->name = $request->input('name');
         $company->email = $request->input('email');

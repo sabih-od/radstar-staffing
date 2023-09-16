@@ -47,6 +47,7 @@ class JobController extends Controller
 
     private $functionalAreas = '';
     private $countries = '';
+    protected $guard = 'company';
 
     /**
      * Create a new controller instance.
@@ -270,6 +271,11 @@ class JobController extends Controller
     public function applyJob(Request $request, $job_slug)
     {
         $user = Auth::user();
+
+        //inactive check
+        if (!Auth::user()->is_active) {
+            return redirect('/login')->withErrors(['email' => 'Your account is inactive. Contact administration to activate your account.']);
+        }
 
         //document check
         if (!user_has_uploaded_all_documents($user)) {

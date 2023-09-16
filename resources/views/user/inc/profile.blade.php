@@ -245,8 +245,8 @@
 		$is_checked = '';
 	}
 	?>
-      <input type="checkbox" value="1" name="is_subscribed" {{$is_checked}} />
-      {{__('Subscribe to news letter')}}
+        {{--<input type="checkbox" value="1" name="is_subscribed" {{$is_checked}} />--}}
+        {{--{{__('Subscribe to news letter')}}--}}
       {!! APFrmErrHelp::showErrors($errors, 'is_subscribed') !!}
       </div>
   </div>
