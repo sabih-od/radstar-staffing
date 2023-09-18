@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\ApiControllers\users\auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Api\UserApiRegisterFromRequest;
 use App\Http\Requests\Front\UserFrontRegisterFormRequest;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -28,10 +29,12 @@ class RegisterController extends Controller
     }
 
     /**
-     * @param UserFrontRegisterFormRequest $request
+//     * @param UserFrontRegisterFormRequest $request
+     * @param UserApiRegisterFormRequest $request
      * @return JsonResponse
      */
-    public function register(UserFrontRegisterFormRequest $request)
+
+    public function register(UserApiRegisterFromRequest $request)
     {
         $password = Hash::make($request->input('password'));
         $array = [

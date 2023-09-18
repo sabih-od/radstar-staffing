@@ -62,24 +62,24 @@
                             {{ csrf_field() }}
                             <div class="row">
                                 <div class="col-md-6{{ $errors->has('full_name') ? ' has-error' : '' }}">                  
-                                    {!! Form::text('full_name', null, array('id'=>'full_name', 'placeholder'=>__('Full Name'), 'required'=>'required', 'autofocus'=>'autofocus')) !!}                
-                                    @if ($errors->has('full_name')) <span class="help-block"> <strong>{{ $errors->first('full_name') }}</strong> </span> @endif
+                                    {!! Form::text('full_name', null, array('id'=>'full_name', 'placeholder'=>__('Full Name'), 'autofocus'=>'autofocus')) !!}
+                                    @if ($errors->has('full_name')) <span class="help-block text-danger"> <strong>{{ $errors->first('full_name') }}</strong> </span> @endif
                                 </div>
                                 <div class="col-md-6{{ $errors->has('email') ? ' has-error' : '' }}">                  
-                                    {!! Form::text('email', null, array('id'=>'email', 'placeholder'=>__('Email'), 'required'=>'required')) !!}                
-                                    @if ($errors->has('email')) <span class="help-block"> <strong>{{ $errors->first('email') }}</strong> </span> @endif
+                                    {!! Form::text('email', null, array('id'=>'email', 'placeholder'=>__('Email'))) !!}
+                                    @if ($errors->has('email')) <span class="help-block text-danger"> <strong>{{ $errors->first('email') }}</strong> </span> @endif
                                 </div>
                                 <div class="col-md-6{{ $errors->has('phone') ? ' has-error' : '' }}">                  
                                     {!! Form::text('phone', null, array('id'=>'phone', 'placeholder'=>__('Phone'))) !!}                
-                                    @if ($errors->has('phone')) <span class="help-block"> <strong>{{ $errors->first('phone') }}</strong> </span> @endif
+                                    @if ($errors->has('phone')) <span class="help-block text-danger"> <strong>{{ $errors->first('phone') }}</strong> </span> @endif
                                 </div>
                                 <div class="col-md-6{{ $errors->has('subject') ? ' has-error' : '' }}">                  
-                                    {!! Form::text('subject', null, array('id'=>'subject', 'placeholder'=>__('Subject'), 'required'=>'required')) !!}                
-                                    @if ($errors->has('subject')) <span class="help-block"> <strong>{{ $errors->first('subject') }}</strong> </span> @endif
+                                    {!! Form::text('subject', null, array('id'=>'subject', 'placeholder'=>__('Subject'))) !!}
+                                    @if ($errors->has('subject')) <span class="help-block text-danger"> <strong>{{ $errors->first('subject') }}</strong> </span> @endif
                                 </div>
                                 <div class="col-md-12{{ $errors->has('message_txt') ? ' has-error' : '' }}">                  
-                                    {!! Form::textarea('message_txt', null, array('id'=>'message_txt', 'placeholder'=>__('Message'), 'required'=>'required')) !!}                
-                                    @if ($errors->has('message_txt')) <span class="help-block"> <strong>{{ $errors->first('message_txt') }}</strong> </span> @endif
+                                    {!! Form::textarea('message_txt', null, array('id'=>'message_txt', 'placeholder'=>__('Message'))) !!}
+                                    @if ($errors->has('message_txt')) <span class="help-block text-danger"> <strong>{{ $errors->first('message_txt') }}</strong> </span> @endif
                                 </div>
                                 <div class="col-md-12{{ $errors->has('g-recaptcha-response') ? ' has-error' : '' }}">
                                     {!! app('captcha')->display() !!}
