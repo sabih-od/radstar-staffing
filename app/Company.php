@@ -6,6 +6,7 @@ namespace App;
 
 
 
+use App\Models\Notification;
 use Auth;
 
 use App;
@@ -72,6 +73,25 @@ class Company extends Authenticatable
         'password', 'remember_token',
 
     ];
+
+
+    public function notifications ()
+    {
+        return $this->hasMany(Notification::class, 'user_id', 'id')
+            ->where('user_type', 'employer')
+            ->orderBy('created_at', 'DESC');
+    }
+
+
+    public function unread_notification_count ()
+    {
+        return $this->hasMany(Notification::class, 'user_id', 'id')
+            ->where([
+                'user_type' => 'employer',
+                'is_read' => 0,
+            ])
+            ->count();
+    }
 
 
 

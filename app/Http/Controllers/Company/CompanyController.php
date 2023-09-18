@@ -970,6 +970,15 @@ class CompanyController extends Controller
 
 
 
+    public function companyNotifications()
+
+    {
+        return view('company.notifications');
+
+    }
+
+
+
     public function companyMessages()
 
     {

@@ -402,7 +402,7 @@ class UserController extends Controller
                 'icon',
                 'Account Status',
                 'Your account has been activated.',
-                'user',
+                'candidate-account',
                 $user->id
             );
 
@@ -434,7 +434,7 @@ class UserController extends Controller
                 'icon',
                 'Account Status',
                 'Your account has been de-activated.',
-                'user',
+                'candidate-account',
                 $user->id
             );
 
@@ -458,7 +458,7 @@ class UserController extends Controller
                 'icon',
                 'Account Verification',
                 'Your account has been verified.',
-                'user',
+                'candidate-account',
                 $user->id
             );
 
@@ -483,7 +483,7 @@ class UserController extends Controller
                 'icon',
                 'Account Verification',
                 'Your account has been un-verified.',
-                'user',
+                'candidate-account',
                 $user->id
             );
         } catch (ModelNotFoundException $e) {

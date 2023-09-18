@@ -240,8 +240,8 @@ class JobController extends Controller
     public function addToFavouriteJob(Request $request, $job_slug)
     {
         $data['job_slug'] = $job_slug;
-        $data['user_id'] = Auth::user()->id;
         $user = User::find(Auth::user()->id);
+        $data['user_id'] = $user->id;
         $job = Job::where('slug', $job_slug)->firstOrFail();
         $data_save = FavouriteJob::create($data);
         flash(__('Job has been added in favorites list'))->success();
@@ -252,8 +252,8 @@ class JobController extends Controller
             'icon',
             'Job Favourited',
             'User: '.($user->name ?? '').' has added your job: '.($job->title ?? '').' to the favourites.',
-            'job',
-            $job->id
+            'candidate',
+            $user->id
         );
 
         return \Redirect::route('job.detail', $job_slug);
@@ -349,8 +349,8 @@ class JobController extends Controller
             'icon',
             'New Job Application',
             'User: '.($user->name ?? '').' has applied for job: '.($job->title ?? '').'.',
-            'job',
-            $job->id
+            'job-apply',
+            $jobApply->id
         );
 
         //send mail to employer
