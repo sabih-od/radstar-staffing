@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\ApiControllers\companies\auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Api\CompanyApiRegisterFormRequest;
 use App\Http\Requests\Front\CompanyFrontRegisterFormRequest;
 use App\Repositories\Companies\Auth\CompanyRepository;
 use Illuminate\Http\Request;
@@ -16,7 +17,7 @@ class RegisterController extends Controller
         $this->companyRepository = $companyRepository;
     }
 
-    public function register(CompanyFrontRegisterFormRequest $request)
+    public function register(CompanyApiRegisterFormRequest $request)
     {
         $password = Hash::make($request->input('password'));
         $array = [
