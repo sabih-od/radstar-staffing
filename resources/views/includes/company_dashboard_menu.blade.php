@@ -16,6 +16,7 @@
 {{--        --}}{{--Company Messages--}}
 {{--        <li class="{{ Request::url() == route('company.messages') ? 'active' : '' }}"><a href="{{route('company.messages')}}"><i class="fas fa-envelope" aria-hidden="true"></i> {{__('Company Messages')}}</a></li>--}}
         <li class="{{ Request::url() == route('company.followers') ? 'active' : '' }}"><a href="{{route('company.followers')}}"><i class="fas fa-users" aria-hidden="true"></i> {{__('Company Followers')}}</a></li>
+        <li class="{{ Request::url() == route('company.notifications') ? 'active' : '' }}"><a href="{{route('company.notifications')}}"><i class="fas fa-exclamation" aria-hidden="true"></i> {{__('Notifications')}}</a></li>
         <li><a href="{{ route('company.logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fas fa-sign-out" aria-hidden="true"></i> {{__('Logout')}}</a>
             <form id="logout-form" action="{{ route('company.logout') }}" method="POST" style="display: none;">{{ csrf_field() }}</form>
         </li>

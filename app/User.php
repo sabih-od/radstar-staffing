@@ -6,6 +6,7 @@ namespace App;
 
 
 
+use App\Models\Notification;
 use Auth;
 
 use App\JobSkill;
@@ -79,6 +80,23 @@ class User extends Authenticatable implements HasMedia
     ];
 
 
+    public function notifications ()
+    {
+        return $this->hasMany(Notification::class, 'user_id', 'id')
+            ->where('user_type', 'candidate')
+            ->orderBy('created_at', 'DESC');
+    }
+
+
+    public function unread_notification_count ()
+    {
+        return $this->hasMany(Notification::class, 'user_id', 'id')
+            ->where([
+                'user_type' => 'candidate',
+                'is_read' => 0,
+            ])
+            ->count();
+    }
 
     public function profileSummary()
 

@@ -17,6 +17,7 @@ Route::get('my-messages', 'Job\SeekerSendController@all_messages')->name('my.mes
 Route::get('seeker-append-messages', 'Job\SeekerSendController@append_messages')->name('seeker-append-messages');
 Route::get('seeker-append-only-messages', 'Job\SeekerSendController@appendonly_messages')->name('seeker-append-only-message');
 Route::post('seeker-submit-messages', 'Job\SeekerSendController@submitnew_message')->name('seeker.submit-message');
+Route::get('seeker-notifications', 'UserController@seekerNotifications')->name('seeker.notifications');
 
 Route::get('resume/{id}', 'UserController@ResumeFetch')->name('resume');
 

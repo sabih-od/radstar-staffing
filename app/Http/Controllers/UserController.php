@@ -241,8 +241,8 @@ class UserController extends Controller
             'icon',
             'New Follower',
             ($user->name ?? '') . ' has started following you.',
-            'favourite_company',
-            $favourite_company->id
+            Auth::guard('company')->check() ? 'employer' : 'candidate',
+            $data['user_id']
         );
 
         return \Redirect::route('company.detail', $company_slug);
@@ -341,6 +341,13 @@ class UserController extends Controller
             $user->clearMediaCollection($media_name . 's');
             $user->addMediaFromRequest($media_name)->toMediaCollection($media_name . 's');
         }
+    }
+
+    public function seekerNotifications()
+
+    {
+        return view('user.notifications');
+
     }
 
 }

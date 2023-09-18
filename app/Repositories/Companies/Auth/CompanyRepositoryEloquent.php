@@ -26,34 +26,6 @@ class CompanyRepositoryEloquent extends BaseRepository implements CompanyReposit
         return Company::class;
     }
 
-    public function authenticateCompany(array $credentials)
-    {
-        if (Auth::guard('company')->attempt($credentials)) {
-            $company = Auth::guard('company_api')->user();
-            $token = $company->createToken('company_token')->accessToken;
-            $selectedFields = $company->only('name', 'email', 'phone');
-            return [
-                'success' => true,
-                'message' => 'Logged In Successfully',
-                'data' => $selectedFields,
-                'access_token' => $token
-            ];
-        } else {
-            return [
-                'success' => false,
-                'error' => 'Unauthorized',
-            ];
-        }
-    }
-
-    public function logoutCompany($company)
-    {
-        $company->user()->token()->revoke();
-        return [
-            'success' => true,
-            'message' => 'Logout successfully',
-        ];
-    }
 
     /**
      * Boot up the repository, pushing criteria

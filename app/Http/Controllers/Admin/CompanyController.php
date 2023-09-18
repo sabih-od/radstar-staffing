@@ -720,7 +720,7 @@ class CompanyController extends Controller
                 'icon',
                 'Account Status',
                 'Your account has been activated.',
-                'company',
+                'employer-account',
                 $company->id
             );
 
@@ -764,7 +764,7 @@ class CompanyController extends Controller
                 'icon',
                 'Account Status',
                 'Your account has been de-activated.',
-                'company',
+                'employer-account',
                 $company->id
             );
 
@@ -800,7 +800,7 @@ class CompanyController extends Controller
                 'icon',
                 'Account Verification',
                 'Your account has been added to featured companies.',
-                'company',
+                'employer-account',
                 $company->id
             );
 
@@ -836,7 +836,7 @@ class CompanyController extends Controller
                 'icon',
                 'Account Verification',
                 'Your account has been removed from featured companies.',
-                'company',
+                'employer-account',
                 $company->id
             );
 

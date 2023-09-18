@@ -32,9 +32,10 @@
         </li>
 {{--        --}}{{--my messages--}}
 {{--        <li class="{{ Request::url() == route('my.messages') ? 'active' : '' }}"><a href="{{route('my.messages')}}"><i class="fas fa-envelope" aria-hidden="true"></i> {{__('My Messages')}}</a>--}}
-        </li>
+{{--        </li>--}}
 {{--        <li class="{{ Request::url() == route('my.followings') ? 'active' : '' }}"><a href="{{route('my.followings')}}"><i class="fas fa-user" aria-hidden="true"></i> {{__('My Followings')}}</a>--}}
 {{--        </li>--}}
+        <li class="{{ Request::url() == route('seeker.notifications') ? 'active' : '' }}"><a href="{{route('seeker.notifications')}}"><i class="fas fa-exclamation" aria-hidden="true"></i> {{__('Notifications')}}</a></li>
         <li><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fas fa-sign-out" aria-hidden="true"></i> {{__('Logout')}}</a>
             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                 {{ csrf_field() }}

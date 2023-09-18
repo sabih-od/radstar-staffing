@@ -129,8 +129,8 @@
                                             ?>
 
 
-                                            <input type="checkbox" value="1" name="is_subscribed" {{$is_checked}} />
-                                            {{__('Subscribe to Newsletter')}}
+                                            {{--<input type="checkbox" value="1" name="is_subscribed" {{$is_checked}} />--}}
+                                            {{--{{__('Subscribe to Newsletter')}}--}}
 
                                             @if ($errors->has('is_subscribed')) <span
                                                 class="help-block text-danger"> <strong>{{ $errors->first('is_subscribed') }}</strong> </span> @endif
@@ -224,8 +224,8 @@
                                             ?>
 
 
-                                            <input type="checkbox" value="1" name="is_subscribed" {{$is_checked}} />
-                                            {{__('Subscribe to Newsletter')}}
+                                            <!-- <input type="checkbox" value="1" name="is_subscribed" {{$is_checked}} />
+                                            {{__('Subscribe to Newsletter')}}-->
 
                                             @if ($errors->has('is_subscribed')) <span
                                                 class="help-block text-danger"> <strong>{{ $errors->first('is_subscribed') }}</strong> </span> @endif
