@@ -1,12 +1,11 @@
 <?php
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\ApiControllers\users\auth\RegisterController as UserRegisterController;
-use App\Http\Controllers\ApiControllers\users\auth\LoginController as UserLoginController;
-use App\Http\Controllers\ApiControllers\companies\auth\RegisterController as CompanyRegisterController;
-use App\Http\Controllers\ApiControllers\companies\auth\LoginController as CompanyLoginController;
-use App\Http\Controllers\ApiControllers\companies\job\JobController as CompanyJobController;
-
+use App\Http\Controllers\Api\User\Auth\RegisterController as UserRegisterController;
+use App\Http\Controllers\Api\User\Auth\LoginController as UserLoginController;
+use App\Http\Controllers\Api\Company\Auth\RegisterController as CompanyRegisterController;
+use App\Http\Controllers\Api\Company\Auth\LoginController as CompanyLoginController;
+use App\Http\Controllers\Api\Company\Job\JobController as CompanyJobController;
 use Illuminate\Support\Facades\Route;
 
 /*
