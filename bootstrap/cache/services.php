@@ -24,7 +24,6 @@
     20 => 'Illuminate\\Validation\\ValidationServiceProvider',
     21 => 'Illuminate\\View\\ViewServiceProvider',
     22 => 'Anhskohbo\\NoCaptcha\\NoCaptchaServiceProvider',
-    23 => 'L5Swagger\\L5SwaggerServiceProvider',
     24 => 'Facade\\Ignition\\IgnitionServiceProvider',
     25 => 'Fideloper\\Proxy\\TrustedProxyServiceProvider',
     26 => 'Fruitcake\\Cors\\CorsServiceProvider',
@@ -63,7 +62,6 @@
     59 => 'App\\Providers\\CustomConfigServiceProvider',
     60 => 'Anhskohbo\\NoCaptcha\\NoCaptchaServiceProvider',
     61 => 'Prettus\\Repository\\Providers\\RepositoryServiceProvider',
-    62 => 'L5Swagger\\L5SwaggerServiceProvider',
   ),
   'eager' => 
   array (
@@ -78,7 +76,6 @@
     8 => 'Illuminate\\Session\\SessionServiceProvider',
     9 => 'Illuminate\\View\\ViewServiceProvider',
     10 => 'Anhskohbo\\NoCaptcha\\NoCaptchaServiceProvider',
-    11 => 'L5Swagger\\L5SwaggerServiceProvider',
     12 => 'Facade\\Ignition\\IgnitionServiceProvider',
     13 => 'Fideloper\\Proxy\\TrustedProxyServiceProvider',
     14 => 'Fruitcake\\Cors\\CorsServiceProvider',
@@ -112,7 +109,6 @@
     42 => 'App\\Providers\\CustomConfigServiceProvider',
     43 => 'Anhskohbo\\NoCaptcha\\NoCaptchaServiceProvider',
     44 => 'Prettus\\Repository\\Providers\\RepositoryServiceProvider',
-    45 => 'L5Swagger\\L5SwaggerServiceProvider',
   ),
   'deferred' => 
   array (
