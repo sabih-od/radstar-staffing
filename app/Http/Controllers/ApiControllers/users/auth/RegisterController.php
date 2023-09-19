@@ -34,6 +34,13 @@ class RegisterController extends Controller
      * @return JsonResponse
      */
 
+    /**
+     * @OA\post(
+     *     path="/candidate-register",
+     *     @OA\Response(response="200", description="An example endpoint")
+     * )
+     */
+
     public function register(UserApiRegisterFromRequest $request)
     {
         $password = Hash::make($request->input('password'));
