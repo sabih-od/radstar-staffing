@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\ApiControllers\companies\auth;
 
+use App\Helpers\APIResponse;
 use App\Http\Controllers\Controller;
 use App\Services\CompanyService;
 use Illuminate\Contracts\Validation\Validator;
@@ -11,20 +12,58 @@ use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
+    /**
+     * @OA\PathItem(path="/company")
+     */
+
     protected $companyService;
     public function __construct(CompanyService $companyService)
     {
         $this->companyService = $companyService;
     }
 
-    protected function failedValidation(Validator $validator)
-    {
-        throw new HttpResponseException(response()->json([
-            'message' => 'Validation failed',
-            'errors' => $validator->errors(),
-        ], 422));
-    }
-
+    /**
+     * @OA\Post(
+     *     path="/login",
+     *     summary="Login for company",
+     *     tags={"Authentication"},
+     *     requestBody={
+     *         "description": "User login credentials",
+     *         "required": true,
+     *         "content": {
+     *             "application/json": {
+     *                 "schema": {
+     *                     "type": "object",
+     *                     "properties": {
+     *                         "email": {
+     *                             "type": "string",
+     *                             "example": "asd@asd.com",
+     *                         },
+     *                         "password": {
+     *                             "type": "string",
+     *                             "example": "asdasdasd",
+     *                         },
+     *                     },
+     *                 },
+     *             },
+     *         },
+     *     },
+     *     responses={
+     *         @OA\Response(
+     *             response=200,
+     *             description="OK",
+     *             @OA\JsonContent(
+     *                 @OA\Property(
+     *                     property="success",
+     *                     type="boolean",
+     *                     example=true,
+     *                     description="A boolean value."
+     *                 ),
+     *             ),
+     *         ),
+     *     },
+     * )
+     */
     public function login(Request $request)
     {
         $credentials = $request->validate([
@@ -32,16 +71,12 @@ class LoginController extends Controller
             'password' => 'required|string',
         ]);
 
-        try {
-            // Attempt to authenticate the company
-            $authResult = $this->companyService->authenticateCompany($credentials);
-            return response()->json($authResult);
-        }catch (\Exception $e){
-            return response()->json([
-                "success" => false,
-                "message" => $e->getMessage(),
-            ]);
-        }
+        $authResult = $this->companyService->authenticateCompany($credentials);
+
+        if($authResult instanceof \Exception)
+            return APIResponse::error($authResult->getMessage());
+
+        return APIResponse::success("Logged In Successfully", $authResult);
     }
 
     public function logout()
