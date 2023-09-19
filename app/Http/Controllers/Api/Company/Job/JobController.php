@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\Api\Company;
+namespace App\Http\Controllers\Api\Company\Job;
 
+use App\Criteria\Company\Job\ByCompanyIdCriteria;
 use App\Helpers\APIResponse;
 use App\Http\Controllers\Controller;
 use App\Services\CompanyService;
@@ -33,6 +34,20 @@ class JobController extends Controller
         $this->companyRepository = $companyRepository;
         $this->jobService = $jobService;
         $this->companyService = $companyService;
+    }
+
+    public function get()
+    {
+        try
+        {
+//            Criteria is for filter querying of job model
+            $this->jobRepository->pushCriteria(ByCompanyIdCriteria::class);
+            $jobs = $this->jobRepository->paginate(null, ['*']);
+
+            return APIResponse::success('My jobs' , $jobs);
+        } catch (\Exception $e) {
+            return APIResponse::error($e->getMessage());
+        }
     }
 
     public function store(Request $request)

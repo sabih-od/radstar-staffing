@@ -5,7 +5,7 @@ use App\Http\Controllers\Api\User\Auth\RegisterController as UserRegisterControl
 use App\Http\Controllers\Api\User\Auth\LoginController as UserLoginController;
 use App\Http\Controllers\Api\Company\Auth\RegisterController as CompanyRegisterController;
 use App\Http\Controllers\Api\Company\Auth\LoginController as CompanyLoginController;
-use App\Http\Controllers\Api\Company\JobController as CompanyJobController;
+use App\Http\Controllers\Api\Company\Job\JobController as CompanyJobController;
 use Illuminate\Support\Facades\Route;
 
 /*
