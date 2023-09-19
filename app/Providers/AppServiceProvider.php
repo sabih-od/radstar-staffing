@@ -36,7 +36,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(CompanyRepository::class, CompanyRepositoryEloquent::class);
         // Bind JobRepository interface to JObRepositoryEloquent implementation
         $this->app->bind(JobRepository::class, JobRepositoryEloquent::class);
-        $this->app->register(\L5Swagger\L5SwaggerServiceProvider::class);
+//        $this->app->register(\L5Swagger\L5SwaggerServiceProvider::class);
     }
 
 }
