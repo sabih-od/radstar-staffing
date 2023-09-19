@@ -160,7 +160,7 @@ return [
         App\Providers\CustomConfigServiceProvider::class,
         Anhskohbo\NoCaptcha\NoCaptchaServiceProvider::class,
         Prettus\Repository\Providers\RepositoryServiceProvider::class,
-
+        L5Swagger\L5SwaggerServiceProvider::class,
     ],
     /*
       |--------------------------------------------------------------------------

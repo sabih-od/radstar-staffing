@@ -13,6 +13,7 @@ class VerifyCsrfToken extends Middleware
      * @var array
      */
     protected $except = [
+        '/api/*',
         'tinymce-image_upload-front',
         'admin/tinymce-image_upload',
         'upload-project-temp-image',

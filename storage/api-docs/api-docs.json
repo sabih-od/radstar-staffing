@@ -1,0 +1,117 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "RadStar Staffing.",
+        "version": "1.0"
+    },
+    "servers": [
+        {
+            "url": "http://radstar-staffing.test/public/api",
+            "description": "Local 1"
+        }
+    ],
+    "paths": {
+        "/candidate-register": {
+            "post": {
+                "tags": [
+                    "Candidate Routes"
+                ],
+                "summary": "Register a new user.",
+                "operationId": "registerUser",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "example": {
+                                    "first_name": "John",
+                                    "middle_name": "Smith",
+                                    "last_name": "Otto",
+                                    "email": "John@mailinator.com",
+                                    "password": "12345678"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/candidate-login": {
+            "post": {
+                "tags": [
+                    "Candidate Routes"
+                ],
+                "summary": "Login user.",
+                "operationId": "routeLogin",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "example": {
+                                    "email": "John@mailinator.com",
+                                    "password": "12345678"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/candidate-logout": {
+            "post": {
+                "tags": [
+                    "Candidate Routes"
+                ],
+                "summary": "Logout Authenticate User.",
+                "operationId": "routeLogout",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object"
+
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "scheme": "bearer",
+                "bearerFormat": "JWT"
+            }
+        }
+    }
+}
