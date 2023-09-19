@@ -10,6 +10,15 @@
       'NoCaptcha' => 'Anhskohbo\\NoCaptcha\\Facades\\NoCaptcha',
     ),
   ),
+  'darkaonline/l5-swagger' => 
+  array (
+    'providers' => 
+    array (
+    ),
+    'aliases' => 
+    array (
+    ),
+  ),
   'facade/ignition' => 
   array (
     'providers' => 

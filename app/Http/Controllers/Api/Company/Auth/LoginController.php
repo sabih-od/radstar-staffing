@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api\Company\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Services\Company;
+use App\Services\CompanyService;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Http\Request;
@@ -11,10 +11,10 @@ use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
-    protected $company;
-    public function __construct(Company $company)
+    protected $companyService;
+    public function __construct(CompanyService $companyService)
     {
-        $this->company = $company;
+        $this->companyService = $companyService;
     }
 
     protected function failedValidation(Validator $validator)
@@ -34,7 +34,7 @@ class LoginController extends Controller
 
         try {
             // Attempt to authenticate the company
-            $authResult = $this->company->authenticateCompany($credentials);
+            $authResult = $this->companyService->authenticateCompany($credentials);
             return response()->json($authResult);
         }catch (\Exception $e){
             return response()->json([
@@ -47,7 +47,7 @@ class LoginController extends Controller
     public function logout()
     {
         try {
-            $response = $this->company->logoutCompany(Auth::guard('company_api'));
+            $response = $this->companyService->logoutCompany(Auth::guard('company_api'));
             return response()->json($response);
         }catch (\Exception $e){
             return response()->json([

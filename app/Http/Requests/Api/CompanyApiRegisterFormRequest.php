@@ -1,27 +1,26 @@
 <?php
 
-namespace App\Http\Requests\Front;
+namespace App\Http\Requests\Api;
 
-use Auth;
-use App\Http\Requests\Request;
 use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class CompanyFrontRegisterFormRequest extends Request
+class CompanyApiRegisterFormRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      *
      * @return bool
      */
-//    protected function failedValidation(Validator $validator)
-//    {
-//        throw new HttpResponseException(response()->json([
-//            'message' => 'Validation failed',
-//            'errors' => $validator->errors(),
-//        ], 422));
-//    }
 
+    protected function failedValidation(Validator $validator)
+    {
+        throw new HttpResponseException(response()->json([
+            'message' => 'Validation failed',
+            'errors' => $validator->errors(),
+        ], 422));
+    }
     public function authorize()
     {
         return true;
@@ -58,5 +57,4 @@ class CompanyFrontRegisterFormRequest extends Request
             //'g-recaptcha-response.captcha' => __('Captcha error! try again later or contact site admin'),
         ];
     }
-
 }

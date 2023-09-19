@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\ApiControllers\users\auth;
+namespace App\Http\Controllers\Api\User\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\UserApiRegisterFromRequest;
@@ -32,6 +32,13 @@ class RegisterController extends Controller
 //     * @param UserFrontRegisterFormRequest $request
      * @param UserApiRegisterFormRequest $request
      * @return JsonResponse
+     */
+
+    /**
+     * @OA\post(
+     *     path="/candidate-register",
+     *     @OA\Response(response="200", description="An example endpoint")
+     * )
      */
 
     public function register(UserApiRegisterFromRequest $request)
