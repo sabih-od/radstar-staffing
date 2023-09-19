@@ -7,6 +7,8 @@ use Prettus\Repository\Criteria\RequestCriteria;
 use App\Repositories\Companies\Job\JobRepository;
 use App\Job;
 use App\Validators\Companies\Job\JobValidator;
+use App\Criteria\Company\Job\ByCompanyIdCriteria;
+
 
 /**
  * Class JobRepositoryEloquent.
@@ -20,17 +22,23 @@ class JobRepositoryEloquent extends BaseRepository implements JobRepository
      *
      * @return string
      */
+
+    /**
+     * Boot up the repository, pushing criteria
+     */
+
+    public function boot()
+    {
+        $this->pushCriteria(app(RequestCriteria::class));
+//        $this->pushCriteria(ByCompanyIdCriteria::class);
+
+    }
+
     public function model()
     {
         return Job::class;
     }
 
-    /**
-     * Boot up the repository, pushing criteria
-     */
-    public function boot()
-    {
-        $this->pushCriteria(app(RequestCriteria::class));
-    }
+
     
 }
