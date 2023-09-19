@@ -274,7 +274,9 @@ class JobController extends Controller
 
         //inactive check
         if (!Auth::user()->is_active) {
-            return redirect('/login')->withErrors(['email' => 'Your account is inactive. Contact administration to activate your account.']);
+            flash(__('Your account is inactive. Contact administration to activate your account.'))->error();
+            return redirect()->route('my.profile');
+//            return redirect('/login')->withErrors(['email' => 'Your account is inactive. Contact administration to activate your account.']);
         }
 
         //document check
