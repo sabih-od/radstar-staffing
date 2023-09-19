@@ -4,7 +4,7 @@ namespace App\Http\Controllers\ApiControllers\users\auth;
 
 use App\Http\Controllers\Controller;
 use App\Repositories\Users\Auth\UserRepository;
-use App\Services\User;
+use App\Services\UserService;
 use App\User as Users;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
@@ -12,10 +12,10 @@ use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
-    protected $user;
-    public function __construct(User $user)
+    protected $userService;
+    public function __construct(UserService $userService)
     {
-        $this->user = $user;
+        $this->userService = $userService;
     }
 
     protected function failedValidation(Validator $validator)
@@ -34,7 +34,7 @@ class LoginController extends Controller
         ]);
         try {
             // Attempt to authenticate the user
-            $authResult = $this->user->authenticateUser($credentials);
+            $authResult = $this->userService->authenticateUser($credentials);
             return response()->json($authResult);
         }catch (\Exception $e){
             return response()->json([
@@ -47,7 +47,7 @@ class LoginController extends Controller
     public function logout(Request $request)
     {
         try {
-            $response = $this->user->logoutUser($request->user());
+            $response = $this->userService->logoutUser($request->user());
             return response()->json($response);
         }catch (\Exception $e){
             return response()->json([

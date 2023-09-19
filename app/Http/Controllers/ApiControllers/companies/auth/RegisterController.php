@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\Hash;
 
 class RegisterController extends Controller
 {
+    protected $companyRepository;
+
     public function __construct(CompanyRepository $companyRepository)
     {
         $this->companyRepository = $companyRepository;

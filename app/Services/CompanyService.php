@@ -3,8 +3,9 @@
 namespace App\Services;
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
-class Company
+class CompanyService
 {
     public function authenticateCompany(array $credentials)
     {
@@ -34,6 +35,11 @@ class Company
             'success' => true,
             'message' => 'Logout successfully',
         ];
+    }
+
+    public function setJobsQuota($company)
+    {
+        return ['availed_jobs_quota' => $company->availed_jobs_quota + 1];
     }
 
 }
