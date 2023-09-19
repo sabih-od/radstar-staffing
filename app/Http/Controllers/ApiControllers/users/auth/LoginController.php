@@ -9,6 +9,7 @@ use App\User as Users;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -47,7 +48,7 @@ class LoginController extends Controller
     public function logout(Request $request)
     {
         try {
-            $response = $this->userService->logoutUser($request->user());
+            $response = $this->userService->logoutUser(auth()->user());
             return response()->json($response);
         }catch (\Exception $e){
             return response()->json([

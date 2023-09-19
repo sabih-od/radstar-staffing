@@ -81,6 +81,7 @@
                 "tags": [
                     "Candidate Routes"
                 ],
+                "security": [{"Bearer": []}],
                 "summary": "Logout Authenticate User.",
                 "operationId": "routeLogout",
                 "requestBody": {
@@ -103,9 +104,154 @@
                     }
                 }
             }
+        },
+
+
+        "/company-register": {
+            "post": {
+                "tags": [
+                    "Company Routes"
+                ],
+                "summary": "Register a new company.",
+                "operationId": "registerCompany",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "example": {
+                                    "name": "John ",
+                                    "last_name": "Enterprise's",
+                                    "email": "John@mailinator.com",
+                                    "password": "12345678"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/company-login": {
+            "post": {
+                "tags": [
+                    "Company Routes"
+                ],
+                "summary": "Login a new company.",
+                "operationId": "loginCompany",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "example": {
+                                    "email": "John@mailinator.com",
+                                    "password": "12345678"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/company-logout": {
+            "post": {
+                "tags": [
+                    "Company Routes"
+                ],
+                "summary": "Logout a new company.",
+                "operationId": "logoutCompany",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object"
+
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/store-job": {
+            "post": {
+                "tags": [
+                    "Company Routes"
+                ],
+                "summary": "Store A Job",
+                "operationId": "createAJob",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "example": {
+                                    "title": "Php Developer",
+                                    "description": "We are looking for a talented very software engineer to join our team.",
+                                    "benefits": "Healthcare, flexible work hours, competitive salary",
+                                    "country_id": 1,
+                                    "state_id": 2,
+                                    "city_id": 3,
+                                    "is_freelance": false,
+                                    "career_level_id": 4,
+                                    "salary_from": 600000,
+                                    "salary_to": 800000,
+                                    "salary_currency": "USD",
+                                    "hide_salary": false,
+                                    "functional_area_id": 5,
+                                    "job_type_id": 6,
+                                    "job_shift_id": 7,
+                                    "num_of_positions": 3,
+                                    "gender_id": 8,
+                                    "expiry_date": "2023-12-31",
+                                    "degree_level_id": 9,
+                                    "job_experience_id": 10,
+                                    "salary_period_id": 11
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                            }
+                        }
+                    }
+                }
+            }
         }
     },
     "components": {
+
         "securitySchemes": {
             "bearerAuth": {
                 "type": "http",
