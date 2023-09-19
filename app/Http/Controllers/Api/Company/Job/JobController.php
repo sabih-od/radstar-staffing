@@ -50,6 +50,49 @@ class JobController extends Controller
         }
     }
 
+    /**
+     * @OA\Post(
+     *     path="/company/job/create",
+     *     summary="Create Company Job ",
+     *     tags={"Company"},
+     *     requestBody={
+     *         "description": "Create Company Job",
+     *         "required": true,
+     *         "content": {
+     *             "application/json": {
+     *                 "schema": {
+     *                     "type": "object",
+     *                     "properties": {
+     *                         "email": {
+     *                             "type": "string",
+     *                             "example": "john@gmail.com",
+     *                         },
+     *                         "password": {
+     *                             "type": "string",
+     *                             "example": "12345678",
+     *                         },
+     *                     },
+     *                 },
+     *             },
+     *         },
+     *     },
+     *     responses={
+     *         @OA\Response(
+     *             response=200,
+     *             description="OK",
+     *             @OA\JsonContent(
+     *                 @OA\Property(
+     *                     property="success",
+     *                     type="boolean",
+     *                     example=true,
+     *                     description="A boolean value."
+     *                 ),
+     *             ),
+     *         ),
+     *     },
+     * )
+     */
+
     public function create(Request $request)
     {
         try {
