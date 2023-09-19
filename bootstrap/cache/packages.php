@@ -14,9 +14,11 @@
   array (
     'providers' => 
     array (
+      0 => 'L5Swagger\\L5SwaggerServiceProvider',
     ),
     'aliases' => 
     array (
+      'L5Swagger' => 'L5Swagger\\L5SwaggerFacade',
     ),
   ),
   'facade/ignition' => 

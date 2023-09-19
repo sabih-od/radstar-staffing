@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\ApiControllers\companies\auth;
 
+use App\Helpers\APIResponse;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\CompanyApiRegisterFormRequest;
 use App\Http\Requests\Front\CompanyFrontRegisterFormRequest;
@@ -21,24 +22,24 @@ class RegisterController extends Controller
 
     public function register(CompanyApiRegisterFormRequest $request)
     {
-        $password = Hash::make($request->input('password'));
-        $array = [
-            'name' => $request->input('name'),
-            'last_name' => $request->input('last_name'),
-            'email' => $request->input('email'),
-            'password' => $password,
-            // Add other fields and their values as needed
-        ];
-        $company = $this->companyRepository->create($array);
-        $token =  $company->createToken('MyApp')->accessToken;
-        return response()
-            ->json(
-                [
-                    'success' => true,
-                    'Message' => 'Company Register Successfully',
-                    'data' => $company,
-                    'access_token' => $token
-                ]
+        try {
+            $password = Hash::make($request->input('password'));
+            $array = [
+                'name' => $request->input('name'),
+                'last_name' => $request->input('last_name'),
+                'email' => $request->input('email'),
+                'password' => $password,
+                // Add other fields and their values as needed
+            ];
+            $company = $this->companyRepository->create($array);
+            $token = $company->createToken('MyApp')->accessToken;
+
+            return APIResponse::success(
+                'Company Register Successfully',
+                compact('company', 'token')
             );
+        } catch (\Exception $e) {
+            return APIResponse::error($e->getMessage());
+        }
     }
 }
