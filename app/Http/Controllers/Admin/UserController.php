@@ -396,7 +396,7 @@ class UserController extends Controller
             $user->is_active = 1;
             $user->update();
 
-            $pusher_emitter_res = emit_pusher_notification(
+            $firebase_emitter_res = emit_firebase_notification(
                 $user->id,
                 'candidate',
                 'icon',
@@ -428,7 +428,7 @@ class UserController extends Controller
             $user->is_active = 0;
             $user->update();
 
-            $pusher_emitter_res = emit_pusher_notification(
+            $firebase_emitter_res = emit_firebase_notification(
                 $user->id,
                 'candidate',
                 'icon',
@@ -452,7 +452,7 @@ class UserController extends Controller
             $user->verified = 1;
             $user->update();
 
-            $pusher_emitter_res = emit_pusher_notification(
+            $firebase_emitter_res = emit_firebase_notification(
                 $user->id,
                 'candidate',
                 'icon',
@@ -477,7 +477,7 @@ class UserController extends Controller
             $user->update();
             echo 'ok';
 
-            $pusher_emitter_res = emit_pusher_notification(
+            $firebase_emitter_res = emit_firebase_notification(
                 $user->id,
                 'candidate',
                 'icon',

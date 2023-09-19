@@ -3,8 +3,8 @@
 use Illuminate\Http\Request;
 use App\Http\Controllers\ApiControllers\users\auth\RegisterController as UserRegisterController;
 use App\Http\Controllers\ApiControllers\users\auth\LoginController as UserLoginController;
-use App\Http\Controllers\ApiControllers\companies\auth\RegisterController as CompanyRegisterController;
-use App\Http\Controllers\ApiControllers\companies\auth\LoginController as CompanyLoginController;
+use App\Http\Controllers\Api\Company\Auth\RegisterController as CompanyRegisterController;
+use App\Http\Controllers\Api\Company\Auth\LoginController as CompanyLoginController;
 use Illuminate\Support\Facades\Route;
 
 /*

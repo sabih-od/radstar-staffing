@@ -235,7 +235,7 @@ class UserController extends Controller
         $favourite_company = FavouriteCompany::create($data);
         flash(__('Company has been added in favorites list'))->success();
 
-        $pusher_emitter_res = emit_pusher_notification(
+        $firebase_emitter_res = emit_firebase_notification(
             $company->id,
             'employer',
             'icon',

@@ -246,7 +246,7 @@ class JobController extends Controller
         $data_save = FavouriteJob::create($data);
         flash(__('Job has been added in favorites list'))->success();
 
-        $pusher_emitter_res = emit_pusher_notification(
+        $firebase_emitter_res = emit_firebase_notification(
             $job->company_id,
             'employer',
             'icon',
@@ -343,7 +343,7 @@ class JobController extends Controller
 
         flash(__('You have successfully applied for this job'))->success();
 
-        $pusher_emitter_res = emit_pusher_notification(
+        $firebase_emitter_res = emit_firebase_notification(
             $job->company_id,
             'employer',
             'icon',
