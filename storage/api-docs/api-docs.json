@@ -1,0 +1,69 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "RadStar Staffing API Documentation",
+        "version": "1.0"
+    },
+    "paths": {
+        "/company": {},
+        "/login": {
+            "post": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "Login for company",
+                "operationId": "c4de3c236a510c35d2d5e643b1139b55",
+                "requestBody": {
+                    "description": "User login credentials",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "example": "asd@asd.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "example": "asdasdasd"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "description": "A boolean value.",
+                                            "type": "boolean",
+                                            "example": true
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/candidate-register": {
+            "post": {
+                "operationId": "18bdaa9b872988630bee671d4e64a05e",
+                "responses": {
+                    "200": {
+                        "description": "An example endpoint"
+                    }
+                }
+            }
+        }
+    }
+}

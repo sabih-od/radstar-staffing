@@ -37,59 +37,74 @@
                                    <div class="divider-text-center"><span>{{__('Or login with your account')}}</span></div>
 
 
-                       <form class="form-horizontal" method="POST" action="{{ route('login') }}">
-                           {{ csrf_field() }}
-                           <input type="hidden" name="candidate_or_employer" value="candidate" />
-                           <div class="formpanel">
-                               <div class="formrow{{ $errors->has('email') ? ' has-error' : '' }}">
-                                   <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required autofocus placeholder="{{__('Email Address')}}">
-                                   @if ($errors->has('email'))
-                                   <span class="help-block text-danger">
+                                    <form class="form-horizontal" method="POST" action="{{ route('login') }}">
+                                        {{ csrf_field() }}
+                                        <input type="hidden" name="candidate_or_employer" value="candidate"/>
+                                        <div class="formpanel">
+                                            <div class="formrow{{ $errors->has('email') ? ' has-error' : '' }}">
+                                                <input id="email" type="email" class="form-control" name="email"
+                                                       value="{{ old('email') }}" autofocus
+                                                       placeholder="{{__('Email Address')}}">
+                                                @if ($errors->has('email'))
+                                                    <span class="help-block text-danger">
                                        <strong>{{ $errors->first('email') }}</strong>
                                    </span>
-                                   @endif
-                               </div>
-                               <div class="formrow{{ $errors->has('password') ? ' has-error' : '' }}">
-                                   <input id="password" type="password" class="form-control" name="password" value="" required placeholder="{{__('Password')}}">
-                                   @if ($errors->has('password'))
-                                   <span class="help-block text-danger">
+                                                @endif
+                                            </div>
+                                            <div class="formrow{{ $errors->has('password') ? ' has-error' : '' }}">
+                                                <input id="password" type="password" class="form-control"
+                                                       name="password" value="" placeholder="{{__('Password')}}">
+                                                @if ($errors->has('password'))
+                                                    <span class="help-block text-danger">
                                        <strong>{{ $errors->first('password') }}</strong>
                                    </span>
-                                   @endif
-                               </div>
-                               <div class="mb-3"><i class="fas fa-lock" aria-hidden="true"></i> {{__('Forgot Your Password')}}? <a href="{{ route('password.request') }}">{{__('Click here')}}</a></div>
-                               <input type="submit" class="btn" value="{{__('Login')}}">
-                           </div>
-                           <!-- login form  end-->
-                       </form>
-                       <!-- sign up form -->
-               <div class="newuser"><i class="fa fa-user" aria-hidden="true"></i> {{__('New User')}}? <a href="{{route('register')}}">{{__('Register Here')}}</a></div>
+                                                @endif
+                                            </div>
+                                            <div class="mb-3"><i class="fas fa-lock"
+                                                                 aria-hidden="true"></i> {{__('Forgot Your Password')}}?
+                                                <a href="{{ route('password.request') }}">{{__('Click here')}}</a></div>
+                                            <input type="submit" class="btn" value="{{__('Login')}}">
+                                        </div>
+                                        <!-- login form  end-->
+                                    </form>
+                                    <!-- sign up form -->
+                                    <div class="newuser"><i class="fa fa-user"
+                                                            aria-hidden="true"></i> {{__('New User')}}? <a
+                                                href="{{route('register')}}">{{__('Register Here')}}</a></div>
 
-               <!-- sign up form end-->
-                   </div>
-                   <div id="employer" class="formpanel mt-0 tab-pane fade {{($c_or_e == 'employer')? 'active':''}}">
-                       <div class="socialLogin">
-                                   <h5>{{__('Login with Social')}}</h5>
-                                   <a href="{{ url('login/employer/facebook')}}" class="fb"><i class="fab fa-facebook" aria-hidden="true"></i></a> <a href="{{ url('login/employer/twitter')}}" class="tw"><i class="fab fa-twitter" aria-hidden="true"></i></a> </div>
+                                    <!-- sign up form end-->
+                                </div>
+                                <div id="employer"
+                                     class="formpanel mt-0 tab-pane fade {{($c_or_e == 'employer')? 'active':''}}">
+                                    <div class="socialLogin">
+                                        <h5>{{__('Login with Social')}}</h5>
+                                        <a href="{{ url('login/employer/facebook')}}" class="fb"><i
+                                                    class="fab fa-facebook" aria-hidden="true"></i></a> <a
+                                                href="{{ url('login/employer/twitter')}}" class="tw"><i
+                                                    class="fab fa-twitter" aria-hidden="true"></i></a></div>
 
-                                   <div class="divider-text-center"><span>{{__('Or login with your account')}}</span></div>
+                                    <div class="divider-text-center"><span>{{__('Or login with your account')}}</span>
+                                    </div>
 
-                       <form class="form-horizontal" method="POST" action="{{ route('company.login') }}">
-                           {{ csrf_field() }}
-                           <input type="hidden" name="candidate_or_employer" value="employer" />
-                           <div class="formpanel">
-                               <div class="formrow{{ $errors->has('email') ? ' has-error' : '' }}">
-                                   <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required autofocus placeholder="{{__('Email Address')}}">
-                                   @if ($errors->has('email'))
-                                   <span class="help-block text-danger">
+                                    <form class="form-horizontal" method="POST" action="{{ route('company.login') }}">
+                                        {{ csrf_field() }}
+                                        <input type="hidden" name="candidate_or_employer" value="employer"/>
+                                        <div class="formpanel">
+                                            <div class="formrow{{ $errors->has('email') ? ' has-error' : '' }}">
+                                                <input id="email" type="email" class="form-control" name="email"
+                                                       value="{{ old('email') }}" autofocus
+                                                       placeholder="{{__('Email Address')}}">
+                                                @if ($errors->has('email'))
+                                                    <span class="help-block text-danger">
                                        <strong>{{ $errors->first('email') }}</strong>
                                    </span>
-                                   @endif
-                               </div>
-                               <div class="formrow{{ $errors->has('password') ? ' has-error' : '' }}">
-                                   <input id="password" type="password" class="form-control" name="password" value="" required placeholder="{{__('Password')}}">
-                                   @if ($errors->has('password'))
-                                   <span class="help-block text-danger">
+                                                @endif
+                                            </div>
+                                            <div class="formrow{{ $errors->has('password') ? ' has-error' : '' }}">
+                                                <input id="password" type="password" class="form-control"
+                                                       name="password" value="" placeholder="{{__('Password')}}">
+                                                @if ($errors->has('password'))
+                                                    <span class="help-block text-danger">
                                        <strong>{{ $errors->first('password') }}</strong>
                                    </span>
                                    @endif

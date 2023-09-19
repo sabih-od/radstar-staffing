@@ -1,10 +1,11 @@
 <?php
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\ApiControllers\users\auth\RegisterController as UserRegisterController;
-use App\Http\Controllers\ApiControllers\users\auth\LoginController as UserLoginController;
-use App\Http\Controllers\ApiControllers\companies\auth\RegisterController as CompanyRegisterController;
-use App\Http\Controllers\ApiControllers\companies\auth\LoginController as CompanyLoginController;
+use App\Http\Controllers\Api\User\Auth\RegisterController as UserRegisterController;
+use App\Http\Controllers\Api\User\Auth\LoginController as UserLoginController;
+use App\Http\Controllers\Api\Company\Auth\RegisterController as CompanyRegisterController;
+use App\Http\Controllers\Api\Company\Auth\LoginController as CompanyLoginController;
+use App\Http\Controllers\Api\Company\JobController as CompanyJobController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,21 +23,36 @@ use Illuminate\Support\Facades\Route;
 //});
 
 // Routes for user authentication
-Route::post('candidate-register', [UserRegisterController::class, 'register']);
-Route::post('candidate-login', [UserLoginController::class, 'login']);
+Route::group([
+    'prefix' => 'candidate'
+], function () {
+    Route::post('register', [UserRegisterController::class, 'register']);
+    Route::post('login', [UserLoginController::class, 'login']);
 
 
-//This for candidates which have User model
-Route::middleware(['redirectIfUser', 'auth:user'])->group(function () {
-        Route::post('candidate-logout', [UserLoginController::class, 'logout']);
+    //This for candidates which have User model
+    Route::middleware(['redirectIfUser', 'auth:user'])->group(function () {
+        Route::post('logout', [UserLoginController::class, 'logout']);
+    });
 });
 
-// Routes for company authentication
-Route::post('company-register', [CompanyRegisterController::class, 'register']);
-Route::post('company-login', [CompanyLoginController::class, 'login']);
+
+Route::group([
+    'prefix' => 'company'
+], function () {
+    // Routes for company authentication
+    Route::post('register', [CompanyRegisterController::class, 'register']);
+    Route::post('login', [CompanyLoginController::class, 'login']);
 
 //This for companies which have Company model
-Route::middleware(['redirectIfCompany', 'auth:company_api'])->group(function () {
-    Route::post('company-logout', [CompanyLoginController::class, 'logout']);
+    Route::middleware(['redirectIfCompany', 'auth:company_api'])->group(function () {
+        Route::post('logout', [CompanyLoginController::class, 'logout']);
 
+        Route::group([
+            'prefix' => 'job'
+        ], function () {
+            Route::post('store', [CompanyJobController::class, 'store']);
+        });
+    });
 });
+

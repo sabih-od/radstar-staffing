@@ -714,7 +714,7 @@ class CompanyController extends Controller
 
             $company->update();
 
-            $pusher_emitter_res = emit_pusher_notification(
+            $firebase_emitter_res = emit_firebase_notification(
                 $company->id,
                 'employer',
                 'icon',
@@ -758,7 +758,7 @@ class CompanyController extends Controller
 
             $company->update();
 
-            $pusher_emitter_res = emit_pusher_notification(
+            $firebase_emitter_res = emit_firebase_notification(
                 $company->id,
                 'employer',
                 'icon',
@@ -794,7 +794,7 @@ class CompanyController extends Controller
 
             $company->update();
 
-            $pusher_emitter_res = emit_pusher_notification(
+            $firebase_emitter_res = emit_firebase_notification(
                 $company->id,
                 'employer',
                 'icon',
@@ -830,7 +830,7 @@ class CompanyController extends Controller
 
             $company->update();
 
-            $pusher_emitter_res = emit_pusher_notification(
+            $firebase_emitter_res = emit_firebase_notification(
                 $company->id,
                 'employer',
                 'icon',

@@ -246,7 +246,7 @@ class JobController extends Controller
         $data_save = FavouriteJob::create($data);
         flash(__('Job has been added in favorites list'))->success();
 
-        $pusher_emitter_res = emit_pusher_notification(
+        $firebase_emitter_res = emit_firebase_notification(
             $job->company_id,
             'employer',
             'icon',
@@ -274,7 +274,9 @@ class JobController extends Controller
 
         //inactive check
         if (!Auth::user()->is_active) {
-            return redirect('/login')->withErrors(['email' => 'Your account is inactive. Contact administration to activate your account.']);
+            flash(__('Your account is inactive. Contact administration to activate your account.'))->error();
+            return redirect()->route('my.profile');
+//            return redirect('/login')->withErrors(['email' => 'Your account is inactive. Contact administration to activate your account.']);
         }
 
         //document check
@@ -343,7 +345,7 @@ class JobController extends Controller
 
         flash(__('You have successfully applied for this job'))->success();
 
-        $pusher_emitter_res = emit_pusher_notification(
+        $firebase_emitter_res = emit_firebase_notification(
             $job->company_id,
             'employer',
             'icon',

@@ -4,7 +4,7 @@
 @include('includes.header')
 <!-- Header end -->
 <!-- Inner Page Title start -->
-@include('includes.inner_page_title', ['page_title'=>__('Seeker Followers')])
+@include('includes.inner_page_title', ['page_title'=>__('Seeker Notifications')])
 <!-- Inner Page Title end -->
 <div class="listpgWraper">
     <div class="container">

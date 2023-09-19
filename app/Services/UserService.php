@@ -4,15 +4,14 @@ namespace App\Services;
 
 use Illuminate\Support\Facades\Auth;
 
-class Company
+class UserService
 {
-    public function authenticateCompany(array $credentials)
+    public function authenticateUser(array $credentials)
     {
-        config(['auth.guards.company_api.driver' => 'session']);
-        if (Auth::guard('company_api')->attempt($credentials)) {
-            $company = Auth::guard('company_api')->user();
-            $token = $company->createToken('company_token')->accessToken;
-            $selectedFields = $company->only('name', 'email', 'phone');
+        if (Auth::attempt($credentials)) {
+            $user = Auth::user();
+            $token = $user->createToken('MyApp')->accessToken;
+            $selectedFields = $user->only('first_name', 'email', 'phone', 'date_of_birth');
             return [
                 'success' => true,
                 'message' => 'Logged In Successfully',
@@ -27,13 +26,12 @@ class Company
         }
     }
 
-    public function logoutCompany($company)
+    public function logoutUser($user)
     {
-        $company->user()->token()->revoke();
+        $user->token()->revoke();
         return [
             'success' => true,
             'message' => 'Logout successfully',
         ];
     }
-
 }

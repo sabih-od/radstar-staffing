@@ -18,13 +18,13 @@ class UserFrontRegisterFormRequest extends Request
         return true;
     }
 
-    protected function failedValidation(Validator $validator)
-    {
-        throw new HttpResponseException(response()->json([
-            'message' => 'Validation failed',
-            'errors' => $validator->errors(),
-        ], 422));
-    }
+//    protected function failedValidation(Validator $validator)
+//    {
+//        throw new HttpResponseException(response()->json([
+//            'message' => 'Validation failed',
+//            'errors' => $validator->errors(),
+//        ], 422));
+//    }
 
     /**
      * Get the validation rules that apply to the request.

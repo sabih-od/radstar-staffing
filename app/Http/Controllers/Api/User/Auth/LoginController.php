@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\ApiControllers\companies\auth;
-
+namespace App\Http\Controllers\Api\User\Auth;
 use App\Http\Controllers\Controller;
-use App\Services\Company;
+use App\Repositories\Users\Auth\UserRepository;
+use App\Services\UserService;
+use App\User as Users;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Http\Request;
@@ -11,10 +12,10 @@ use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
-    protected $company;
-    public function __construct(Company $company)
+    protected $userService;
+    public function __construct(UserService $userService)
     {
-        $this->company = $company;
+        $this->userService = $userService;
     }
 
     protected function failedValidation(Validator $validator)
@@ -31,23 +32,22 @@ class LoginController extends Controller
             'email' => 'required|string|email',
             'password' => 'required|string',
         ]);
-
         try {
-            // Attempt to authenticate the company
-            $authResult = $this->company->authenticateCompany($credentials);
+            // Attempt to authenticate the user
+            $authResult = $this->userService->authenticateUser($credentials);
             return response()->json($authResult);
         }catch (\Exception $e){
             return response()->json([
                 "success" => false,
-                "message" => $e->getMessage(),
+                "message" => $e,
             ]);
         }
     }
 
-    public function logout()
+    public function logout(Request $request)
     {
         try {
-            $response = $this->company->logoutCompany(Auth::guard('company_api'));
+            $response = $this->userService->logoutUser(auth()->user());
             return response()->json($response);
         }catch (\Exception $e){
             return response()->json([
@@ -55,6 +55,7 @@ class LoginController extends Controller
                 "message" => $e,
             ]);
         }
-
     }
+
+
 }
