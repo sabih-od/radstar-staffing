@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Api;
 
+use App\Helpers\APIResponse;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
@@ -16,8 +17,7 @@ class CompanyApiRegisterFormRequest extends FormRequest
 
     protected function failedValidation(Validator $validator)
     {
-        throw new HttpResponseException(response()->json([
-            'message' => 'Validation failed',
+        throw new HttpResponseException(APIResponse::error('Validation failed', [
             'errors' => $validator->errors(),
         ], 422));
     }
