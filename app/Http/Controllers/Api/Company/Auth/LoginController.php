@@ -24,9 +24,9 @@ class LoginController extends Controller
 
     /**
      * @OA\Post(
-     *     path="/login",
+     *     path="/company/login",
      *     summary="Login for company",
-     *     tags={"Authentication"},
+     *     tags={"Company"},
      *     requestBody={
      *         "description": "User login credentials",
      *         "required": true,
@@ -37,11 +37,11 @@ class LoginController extends Controller
      *                     "properties": {
      *                         "email": {
      *                             "type": "string",
-     *                             "example": "asd@asd.com",
+     *                             "example": "john@gmail.com",
      *                         },
      *                         "password": {
      *                             "type": "string",
-     *                             "example": "asdasdasd",
+     *                             "example": "12345678",
      *                         },
      *                     },
      *                 },
@@ -79,8 +79,43 @@ class LoginController extends Controller
         return APIResponse::success("Logged In Successfully", $authResult);
     }
 
+    /**
+     * @OA\Post(
+     *     path="/company/logout",
+     *     summary="logout for company",
+     *     tags={"Company"},
+     *     requestBody={
+     *         "description": "User logout",
+     *         "content": {
+     *             "application/json": {
+     *                 "schema": {
+     *                     "type": "object",
+     *
+     *                 },
+     *             },
+     *         },
+     *     },
+     *     responses={
+     *         @OA\Response(
+     *             response=200,
+     *             description="OK",
+     *             @OA\JsonContent(
+     *                 @OA\Property(
+     *                     property="success",
+     *                     type="boolean",
+     *                     example=true,
+     *                     description="A boolean value."
+     *                 ),
+     *             ),
+     *         ),
+     *     },
+     * )
+     */
+
     public function logout()
     {
+        dd("In");
+
         try {
             $response = $this->companyService->logoutCompany(Auth::guard('company_api'));
             return response()->json($response);
