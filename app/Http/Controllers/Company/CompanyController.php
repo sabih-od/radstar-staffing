@@ -318,7 +318,7 @@ class CompanyController extends Controller
 
         flash(__('Job seeker has been added in favorites list'))->success();
 
-        $pusher_emitter_res = emit_pusher_notification(
+        $firebase_emitter_res = emit_firebase_notification(
             $user_id,
             'candidate',
             'icon',
@@ -401,7 +401,7 @@ class CompanyController extends Controller
 
         flash(__('Job seeker has been Hired from favorites list'))->success();
 
-        $pusher_emitter_res = emit_pusher_notification(
+        $firebase_emitter_res = emit_firebase_notification(
             $user_id,
             'candidate',
             'icon',
@@ -869,7 +869,7 @@ class CompanyController extends Controller
 
         flash(__('Job seeker has been rejected successfully'))->success();
 
-        $pusher_emitter_res = emit_pusher_notification(
+        $firebase_emitter_res = emit_firebase_notification(
             $job_application->user_id,
             'candidate',
             'icon',

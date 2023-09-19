@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\ApiControllers\companies\job;
+namespace App\Http\Controllers\Api\Company;
 
 use App\Helpers\APIResponse;
 use App\Http\Controllers\Controller;
