@@ -114,6 +114,8 @@ class LoginController extends Controller
 
     public function logout()
     {
+        dd("In");
+
         try {
             $response = $this->companyService->logoutCompany(Auth::guard('company_api'));
             return response()->json($response);
