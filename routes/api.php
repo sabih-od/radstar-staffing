@@ -1,5 +1,5 @@
 <?php
-
+use App\Http\Controllers\Api\location\CountryController;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Api\User\Auth\RegisterController as UserRegisterController;
 use App\Http\Controllers\Api\User\Auth\LoginController as UserLoginController;
@@ -26,6 +26,8 @@ use Illuminate\Support\Facades\Route;
 //});
 
 // Routes for user authentication
+Route::get('/countries',[CountryController::class, 'getCountries']);
+
 Route::group([
     'prefix' => 'candidate'
 ], function () {
@@ -62,5 +64,9 @@ Route::group([
 
         });
     });
+
+
 });
+
+
 

@@ -2,6 +2,9 @@
 
 namespace App\Providers;
 
+
+use App\Repositories\Location\CountryRepository;
+use App\Repositories\Location\CountryRepositoryEloquent;
 use Illuminate\Support\ServiceProvider;
 use App\Repositories\Users\Auth\UserRepository;
 use App\Repositories\Users\Auth\UserRepositoryEloquent;
@@ -41,6 +44,8 @@ class AppServiceProvider extends ServiceProvider
         // Bind SubscriptionRepository interface to SubscriptionRepositoryEloquent implementation
         $this->app->bind(SubscriptionRepository::class, SubscriptionRepositoryEloquent::class);
 //        $this->app->register(\L5Swagger\L5SwaggerServiceProvider::class);
+        // Bind CountryRepository interface to CountryRepositoryInterface implementation
+        $this->app->bind(CountryRepository::class, CountryRepositoryEloquent::class);
     }
 
 }
