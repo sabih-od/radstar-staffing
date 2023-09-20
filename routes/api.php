@@ -55,7 +55,7 @@ Route::group([
         ], function () {
             Route::get('get', [CompanyJobController::class, 'get']);
             Route::post('create', [CompanyJobController::class, 'create']);
-            Route::post('job_related_data', [CompanyJobDetailController::class, 'JobRelatedData']);
+            Route::get('job_related_data', [CompanyJobDetailController::class, 'JobRelatedData']);
         });
     });
 });
