@@ -8,6 +8,14 @@ return [
                 'title' => 'RadStar Staffing',
             ],
 
+            'servers' => [
+                [
+                    'url' => env('L5_SWAGGER_SERVER_URL', 'http://give-your-server.com'),
+                    'description' => 'App Server',
+                ],
+
+            ],
+
             'routes' => [
                 /*
                  * Route for accessing api documentation interface
@@ -179,21 +187,15 @@ return [
                 ],
                 */
 
-                /* Open API 3.0 support
                 'passport' => [ // Unique name of security
-                    'type' => 'oauth2', // The type of the security scheme. Valid values are "basic", "apiKey" or "oauth2".
-                    'description' => 'Laravel passport oauth2 security.',
+                    'type' => 'http', // The type of the security scheme. Valid values are "basic", "apiKey" or "oauth2".
+                    'description' => 'Laravel passport bearer authentication.',
                     'in' => 'header',
-                    'scheme' => 'https',
-                    'flows' => [
-                        "password" => [
-                            "authorizationUrl" => config('app.url') . '/oauth/authorize',
-                            "tokenUrl" => config('app.url') . '/oauth/token',
-                            "refreshUrl" => config('app.url') . '/token/refresh',
-                            "scopes" => []
-                        ],
-                    ],
+                    'scheme' => 'bearer',
                 ],
+
+
+                /* Open API 3.0 support
                 'sanctum' => [ // Unique name of security
                     'type' => 'apiKey', // Valid values are "basic", "apiKey" or "oauth2".
                     'description' => 'Enter token in format (Bearer <token>)',
@@ -212,9 +214,10 @@ return [
                         'read',
                         'write'
                     ],
+                    */
 
                     'passport' => []
-                    */
+
                 ],
             ],
         ],
@@ -223,7 +226,7 @@ return [
          * Set this to `true` in development mode so that docs would be regenerated on each request
          * Set this to `false` to disable swagger generation on production
         */
-        'generate_always' => env('L5_SWAGGER_GENERATE_ALWAYS', false),
+        'generate_always' => env('L5_SWAGGER_GENERATE_ALWAYS', true),
 
         /*
          * Set this to `true` to generate a copy of documentation in yaml format

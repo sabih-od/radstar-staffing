@@ -4,15 +4,20 @@
         "title": "RadStar Staffing API Documentation",
         "version": "1.0"
     },
+    "servers": [
+        {
+            "url": "http://radstar-staffing.test/public/api"
+        }
+    ],
     "paths": {
         "/company": {},
-        "/login": {
+        "/company/login": {
             "post": {
                 "tags": [
-                    "Authentication"
+                    "Company"
                 ],
                 "summary": "Login for company",
-                "operationId": "c4de3c236a510c35d2d5e643b1139b55",
+                "operationId": "5282ab3c642026f62ba2ff8625463313",
                 "requestBody": {
                     "description": "User login credentials",
                     "required": true,
@@ -23,11 +28,11 @@
                                 "properties": {
                                     "email": {
                                         "type": "string",
-                                        "example": "asd@asd.com"
+                                        "example": "john@gmail.com"
                                     },
                                     "password": {
                                         "type": "string",
-                                        "example": "asdasdasd"
+                                        "example": "12345678"
                                     }
                                 }
                             }
@@ -55,15 +60,448 @@
                 }
             }
         },
-        "/candidate-register": {
+        "/company/logout": {
             "post": {
-                "operationId": "18bdaa9b872988630bee671d4e64a05e",
+                "tags": [
+                    "Company"
+                ],
+                "summary": "logout for company",
+                "operationId": "6dab5ba04e78803fa7e69734e7909b13",
+                "requestBody": {
+                    "description": "User logout",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
                 "responses": {
                     "200": {
-                        "description": "An example endpoint"
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "description": "A boolean value.",
+                                            "type": "boolean",
+                                            "example": true
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/company/register": {
+            "post": {
+                "tags": [
+                    "Company"
+                ],
+                "summary": "register for company",
+                "operationId": "69556bac9271d896c3c79d1d9655d702",
+                "requestBody": {
+                    "description": "User register credentials",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "John"
+                                    },
+                                    "last_name": {
+                                        "type": "string",
+                                        "example": "Smith"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "example": "john@gmail.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "example": "12345678"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "description": "A boolean value.",
+                                            "type": "boolean",
+                                            "example": true
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/company/job/get": {
+            "get": {
+                "tags": [
+                    "Company"
+                ],
+                "summary": "Get Company Job ",
+                "operationId": "b4ca628c5a517ffa4ba5b0a89ca3bbf9",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "description": "A boolean value.",
+                                            "type": "boolean",
+                                            "example": true
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/company/job/create": {
+            "post": {
+                "tags": [
+                    "Company"
+                ],
+                "summary": "Create Company Job",
+                "operationId": "4472761e344d3db800b10be02d64b5be",
+                "requestBody": {
+                    "description": "Create Company Job",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "title": {
+                                        "type": "string",
+                                        "example": "Software Engineer oihooo"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "We are looking for a talented software engineer to join our team."
+                                    },
+                                    "benefits": {
+                                        "type": "string",
+                                        "example": "Healthcare, flexible work hours, competitive salary"
+                                    },
+                                    "country_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "state_id": {
+                                        "type": "integer",
+                                        "example": 2
+                                    },
+                                    "city_id": {
+                                        "type": "integer",
+                                        "example": 3
+                                    },
+                                    "is_freelance": {
+                                        "type": "boolean",
+                                        "example": false
+                                    },
+                                    "career_level_id": {
+                                        "type": "integer",
+                                        "example": 4
+                                    },
+                                    "salary_from": {
+                                        "type": "number",
+                                        "format": "double",
+                                        "example": 600000
+                                    },
+                                    "salary_to": {
+                                        "type": "number",
+                                        "format": "double",
+                                        "example": 800000
+                                    },
+                                    "salary_currency": {
+                                        "type": "string",
+                                        "example": "USD"
+                                    },
+                                    "hide_salary": {
+                                        "type": "boolean",
+                                        "example": false
+                                    },
+                                    "functional_area_id": {
+                                        "type": "integer",
+                                        "example": 5
+                                    },
+                                    "job_type_id": {
+                                        "type": "integer",
+                                        "example": 6
+                                    },
+                                    "job_shift_id": {
+                                        "type": "integer",
+                                        "example": 7
+                                    },
+                                    "num_of_positions": {
+                                        "type": "integer",
+                                        "example": 3
+                                    },
+                                    "gender_id": {
+                                        "type": "integer",
+                                        "example": 8
+                                    },
+                                    "expiry_date": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2023-12-31"
+                                    },
+                                    "degree_level_id": {
+                                        "type": "integer",
+                                        "example": 9
+                                    },
+                                    "job_experience_id": {
+                                        "type": "integer",
+                                        "example": 10
+                                    },
+                                    "salary_period_id": {
+                                        "type": "integer",
+                                        "example": 11
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "description": "A boolean value.",
+                                            "type": "boolean",
+                                            "example": true
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/company/job/job_related_data": {
+            "get": {
+                "tags": [
+                    "Company"
+                ],
+                "summary": " Job Related Data",
+                "operationId": "c42a5ba5460c5f253f5d75518e5b93b1",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "description": "A boolean value.",
+                                            "type": "boolean",
+                                            "example": true
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/candidate/login": {
+            "post": {
+                "tags": [
+                    "Candidate"
+                ],
+                "summary": "Login Candidate",
+                "operationId": "565c9f89b03bf5bdd1b40a6f76daf386",
+                "requestBody": {
+                    "description": "Login Candidate",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "example": "johnsmith@gmail.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "example": "12345678"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "description": "A boolean value.",
+                                            "type": "boolean",
+                                            "example": true
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/candidate/logout": {
+            "post": {
+                "tags": [
+                    "Candidate"
+                ],
+                "summary": "logout Candidate",
+                "operationId": "ed7c48c940ad173edef5babff6b716f1",
+                "requestBody": {
+                    "description": "logout Candidate",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "description": "A boolean value.",
+                                            "type": "boolean",
+                                            "example": true
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/candidate/register": {
+            "post": {
+                "tags": [
+                    "Candidate"
+                ],
+                "summary": "Register Candidate",
+                "operationId": "8541ead945275dd26e19e7f26705514e",
+                "requestBody": {
+                    "description": "Register Candidate",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "first_name": {
+                                        "type": "string",
+                                        "example": "John"
+                                    },
+                                    "middle_name": {
+                                        "type": "string",
+                                        "example": "Smith"
+                                    },
+                                    "last_name": {
+                                        "type": "string",
+                                        "example": "JS"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "example": "john@gmail.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "example": "12345678"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "description": "A boolean value.",
+                                            "type": "boolean",
+                                            "example": true
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
                     }
                 }
             }
         }
-    }
+    },
+    "components": {
+        "securitySchemes": {
+            "passport": {
+                "type": "http",
+                "description": "Laravel passport bearer authentication.",
+                "in": "header",
+                "scheme": "bearer"
+            }
+        }
+    },
+    "security": [
+        {
+            "passport": []
+        }
+    ]
 }
