@@ -37,21 +37,10 @@ class JobController extends Controller
     }
 
     /**
-     * @OA\Post(
+     * @OA\Get(
      *     path="/company/job/get",
      *     summary="Get Company Job ",
      *     tags={"Company"},
-     *     requestBody={
-     *         "description": "Get Company Job",
-     *         "required": true,
-     *         "content": {
-     *             "application/json": {
-     *                 "schema": {
-     *                     "type": "object",
-     *                 },
-     *             },
-     *         },
-     *     },
      *     responses={
      *         @OA\Response(
      *             response=200,

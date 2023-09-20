@@ -156,23 +156,12 @@
             }
         },
         "/company/job/get": {
-            "post": {
+            "get": {
                 "tags": [
                     "Company"
                 ],
                 "summary": "Get Company Job ",
-                "operationId": "5982f13b1abd8e9def79f5a515a46418",
-                "requestBody": {
-                    "description": "Get Company Job",
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "type": "object"
-                            }
-                        }
-                    }
-                },
+                "operationId": "b4ca628c5a517ffa4ba5b0a89ca3bbf9",
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -297,6 +286,45 @@
                                         "example": 11
                                     }
                                 }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "description": "A boolean value.",
+                                            "type": "boolean",
+                                            "example": true
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/company/job/job_related_data": {
+            "post": {
+                "tags": [
+                    "Company"
+                ],
+                "summary": " Job Related Data",
+                "operationId": "2526433a692f487b3da0ff48e6acfa17",
+                "requestBody": {
+                    "description": "Job Related Data",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object"
                             }
                         }
                     }

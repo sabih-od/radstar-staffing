@@ -53,7 +53,7 @@ Route::group([
         Route::group([
             'prefix' => 'job'
         ], function () {
-            Route::post('get', [CompanyJobController::class, 'get']);
+            Route::get('get', [CompanyJobController::class, 'get']);
             Route::post('create', [CompanyJobController::class, 'create']);
             Route::post('job_related_data', [CompanyJobDetailController::class, 'JobRelatedData']);
         });
