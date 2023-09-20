@@ -23,10 +23,10 @@ class JobController extends Controller
 
     public function __construct
     (
-        JobRepository     $jobRepository,
+        JobRepository $jobRepository,
         CompanyRepository $companyRepository,
-        JobService        $jobService,
-        CompanyService    $companyService
+        JobService $jobService,
+        CompanyService $companyService
     )
 
     {
@@ -36,42 +36,18 @@ class JobController extends Controller
         $this->companyService = $companyService;
     }
 
-    public function get()
-    {
-        try
-        {
-//            Criteria is for filter querying of job model
-            $this->jobRepository->pushCriteria(ByCompanyIdCriteria::class);
-            $jobs = $this->jobRepository->paginate(null, ['*']);
-
-            return APIResponse::success('My jobs' , $jobs);
-        } catch (\Exception $e) {
-            return APIResponse::error($e->getMessage());
-        }
-    }
-
     /**
      * @OA\Post(
-     *     path="/company/job/create",
-     *     summary="Create Company Job ",
+     *     path="/company/job/get",
+     *     summary="Get Company Job ",
      *     tags={"Company"},
      *     requestBody={
-     *         "description": "Create Company Job",
+     *         "description": "Get Company Job",
      *         "required": true,
      *         "content": {
      *             "application/json": {
      *                 "schema": {
      *                     "type": "object",
-     *                     "properties": {
-     *                         "email": {
-     *                             "type": "string",
-     *                             "example": "john@gmail.com",
-     *                         },
-     *                         "password": {
-     *                             "type": "string",
-     *                             "example": "12345678",
-     *                         },
-     *                     },
      *                 },
      *             },
      *         },
@@ -92,6 +68,142 @@ class JobController extends Controller
      *     },
      * )
      */
+
+    public function get()
+    {
+        try {
+//            Criteria is for filter querying of job model
+            $this->jobRepository->pushCriteria(ByCompanyIdCriteria::class);
+            $jobs = $this->jobRepository->paginate(null, ['*']);
+
+            return APIResponse::success('My jobs', $jobs);
+        } catch (\Exception $e) {
+            return APIResponse::error($e->getMessage());
+        }
+    }
+
+    /**
+     * @OA\Post(
+     *     path="/company/job/create",
+     *     summary="Create Company Job",
+     *     tags={"Company"},
+     *     requestBody={
+     *         "description": "Create Company Job",
+     *         "required": true,
+     *         "content": {
+     *             "application/json": {
+     *                 "schema": {
+     *                     "type": "object",
+     *                     "properties": {
+     *                         "title": {
+     *                             "type": "string",
+     *                             "example": "Software Engineer oihooo"
+     *                         },
+     *                         "description": {
+     *                             "type": "string",
+     *                             "example": "We are looking for a talented software engineer to join our team."
+     *                         },
+     *                         "benefits": {
+     *                             "type": "string",
+     *                             "example": "Healthcare, flexible work hours, competitive salary"
+     *                         },
+     *                         "country_id": {
+     *                             "type": "integer",
+     *                             "example": 1
+     *                         },
+     *                         "state_id": {
+     *                             "type": "integer",
+     *                             "example": 2
+     *                         },
+     *                         "city_id": {
+     *                             "type": "integer",
+     *                             "example": 3
+     *                         },
+     *                         "is_freelance": {
+     *                             "type": "boolean",
+     *                             "example": false
+     *                         },
+     *                         "career_level_id": {
+     *                             "type": "integer",
+     *                             "example": 4
+     *                         },
+     *                         "salary_from": {
+     *                             "type": "number",
+     *                             "format": "double",
+     *                             "example": 600000
+     *                         },
+     *                         "salary_to": {
+     *                             "type": "number",
+     *                             "format": "double",
+     *                             "example": 800000
+     *                         },
+     *                         "salary_currency": {
+     *                             "type": "string",
+     *                             "example": "USD"
+     *                         },
+     *                         "hide_salary": {
+     *                             "type": "boolean",
+     *                             "example": false
+     *                         },
+     *                         "functional_area_id": {
+     *                             "type": "integer",
+     *                             "example": 5
+     *                         },
+     *                         "job_type_id": {
+     *                             "type": "integer",
+     *                             "example": 6
+     *                         },
+     *                         "job_shift_id": {
+     *                             "type": "integer",
+     *                             "example": 7
+     *                         },
+     *                         "num_of_positions": {
+     *                             "type": "integer",
+     *                             "example": 3
+     *                         },
+     *                         "gender_id": {
+     *                             "type": "integer",
+     *                             "example": 8
+     *                         },
+     *                         "expiry_date": {
+     *                             "type": "string",
+     *                             "format": "date",
+     *                             "example": "2023-12-31"
+     *                         },
+     *                         "degree_level_id": {
+     *                             "type": "integer",
+     *                             "example": 9
+     *                         },
+     *                         "job_experience_id": {
+     *                             "type": "integer",
+     *                             "example": 10
+     *                         },
+     *                         "salary_period_id": {
+     *                             "type": "integer",
+     *                             "example": 11
+     *                         }
+     *                     }
+     *                 }
+     *             }
+     *         }
+     *     },
+     *     responses={
+     *         @OA\Response(
+     *             response=200,
+     *             description="OK",
+     *             @OA\JsonContent(
+     *                 @OA\Property(
+     *                     property="success",
+     *                     type="boolean",
+     *                     example=true,
+     *                     description="A boolean value."
+     *                 )
+     *             )
+     *         )
+     *     }
+     * )
+     */
+
 
     public function create(Request $request)
     {
