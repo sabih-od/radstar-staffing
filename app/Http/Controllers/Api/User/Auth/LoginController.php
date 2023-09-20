@@ -26,6 +26,49 @@ class LoginController extends Controller
         ], 422));
     }
 
+    /**
+     * @OA\Post(
+     *     path="/candidate/login",
+     *     summary="Login Candidate",
+     *     tags={"Candidate"},
+     *     requestBody={
+     *         "description": "Login Candidate",
+     *         "required": true,
+     *         "content": {
+     *             "application/json": {
+     *                 "schema": {
+     *                     "type": "object",
+     *                     "properties": {
+     *                         "email": {
+     *                             "type": "string",
+     *                             "example": "johnsmith@gmail.com",
+     *                         },
+     *                         "password": {
+     *                             "type": "string",
+     *                             "example": "12345678",
+     *                         },
+     *                     },
+     *                 },
+     *             },
+     *         },
+     *     },
+     *     responses={
+     *         @OA\Response(
+     *             response=200,
+     *             description="OK",
+     *             @OA\JsonContent(
+     *                 @OA\Property(
+     *                     property="success",
+     *                     type="boolean",
+     *                     example=true,
+     *                     description="A boolean value."
+     *                 ),
+     *             ),
+     *         ),
+     *     },
+     * )
+     */
+
     public function login(Request $request)
     {
         $credentials = $request->validate([
@@ -43,6 +86,40 @@ class LoginController extends Controller
             ]);
         }
     }
+
+    /**
+     * @OA\Post(
+     *     path="/candidate/logout",
+     *     summary="logout Candidate",
+     *     tags={"Candidate"},
+     *     requestBody={
+     *         "description": "logout Candidate",
+     *         "required": true,
+     *         "content": {
+     *             "application/json": {
+     *                 "schema": {
+     *                     "type": "object",
+     *
+     *                 },
+     *             },
+     *         },
+     *     },
+     *     responses={
+     *         @OA\Response(
+     *             response=200,
+     *             description="OK",
+     *             @OA\JsonContent(
+     *                 @OA\Property(
+     *                     property="success",
+     *                     type="boolean",
+     *                     example=true,
+     *                     description="A boolean value."
+     *                 ),
+     *             ),
+     *         ),
+     *     },
+     * )
+     */
 
     public function logout(Request $request)
     {

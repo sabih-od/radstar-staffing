@@ -30,11 +30,60 @@ class RegisterController extends Controller
     }
 
     /**
-     * @OA\post(
-     *     path="/candidate-register",
-     *     @OA\Response(response="200", description="An example endpoint")
+     * @OA\Post(
+     *     path="/candidate/register",
+     *     summary="Register Candidate",
+     *     tags={"Candidate"},
+     *     requestBody={
+     *         "description": "Register Candidate",
+     *         "required": true,
+     *         "content": {
+     *             "application/json": {
+     *                 "schema": {
+     *                     "type": "object",
+     *                     "properties": {
+     *                       "first_name": {
+     *                             "type": "string",
+     *                             "example": "John",
+     *                         },
+     *                      "middle_name": {
+     *                             "type": "string",
+     *                             "example": "Smith",
+     *                         },
+     *                       "last_name": {
+     *                             "type": "string",
+     *                             "example": "JS",
+     *                         },
+     *                         "email": {
+     *                             "type": "string",
+     *                             "example": "john@gmail.com",
+     *                         },
+     *                         "password": {
+     *                             "type": "string",
+     *                             "example": "12345678",
+     *                         },
+     *                     },
+     *                 },
+     *             },
+     *         },
+     *     },
+     *     responses={
+     *         @OA\Response(
+     *             response=200,
+     *             description="OK",
+     *             @OA\JsonContent(
+     *                 @OA\Property(
+     *                     property="success",
+     *                     type="boolean",
+     *                     example=true,
+     *                     description="A boolean value."
+     *                 ),
+     *             ),
+     *         ),
+     *     },
      * )
      */
+
     public function register(UserApiRegisterFromRequest $request)
     {
         try {
