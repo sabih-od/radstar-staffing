@@ -4,9 +4,12 @@ namespace App\Services;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use App\Helpers\DataArrayHelper;
+
 
 class JobService
 {
+
     public function assignJobValues($request , $company)
     {
         return [
@@ -62,6 +65,24 @@ class JobService
     public function setSlug($job)
     {
         return ['slug' => Str::slug($job->title, '-') . '-' . $job->id];
+    }
+
+    public function jobRelatedData()
+    {
+        return $data = [
+            'companies' => DataArrayHelper::companiesArray(),
+            'countries' => DataArrayHelper::defaultCountriesArray(),
+            'currencies' => DataArrayHelper::currenciesArray(),
+            'career_levels' => DataArrayHelper::defaultCareerLevelsArray(),
+            'functional_areas' => DataArrayHelper::defaultFunctionalAreasArray(),
+            'job_types' => DataArrayHelper::defaultJobTypesArray(),
+            'job_shifts' => DataArrayHelper::defaultJobShiftsArray(),
+            'genders' => DataArrayHelper::defaultGendersArray(),
+            'job_experiences' => DataArrayHelper::defaultJobExperiencesArray(),
+            'job_skills' => DataArrayHelper::defaultJobSkillsArray(),
+            'degree_levels' => DataArrayHelper::defaultDegreeLevelsArray(),
+            'salary_periods' => DataArrayHelper::defaultSalaryPeriodsArray(),
+        ];
     }
 
 }

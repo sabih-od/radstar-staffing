@@ -9,16 +9,74 @@ use App\Http\Requests\Front\CompanyFrontRegisterFormRequest;
 use App\Repositories\Companies\Auth\CompanyRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use OA\PathItem;
 
 
 class RegisterController extends Controller
 {
+
+    /**
+     * @OA\PathItem(path="/company")
+     */
+
+
     protected $companyRepository;
 
     public function __construct(CompanyRepository $companyRepository)
     {
         $this->companyRepository = $companyRepository;
     }
+    /**
+     * @OA\Post(
+     *     path="/company/register",
+     *     summary="register for company",
+     *     tags={"Company"},
+     *     requestBody={
+     *         "description": "User register credentials",
+     *         "required": true,
+     *         "content": {
+     *             "application/json": {
+     *                 "schema": {
+     *                     "type": "object",
+     *                     "properties": {
+     *                         "name": {
+     *                             "type": "string",
+     *                             "example": "John",
+     *                         },
+     *                         "last_name": {
+     *                             "type": "string",
+     *                             "example": "Smith",
+     *                         },
+     *                         "email": {
+     *                             "type": "string",
+     *                             "example": "john@gmail.com",
+     *                         },
+     *                         "password": {
+     *                             "type": "string",
+     *                             "example": "12345678",
+     *                         },
+     *                     },
+     *                 },
+     *             },
+     *         },
+     *     },
+     *     responses={
+     *         @OA\Response(
+     *             response=200,
+     *             description="OK",
+     *             @OA\JsonContent(
+     *                 @OA\Property(
+     *                     property="success",
+     *                     type="boolean",
+     *                     example=true,
+     *                     description="A boolean value."
+     *                 ),
+     *             ),
+     *         ),
+     *     },
+     * )
+     */
+
 
     public function register(CompanyApiRegisterFormRequest $request)
     {
