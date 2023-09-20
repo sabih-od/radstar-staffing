@@ -13,21 +13,10 @@ class JobDetailController extends JobController
 {
 
     /**
-     * @OA\Post(
+     * @OA\Get(
      *     path="/company/job/job_related_data",
      *     summary=" Job Related Data",
      *     tags={"Company"},
-     *     requestBody={
-     *         "description": "Job Related Data",
-     *         "required": true,
-     *         "content": {
-     *             "application/json": {
-     *                 "schema": {
-     *                     "type": "object",
-     *                 },
-     *             },
-     *         },
-     *     },
      *     responses={
      *         @OA\Response(
      *             response=200,
