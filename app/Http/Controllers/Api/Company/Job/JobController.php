@@ -23,10 +23,10 @@ class JobController extends Controller
 
     public function __construct
     (
-        JobRepository $jobRepository,
+        JobRepository     $jobRepository,
         CompanyRepository $companyRepository,
-        JobService $jobService,
-        CompanyService $companyService
+        JobService        $jobService,
+        CompanyService    $companyService
     )
 
     {
@@ -198,7 +198,6 @@ class JobController extends Controller
     {
         try {
             DB::beginTransaction();
-
             $company = Auth::guard('company_api')->user();
 //            job create
             $data = $this->jobService->assignJobValues($request, $company);
@@ -215,7 +214,6 @@ class JobController extends Controller
             $this->companyRepository->update($companyData, $company->id);
 
             DB::commit();
-
             return APIResponse::success("Job Posted Successfully");
         } catch (\Exception $e) {
             DB::rollBack();

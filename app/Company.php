@@ -63,9 +63,9 @@ class Company extends Authenticatable
     protected $dates = ['created_at', 'updated_at', 'package_start_date', 'package_end_date'];
 
     protected $fillable = [
-
-        'name', 'email', 'password', 'slug',
-
+        'name', 'email', 'password', 'slug', 'ceo', 'industry_id', 'location', 'ownership_type_id', 'description',
+        'map', 'no_of_offices', 'website', 'no_of_employees', 'fax', 'phone', 'facebook', 'twitter',
+        'linkedin', 'google_plus', 'pinterest', 'country_id', 'state_id', 'city_id', 'is_subscribed', 'logo', 'established_in',
     ];
 
     protected $hidden = [

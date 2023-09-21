@@ -146,15 +146,10 @@ class CompanyController extends Controller
 
 
     public function companyProfile()
-
     {
-
         $countries = DataArrayHelper::defaultCountriesArray();
-
         $industries = DataArrayHelper::defaultIndustriesArray();
-
         $ownershipTypes = DataArrayHelper::defaultOwnershipTypesArray();
-
         $company = Company::findOrFail(Auth::guard('company')->user()->id);
 
         return view('company.edit_profile')
@@ -170,9 +165,7 @@ class CompanyController extends Controller
     }
 
 
-
     public function updateCompanyProfile(CompanyFrontFormRequest $request)
-
     {
 
         $company = Company::findOrFail(Auth::guard('company')->user()->id);

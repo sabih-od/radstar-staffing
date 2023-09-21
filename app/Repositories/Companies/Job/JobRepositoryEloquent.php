@@ -31,7 +31,6 @@ class JobRepositoryEloquent extends BaseRepository implements JobRepository
     {
         $this->pushCriteria(app(RequestCriteria::class));
 //        $this->pushCriteria(ByCompanyIdCriteria::class);
-
     }
 
     public function model()
