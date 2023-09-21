@@ -37,8 +37,28 @@ class CompanyController extends Controller
         $this->subscriptionRepository = $subscriptionRepository;
         $this->subscriptionService = $subscriptionService;
     }
-
-    public function update(Request $request)update
+    /**
+     * @OA\Post(
+     *     path="/company/update",
+     *     summary="Update Company",
+     *     tags={"Company"},
+     *     responses={
+     *         @OA\Response(
+     *             response=200,
+     *             description="OK",
+     *             @OA\JsonContent(
+     *                 @OA\Property(
+     *                     property="success",
+     *                     type="boolean",
+     *                     example=true,
+     *                     description="A boolean value."
+     *                 ),
+     *             ),
+     *         ),
+     *     },
+     * )
+     */
+    public function update(Request $request)
     {
         try {
             $company = $this->companyRepository->find(Auth::guard('company_api')->user()->id);

@@ -1,13 +1,18 @@
 <?php
 
+use App\Http\Controllers\Api\Company\CompanyController;
+use App\Http\Controllers\Api\location\CountryController;
+use App\Http\Controllers\Api\location\StateController;
+
 use Illuminate\Http\Request;
 use App\Http\Controllers\Api\User\Auth\RegisterController as UserRegisterController;
 use App\Http\Controllers\Api\User\Auth\LoginController as UserLoginController;
 use App\Http\Controllers\Api\Company\Auth\RegisterController as CompanyRegisterController;
 use App\Http\Controllers\Api\Company\Auth\LoginController as CompanyLoginController;
 use App\Http\Controllers\Api\Company\Job\JobController as CompanyJobController;
-use App\Http\Controllers\Api\Company\Job\JobDetailController as CompanyJobDetailController;
-use App\Http\Controllers\Api\Company\CompanyController;
+use App\Http\Controllers\Api\Company\Job\JobDropdownController as CompanyJobDetailController;
+use App\Http\Controllers\Api\location\CityController;
+
 
 use Illuminate\Support\Facades\Route;
 
@@ -26,6 +31,10 @@ use Illuminate\Support\Facades\Route;
 //});
 
 // Routes for user authentication
+Route::get('/countries',[CountryController::class, 'getCountries']);
+Route::get('states/{countryId}',[StateController::class, 'getStates']);
+Route::get('cities/{stateId}',[CityController::class, 'getCities']);
+
 Route::group([
     'prefix' => 'candidate'
 ], function () {
@@ -38,7 +47,6 @@ Route::group([
         Route::post('logout', [UserLoginController::class, 'logout']);
     });
 });
-
 
 
 Route::group([
@@ -58,9 +66,12 @@ Route::group([
         ], function () {
             Route::get('get', [CompanyJobController::class, 'get']);
             Route::post('create', [CompanyJobController::class, 'create']);
-            Route::get('job_related_data', [CompanyJobDetailController::class, 'JobRelatedData']);
-
+            Route::get('job_dropdown_data', [CompanyJobDetailController::class, 'JobRelatedData']);
         });
     });
+
+
 });
+
+
 
