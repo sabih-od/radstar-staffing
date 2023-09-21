@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api\location;
+namespace App\Http\Controllers\Api\Location;
 
 use App\Helpers\APIResponse;
 use App\Http\Controllers\Controller;

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\Company\Job;
 use App\Criteria\Company\Job\ByCompanyIdCriteria;
 use App\Helpers\APIResponse;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\JobApiFormRequest;
 use App\Services\CompanyService;
 use App\Services\JobService;
 use App\Traits\Skills;
@@ -194,7 +195,7 @@ class JobController extends Controller
      */
 
 
-    public function create(Request $request)
+    public function create(Request $request , JobApiFormRequest $jobApiFormRequest)
     {
         try {
             DB::beginTransaction();

@@ -42,6 +42,116 @@ class CompanyController extends Controller
      *     path="/company/update",
      *     summary="Update Company",
      *     tags={"Company"},
+     *     requestBody={
+     *         "description": "Company Updated Successfully",
+     *         "required": true,
+     *         "content": {
+     *             "application/json": {
+     *                 "schema": {
+     *                     "type": "object",
+     *                     "properties": {
+     *                         "name": {
+     *                             "type": "string",
+     *                             "example": "Star llc",
+     *                         },
+     *                         "email": {
+     *                             "type": "string",
+     *                             "example": "star@gmail.com",
+     *                         },
+     *                         "password": {
+     *                             "type": "string",
+     *                             "example": "6434897454dff",
+     *                         },
+     *                         "ceo": {
+     *                             "type": "string",
+     *                             "example": "Smith",
+     *                         },
+     *                         "industry_id": {
+     *                             "type": "integer",
+     *                             "example": 1,
+     *                         },
+     *                         "ownership_type_id": {
+     *                             "type": "integer",
+     *                             "example": 2,
+     *                         },
+                               "description": {
+     *                             "type": "string",
+     *                             "example": "Lorem ispum ",
+     *                         },
+     *                         "location": {
+     *                             "type": "string",
+     *                             "example": "Company Location",
+     *                         },
+     *                         "no_of_offices": {
+     *                             "type": "integer",
+     *                             "example": 5,
+     *                         },
+     *                         "website": {
+     *                             "type": "string",
+     *                             "example": "http://companywebsite.com",
+     *                         },
+     *                         "no_of_employees": {
+     *                             "type": "integer",
+     *                             "example": 50,
+     *                         },
+     *                         "established_in": {
+     *                             "type": "integer",
+     *                             "example": 1995,
+     *                         },
+     *                         "fax": {
+     *                             "type": "string",
+     *                             "example": "Company Fax",
+     *                         },
+     *                         "phone": {
+     *                             "type": "string",
+     *                             "example": "+1-202-555-0105",
+     *                         },
+     *                         "facebook": {
+     *                             "type": "string",
+     *                             "example": "https://www.facebook.com/",
+     *                         },
+     *                         "twitter": {
+     *                             "type": "string",
+     *                             "example": "https://twitter.com/",
+     *                         },
+     *                         "linkedin": {
+     *                             "type": "string",
+     *                             "example": "https://www.linkedin.com/login",
+     *                         },
+     *                         "google_plus": {
+     *                             "type": "string",
+     *                             "example": "",
+     *                         },
+     *                         "pinterest": {
+     *                             "type": "string",
+     *                             "example": "",
+     *                         },
+     *                         "country_id": {
+     *                             "type": "integer",
+     *                             "example": 1,
+     *                         },
+     *                         "state_id": {
+     *                             "type": "integer",
+     *                             "example": 1,
+     *                         },
+     *                         "city_id": {
+     *                             "type": "integer",
+     *                             "example": 3,
+     *                         },
+     *                         "is_subscribed": {
+     *                             "type": "integer",
+     *                             "example": 1,
+     *                         },
+     *                         "logo": {
+     *                             "type": "",
+     *                             "example": "http://example.com/path/to/logo.jpg",
+     *                         },
+     *
+     *                     },
+     *                 },
+     *             },
+     *         },
+     *     },
      *     responses={
      *         @OA\Response(
      *             response=200,
@@ -58,6 +168,7 @@ class CompanyController extends Controller
      *     },
      * )
      */
+
     public function update(Request $request)
     {
         try {
