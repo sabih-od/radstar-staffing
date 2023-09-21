@@ -24,7 +24,27 @@ class CountryController extends Controller
         $this->countryRepository = $countryRepository;
         $this->countryService = $countryService;
     }
-
+    /**
+     * @OA\Get(
+     *     path="/countries",
+     *     summary=" Countries Data",
+     *     tags={"Country"},
+     *     responses={
+     *         @OA\Response(
+     *             response=200,
+     *             description="OK",
+     *             @OA\JsonContent(
+     *                 @OA\Property(
+     *                     property="success",
+     *                     type="boolean",
+     *                     example=true,
+     *                     description="A boolean value."
+     *                 ),
+     *             ),
+     *         ),
+     *     },
+     * )
+     */
     public function getCountries()
     {
         try {

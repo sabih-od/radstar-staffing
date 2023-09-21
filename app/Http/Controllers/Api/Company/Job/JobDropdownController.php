@@ -8,13 +8,13 @@ use App\Http\Controllers\Api\Company\Job\JobController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 
-class JobDetailController extends JobController
+class JobDropdownController extends JobController
 
 {
 
     /**
      * @OA\Get(
-     *     path="/company/job/job_related_data",
+     *     path="/company/job/job_dropdown_data",
      *     summary=" Job Related Data",
      *     tags={"Company"},
      *     responses={

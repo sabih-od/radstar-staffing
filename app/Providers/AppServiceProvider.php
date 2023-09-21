@@ -3,8 +3,12 @@
 namespace App\Providers;
 
 
+use App\Repositories\Location\CityRepository;
+use App\Repositories\Location\CityRepositoryEloquent;
 use App\Repositories\Location\CountryRepository;
 use App\Repositories\Location\CountryRepositoryEloquent;
+use App\Repositories\Location\StateRepository;
+use App\Repositories\Location\StateRepositoryEloquent;
 use Illuminate\Support\ServiceProvider;
 use App\Repositories\Users\Auth\UserRepository;
 use App\Repositories\Users\Auth\UserRepositoryEloquent;
@@ -46,6 +50,10 @@ class AppServiceProvider extends ServiceProvider
 //        $this->app->register(\L5Swagger\L5SwaggerServiceProvider::class);
         // Bind CountryRepository interface to CountryRepositoryInterface implementation
         $this->app->bind(CountryRepository::class, CountryRepositoryEloquent::class);
+        // Bind StateRepository interface to StateRepositoryEloquent implementation
+        $this->app->bind(StateRepository::class, StateRepositoryEloquent::class);
+        // Bind CityRepository interface to CityRepositoryEloquent implementation
+        $this->app->bind(CityRepository::class, CityRepositoryEloquent::class);
     }
 
 }
