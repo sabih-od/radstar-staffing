@@ -2,11 +2,16 @@
 
 namespace App\Http\Controllers\Company\Auth;
 
+use App\Company;
 use App\Http\Controllers\Controller;
+use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Foundation\Auth\ResetsPasswords;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+
 
 class ResetPasswordController extends Controller
 {
@@ -21,7 +26,7 @@ class ResetPasswordController extends Controller
       |
      */
 
-use ResetsPasswords;
+//use ResetsPasswords;
 
     /**
      * Where to redirect users after resetting their password.
@@ -39,21 +44,56 @@ use ResetsPasswords;
     {
         $this->middleware('company.guest');
     }
-    
+
     /**
      * Display the password reset view for the given token.
      *
      * If no token is present, display the link request form.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  string|null  $token
+     * @param \Illuminate\Http\Request $request
+     * @param string|null $token
      * @return \Illuminate\Http\Response
      */
     public function showResetForm(Request $request, $token = null)
     {
         return view('company_auth.passwords.reset')->with(
-                        ['token' => $token, 'email' => $request->email]
+            ['token' => $token, 'email' => $request->email]
         );
+    }
+
+    protected function resetPassword(Request $request)
+    {
+        $request->validate([
+            'password' => 'required|min:8|confirmed',
+        ]);
+
+        $company = Company::where('email', $request->email)->first();
+
+        if (!$company)
+            return redirect()->back()->with('error', 'Compant not found');
+
+
+        $this->setUserPassword($company, $request->password);
+
+        $company->setRememberToken(Str::random(60));
+
+        $company->save();
+
+        event(new PasswordReset($company));
+
+        $this->guard()->login($company);
+    }
+
+    /**
+     * Set the user's password.
+     *
+     * @param \Illuminate\Contracts\Auth\CanResetPassword $user
+     * @param string $password
+     * @return void
+     */
+    protected function setUserPassword($user, $password)
+    {
+        $user->password = Hash::make($password);
     }
 
     /**
