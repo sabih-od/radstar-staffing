@@ -88,7 +88,7 @@ class ForgotPasswordController extends Controller
                 return redirect()->route('company.password.reset.form', ['token' => $encryptedId])->with('success', 'Verification Successfully');
             }
             else {
-                return redirect()->route('password.request')->with('error', 'Otp is expired please regenrate');
+                return redirect()->route('password.request')->with('error', 'Otp is expired please regenrate')
             }
         }
 
