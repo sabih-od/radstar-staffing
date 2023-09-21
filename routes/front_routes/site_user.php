@@ -80,3 +80,14 @@ Route::delete('delete-front.profile-language', 'UserController@deleteProfileLang
 
 Route::get('my-alerts', 'UserController@myAlerts')->name('my-alerts');
 Route::get('delete-alert/{id}', 'UserController@delete_alert')->name('delete-alert');
+
+// user reset password
+Route::prefix('user')->name('user.')->group(function () {
+    Route::get('/password/reset/request', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
+    Route::post('/password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
+    Route::get('/enter/otp/form', 'Auth\ForgotPasswordController@enterOtpForm')->name('enter.otp.form');
+    Route::post('/verify/otp', 'Auth\ForgotPasswordController@verifyOtp')->name('verify.otp');
+    Route::get('/password/reset', 'Auth\ResetPasswordController@showResetForm')->name('password.reset.form');
+    Route::post('/password/reset', 'Auth\ResetPasswordController@resetPassword')->name('password.reset');
+});
+

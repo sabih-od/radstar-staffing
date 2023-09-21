@@ -62,7 +62,7 @@
                                             </div>
                                             <div class="mb-3"><i class="fas fa-lock"
                                                                  aria-hidden="true"></i> {{__('Forgot Your Password')}}?
-                                                <a href="{{ route('password.request') }}">{{__('Click here')}}</a></div>
+                                                <a href="{{ route('user.password.request') }}">{{__('Click here')}}</a></div>
                                             <input type="submit" class="btn" value="{{__('Login')}}">
                                         </div>
                                         <!-- login form  end-->

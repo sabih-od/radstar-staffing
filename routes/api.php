@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\location\StateController;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Api\User\Auth\RegisterController as UserRegisterController;
+use App\Http\Controllers\Api\User\Auth\ForgotPasswordController as UserForgotPasswordController;
 use App\Http\Controllers\Api\User\Auth\LoginController as UserLoginController;
 use App\Http\Controllers\Api\Company\Auth\RegisterController as CompanyRegisterController;
 use App\Http\Controllers\Api\Company\Auth\LoginController as CompanyLoginController;
@@ -40,6 +41,11 @@ Route::group([
 ], function () {
     Route::post('register', [UserRegisterController::class, 'register']);
     Route::post('login', [UserLoginController::class, 'login']);
+
+
+    Route::post('password/email', [UserForgotPasswordController::class, 'sendResetLinkEmail']);
+    Route::post('verify/otp', [UserForgotPasswordController::class, 'verifyOtp']);
+    Route::post('password/reset', [UserForgotPasswordController::class, 'resetPassword']);
 
 
     //This for candidates which have User model
