@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\Company\Auth\RegisterController as CompanyRegisterC
 use App\Http\Controllers\Api\Company\Auth\LoginController as CompanyLoginController;
 use App\Http\Controllers\Api\Company\Job\JobController as CompanyJobController;
 use App\Http\Controllers\Api\Company\Job\JobDetailController as CompanyJobDetailController;
+use App\Http\Controllers\Api\Company\CompanyController;
 
 use Illuminate\Support\Facades\Route;
 
@@ -39,6 +40,7 @@ Route::group([
 });
 
 
+
 Route::group([
     'prefix' => 'company'
 ], function () {
@@ -49,6 +51,7 @@ Route::group([
 //This for companies which have Company model
     Route::middleware(['redirectIfCompany', 'auth:company_api'])->group(function () {
         Route::post('logout', [CompanyLoginController::class, 'logout']);
+        Route::post('update', [CompanyController::class, 'update']);
 
         Route::group([
             'prefix' => 'job'
@@ -56,6 +59,7 @@ Route::group([
             Route::get('get', [CompanyJobController::class, 'get']);
             Route::post('create', [CompanyJobController::class, 'create']);
             Route::get('job_related_data', [CompanyJobDetailController::class, 'JobRelatedData']);
+
         });
     });
 });
