@@ -1,6 +1,9 @@
 <?php
+
+use App\Http\Controllers\Api\Company\CompanyController;
 use App\Http\Controllers\Api\location\CountryController;
 use App\Http\Controllers\Api\location\StateController;
+
 use Illuminate\Http\Request;
 use App\Http\Controllers\Api\User\Auth\RegisterController as UserRegisterController;
 use App\Http\Controllers\Api\User\Auth\LoginController as UserLoginController;
@@ -9,7 +12,7 @@ use App\Http\Controllers\Api\Company\Auth\LoginController as CompanyLoginControl
 use App\Http\Controllers\Api\Company\Job\JobController as CompanyJobController;
 use App\Http\Controllers\Api\Company\Job\JobDropdownController as CompanyJobDetailController;
 use App\Http\Controllers\Api\location\CityController;
-use App\Http\Controllers\Api\Company\CompanyController;
+
 
 use Illuminate\Support\Facades\Route;
 
