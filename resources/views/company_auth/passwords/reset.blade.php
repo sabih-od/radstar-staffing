@@ -13,7 +13,8 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">{{__('Reset Password')}}</div>
                     <div class="panel-body">
-                        <form class="form-horizontal" method="POST" action="{{ route('company.password.request') }}">
+                        <form class="form-horizontal" method="POST" action="{{ route('company.password.reset') }}">
+{{--                            <form class="form-horizontal" method="POST" action="{{ route('company.password.request') }}">--}}
                             {{ csrf_field() }}
                             <input type="hidden" name="token" value="{{ $token }}">
                             <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">

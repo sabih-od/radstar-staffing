@@ -13,6 +13,11 @@
 @foreach ($introLines as $line)
 {{ $line }}
 @endforeach
+
+
+
+
+
 {{-- Action Button --}}
 @isset($actionText)
 <?php
