@@ -29,6 +29,7 @@
         <!-- END THEME GLOBAL STYLES -->
         <!-- BEGIN PAGE LEVEL STYLES -->
         <link href="{{ asset('/') }}admin_assets/pages/css/login.min.css" rel="stylesheet" type="text/css" />
+        <link href="{{ asset('/') }}admin_assets/pages/css/mylogin.css" rel="stylesheet" type="text/css" />
         <!-- END PAGE LEVEL STYLES -->
         <!-- BEGIN THEME LAYOUT STYLES -->
         <!-- END THEME LAYOUT STYLES -->

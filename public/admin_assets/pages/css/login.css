@@ -12,6 +12,10 @@ Login page
   padding: 15px;
   text-align: center; }
 
+
+.login .logo a img{
+  max-width: 140px;
+}
 .login .content {
   background-color: #eceef1;
   -webkit-border-radius: 7px;

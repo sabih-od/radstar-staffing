@@ -463,6 +463,9 @@ h6 {
 	display: inline-block;
 	margin: 5px 0 5px 0;
 }
+.header .logo img{
+	max-height: 75px;
+}
 
 .navbar{padding: 0;}
 
@@ -4974,6 +4977,7 @@ body {
 	text-align: center;
 	float: left;
 }
+
 .navbar-header {
 	float: right;
 	display: block;
