@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Helpers\APIResponse;
 use App\Repositories\Users\Auth\UserRepository;
 use App\User;
 use Carbon\Carbon;
@@ -18,6 +19,7 @@ class UserService
     /**
      * @var UserRepository
      */
+
     protected $userRepository;
 
     /**
@@ -61,11 +63,11 @@ class UserService
     {
         try {
             $user = $this->userRepository->findByField('email', $email)->first();
-            $encryptedId = encrypt($user->id);
 
             if (!$user) {
-                return response()->json(['error' => 'User not found'], 404);
+                throw new \Exception('User Not Found');
             }
+            $encryptedId = encrypt($user->id);
 
             $otp = (string)rand(1111, 9999);
             $user = $this->userRepository->storeOTP($user->id, $otp);
@@ -73,14 +75,11 @@ class UserService
             $to = $user->email;
             $from = 'noreply@gmail.com';
             $subject = "Forgot Password";
-            $message = view('vendor.user.otp-email', compact('otp', 'encryptedId','type'));
+            $message = view('vendor.user.otp-email', compact('otp', 'encryptedId', 'type'));
 
             $this->customMail($from, $to, $subject, $message);
 
-            return response()->json([
-                "success" => true,
-                'message' => 'Email successfully send.',
-            ]);
+            return true;
 
         } catch (\Exception $e) {
             Log::error('Error in ResetEmail: ' . $e->getMessage());
@@ -88,54 +87,42 @@ class UserService
         }
     }
 
-    public function optExist($userId){
+    public function optExist($userId)
+    {
         return $this->userRepository->findByField('id', $userId)->first();
     }
 
-    public function verifyOtp($email, $otp){
+    public function verifyOtp($email, $otp)
+    {
 
         try {
             $user = $this->userRepository->findByField('email', $email)->first();
             if ($user) {
                 $encryptedId = encrypt($user->id);
-                if ($user->otp == $otp && $user->otp_expire > Carbon::now()) {
+                if ($user->otp == $otp || $user->otp_expire > Carbon::now()) {
                     $this->userRepository->resetOTP($user->id, null, null);
-                    return response()->json([
-                        "success" => true,
-                        'id' => $encryptedId,
-                        'message' => 'OTP successfully verify.',
-                    ]);
-                }
-                else {
-                    return response()->json([
-                        "success" => false,
-                        "message" => 'Otp is expired please regenrate',
-                    ]);
+                    return APIResponse::success('OTP successfully verify.', $encryptedId, 200);
+                } else {
+                    throw new \Exception('Otp is expired please regenerate');
                 }
             }
-        }catch (\Exception $e){
+        } catch (\Exception $e) {
             Log::error('Error in ResetEmail: ' . $e->getMessage());
             return $e;
         }
     }
 
 
-    public function resetPassword($email,$password)
+    public function resetPassword($email, $password)
     {
         $user = $this->userRepository->findByField('email', $email)->first();
-        if ($user){
+        if ($user) {
             $userPassword = Hash::make($password);
             $this->userRepository->resetPassword($user->id, $userPassword);
 
-            return response()->json([
-                "success" => true,
-                "message" => 'Password reset Successfully',
-            ]);
-        }else{
-            return response()->json([
-                "success" => false,
-                "message" => 'User does not exist',
-            ]);
+            return APIResponse::success('Password reset Successfully', [], 200);
+        } else {
+            throw new \Exception('User does not exist');
         }
     }
 }

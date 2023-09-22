@@ -11,6 +11,152 @@
     ],
     "paths": {
         "/company": {},
+        "/company/password/email": {
+            "post": {
+                "tags": [
+                    "Company"
+                ],
+                "summary": "Send Forget passord reset link",
+                "operationId": "2b317cefdb460a4587a622ea0561e036",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "example": "johnsmith@gmail.com"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "description": "A boolean value.",
+                                            "type": "boolean",
+                                            "example": true
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/company/verify/otp": {
+            "post": {
+                "tags": [
+                    "Company"
+                ],
+                "summary": "Verify Forget passord Otp",
+                "operationId": "0573da44d1722286da5ead3dd3a811f5",
+                "requestBody": {
+                    "description": "Login Candidate",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "example": "johnsmith@gmail.com"
+                                    },
+                                    "otp": {
+                                        "type": "integer",
+                                        "example": 4321
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "description": "A boolean value.",
+                                            "type": "boolean",
+                                            "example": true
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/company/password/reset": {
+            "post": {
+                "tags": [
+                    "Company"
+                ],
+                "summary": "Reset Company Password",
+                "operationId": "14fc5732414c5de9341431d7984a8250",
+                "requestBody": {
+                    "description": "Login Candidate",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "example": "johnsmith@gmail.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "example": 12345678
+                                    },
+                                    "confirm_password": {
+                                        "type": "string",
+                                        "example": 12345678
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "description": "A boolean value.",
+                                            "type": "boolean",
+                                            "example": true
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/company/login": {
             "post": {
                 "tags": [
@@ -134,6 +280,34 @@
                         }
                     }
                 },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "description": "A boolean value.",
+                                            "type": "boolean",
+                                            "example": true
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/company/update": {
+            "post": {
+                "tags": [
+                    "Company"
+                ],
+                "summary": "Update Company",
+                "operationId": "1007fbe2229d5deeb7b859529d89856a",
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -311,13 +485,159 @@
                 }
             }
         },
-        "/company/job/job_related_data": {
+        "/company/job/job_dropdown_data": {
             "get": {
                 "tags": [
                     "Company"
                 ],
                 "summary": " Job Related Data",
-                "operationId": "c42a5ba5460c5f253f5d75518e5b93b1",
+                "operationId": "95aaf3001dc66e6c0e3026dff9ff6bbe",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "description": "A boolean value.",
+                                            "type": "boolean",
+                                            "example": true
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/candidate/password/email": {
+            "post": {
+                "tags": [
+                    "Candidate"
+                ],
+                "summary": "Send Forget passord reset link",
+                "operationId": "47243ebf254ff2303940f45aae011ac3",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "example": "johnsmith@gmail.com"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "description": "A boolean value.",
+                                            "type": "boolean",
+                                            "example": true
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/candidate/verify/otp": {
+            "post": {
+                "tags": [
+                    "Candidate"
+                ],
+                "summary": "Verify Forget passord Otp",
+                "operationId": "7933cfd3f8fe6d96a026f068bd0c0edc",
+                "requestBody": {
+                    "description": "Login Candidate",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "example": "johnsmith@gmail.com"
+                                    },
+                                    "otp": {
+                                        "type": "integer",
+                                        "example": 4321
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "description": "A boolean value.",
+                                            "type": "boolean",
+                                            "example": true
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/candidate/password/reset": {
+            "post": {
+                "tags": [
+                    "Candidate"
+                ],
+                "summary": "Reset Company Password",
+                "operationId": "bccf1976e0878a51844674d4c92595e6",
+                "requestBody": {
+                    "description": "Login Candidate",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "example": "johnsmith@gmail.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "example": 12345678
+                                    },
+                                    "confirm_password": {
+                                        "type": "string",
+                                        "example": 12345678
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -467,6 +787,114 @@
                         }
                     }
                 },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "description": "A boolean value.",
+                                            "type": "boolean",
+                                            "example": true
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/cities/{stateId}": {
+            "get": {
+                "tags": [
+                    "City"
+                ],
+                "summary": "Cities Data",
+                "operationId": "f4807e52959d6d740c1943ba0b04beb6",
+                "parameters": [
+                    {
+                        "name": "stateId",
+                        "in": "path",
+                        "description": "The ID of the state for which you want to retrieve cities.",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "description": "A boolean value.",
+                                            "type": "boolean",
+                                            "example": true
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/countries": {
+            "get": {
+                "tags": [
+                    "Country"
+                ],
+                "summary": " Countries Data",
+                "operationId": "73fbcbc7435cfb1275282d0ae6de5fbe",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "description": "A boolean value.",
+                                            "type": "boolean",
+                                            "example": true
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/states/{CountryId}": {
+            "get": {
+                "tags": [
+                    "State"
+                ],
+                "summary": "Cities Data",
+                "operationId": "0316e7c78b7e15e51fadb4149b5badc6",
+                "parameters": [
+                    {
+                        "name": "CountryId",
+                        "in": "path",
+                        "description": "The ID of the country for which you want to retrieve states.",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",

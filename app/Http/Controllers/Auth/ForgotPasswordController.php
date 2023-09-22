@@ -22,7 +22,7 @@ class ForgotPasswordController extends Controller
       |
      */
 
-use SendsPasswordResetEmails;
+    use SendsPasswordResetEmails;
 
     /**
      * Create a new controller instance.
@@ -30,7 +30,8 @@ use SendsPasswordResetEmails;
      * @return void
      */
     protected $userService;
-    public function __construct(UserService $userService )
+
+    public function __construct(UserService $userService)
     {
         $this->middleware('guest');
         $this->userService = $userService;
@@ -45,8 +46,14 @@ use SendsPasswordResetEmails;
     public function sendResetLinkEmail(Request $request)
     {
         $request->validate(['email' => 'required|email']);
-        $this->userService->resetEmail($request->email,'web');
+        $response = $this->userService->resetEmail($request->email, 'web');
 
+        if ($response instanceof \Exception) {
+            flash(__($response->getMessage()))->error();
+            return redirect()->back();
+        }
+
+        flash(__('Send reset email successfully'))->success();
         return redirect()->back();
     }
 
@@ -55,19 +62,25 @@ use SendsPasswordResetEmails;
         $userId = decrypt($request['id']);
         $user = $this->userService->optExist($userId);
 
-        if ($user){
+        if ($user) {
             return view('user_auth.passwords.verify-otp', compact('user'));
-        }else{
+        } else {
             return back()->with('error', 'something went wrong');
         }
     }
 
     public function verifyOtp(Request $request)
     {
-        $users = $this->userService->verifyOtp($request->email,$request->otp);
-        $encryptedId = encrypt($users->getData()->id);
+        $users = $this->userService->verifyOtp($request->email, $request->otp);
+        if ($users instanceof \Exception) {
+            flash(__($users->getMessage()))->error();
+            return redirect()->back();
+        }
+        $encryptedId = $users->getDate();
 
-        return redirect()->route('user.password.reset.form', ['token' => $encryptedId])->with('success', 'Verification Successfully');
+
+        flash(__('Verification Successfully'))->success();
+        return redirect()->route('user.password.reset.form', ['token' => $encryptedId]);
     }
 
 }

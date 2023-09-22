@@ -51,12 +51,11 @@ class ForgotPasswordController extends Controller
 
         $company = Company::where('email', $request->email)->first();
 
-        $encryptedId = encrypt($company->id);
-
         if (!$company) {
+            flash(__('Sorry!! Company not found'))->error();
             return redirect()->back()->with('error', 'company not found');
         }
-
+        $encryptedId = encrypt($company->id);
         $otp = (string)rand(1111, 9999);
 
         $company->otp = $otp;
@@ -72,6 +71,7 @@ class ForgotPasswordController extends Controller
 
         $this->customMail($from, $to, $subject, $message);
 
+        flash(__('Otp Sanded Successfully! Please check your email'))->success();
         return redirect()->back();
 
     }
@@ -81,14 +81,15 @@ class ForgotPasswordController extends Controller
         $company = Company::where('email', $request->email)->first();
         $encryptedId = encrypt($company->id);
         if ($company) {
-            if ($company->otp == $request->otp && $company->otp_expire <= Carbon::now()) {
+            if ($company->otp == $request->otp || $company->otp_expire <= Carbon::now()) {
                 $company->otp = null;
                 $company->otp_expire = null;
                 $company->save();
-                return redirect()->route('company.password.reset.form', ['token' => $encryptedId])->with('success', 'Verification Successfully');
-            }
-            else {
-                return redirect()->route('password.request')->with('error', 'Otp is expired please regenrate');
+                flash(__('Verification Successfully'))->success();
+                return redirect()->route('company.password.reset.form', ['token' => $encryptedId]);
+            } else {
+                flash(__('Otp is expired please regenerate'))->error();
+                return redirect()->route('password.request');
             }
         }
 

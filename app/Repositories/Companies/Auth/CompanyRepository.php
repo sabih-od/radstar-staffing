@@ -11,6 +11,10 @@ use Prettus\Repository\Contracts\RepositoryInterface;
  */
 interface CompanyRepository extends RepositoryInterface
 {
+    public function storeOTP($user_id, $otp);
 
+    public function resetOTP($user_id, $otp, $otp_expire);
+
+    public function resetPassword($user_id, $password);
 
 }
