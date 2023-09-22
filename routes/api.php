@@ -18,6 +18,8 @@ use App\Http\Controllers\Api\Company\Job\JobDropdownController as CompanyJobDeta
 use App\Http\Controllers\Api\Company\Job\JobSeekerController;
 
 use App\Http\Controllers\Api\location\CityController;
+use App\Http\Controllers\Api\User\Job\CandidateController;
+use App\Http\Controllers\Api\Contact\ContactController;
 
 
 use Illuminate\Support\Facades\Route;
@@ -40,6 +42,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/countries', [CountryController::class, 'getCountries']);
 Route::get('states/{countryId}', [StateController::class, 'getStates']);
 Route::get('cities/{stateId}', [CityController::class, 'getCities']);
+Route::post('contact', [ContactController::class, 'contact']);
 
 Route::group([
     'prefix' => 'candidate'
