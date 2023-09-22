@@ -69,9 +69,10 @@ class ResetPasswordController extends Controller
 
         $company = Company::where('email', $request->email)->first();
 
-        if (!$company)
-            return redirect()->back()->with('error', 'Compant not found');
-
+        if (!$company) {
+            flash(__('Company not found'))->error();
+            return redirect()->back();
+        }
 
         $this->setUserPassword($company, $request->password);
 
@@ -80,8 +81,9 @@ class ResetPasswordController extends Controller
         $company->save();
 
         event(new PasswordReset($company));
-
         $this->guard()->login($company);
+        flash(__('Password Reset Successfully'))->success();
+        return redirect()->route('company.home');
     }
 
     /**
