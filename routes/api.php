@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Api\User\Auth\RegisterController as UserRegisterController;
 use App\Http\Controllers\Api\User\Auth\ForgotPasswordController as UserForgotPasswordController;
 use App\Http\Controllers\Api\User\Auth\LoginController as UserLoginController;
+use App\Http\Controllers\Api\User\UserController as UserController;
+
 use App\Http\Controllers\Api\Company\Auth\RegisterController as CompanyRegisterController;
 use App\Http\Controllers\Api\Company\Auth\LoginController as CompanyLoginController;
 use App\Http\Controllers\Api\Company\Auth\ForgetPasswordController as CompanyForgetPasswordController;
@@ -44,6 +46,7 @@ Route::group([
 ], function () {
     Route::post('register', [UserRegisterController::class, 'register']);
     Route::post('login', [UserLoginController::class, 'login']);
+    Route::get('my-profile', [UserController::class, 'myProfile']);
 
 
     Route::post('password/email', [UserForgotPasswordController::class, 'sendResetLinkEmail']);
