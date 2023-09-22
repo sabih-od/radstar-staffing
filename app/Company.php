@@ -239,13 +239,9 @@ class Company extends Authenticatable
 
 
     public function countFollowers()
-
     {
-
         return FavouriteCompany::where('company_slug', 'like', $this->slug)->count();
-
     }
-
 
 
     public function getFollowerIdsArray()

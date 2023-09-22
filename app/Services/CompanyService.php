@@ -83,4 +83,9 @@ class CompanyService
         ];
 
     }
+
+    public function getFollowersAndCount($users,$followers)
+    {
+        return['followers' => $users, 'followers_count' => $followers];
+    }
 }

@@ -66,6 +66,8 @@ Route::group([
     Route::middleware(['redirectIfCompany', 'auth:company_api'])->group(function () {
         Route::post('logout', [CompanyLoginController::class, 'logout']);
         Route::post('update', [CompanyController::class, 'update']);
+        Route::get('followers', [CompanyController::class, 'getFollowers']);
+
 
         Route::group([
             'prefix' => 'job'

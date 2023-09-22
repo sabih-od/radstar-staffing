@@ -126,21 +126,14 @@ class CompanyController extends Controller
 
 
     public function index()
-
     {
-
         return view('company_home');
-
     }
 
     public function company_listing()
-
     {
-
         $data['companies']=Company::paginate(20);
-
         return view('company.listing')->with($data);
-
     }
 
 
@@ -940,11 +933,8 @@ class CompanyController extends Controller
     }
 
 
-
     public function companyFollowers()
-
     {
-
         $company = Company::findOrFail(Auth::guard('company')->user()->id);
 
         $userIdsArray = $company->getFollowerIdsArray();
@@ -952,13 +942,11 @@ class CompanyController extends Controller
         $users = User::whereIn('id', $userIdsArray)->get();
 
 
-
         return view('company.follower_users')
 
                         ->with('users', $users)
 
                         ->with('company', $company);
-
     }
 
 

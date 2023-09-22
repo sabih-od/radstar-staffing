@@ -77,7 +77,6 @@ class RegisterController extends Controller
      * )
      */
 
-
     public function register(CompanyApiRegisterFormRequest $request)
     {
         try {
