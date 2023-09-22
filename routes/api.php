@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Api\User\Auth\RegisterController as UserRegisterController;
 use App\Http\Controllers\Api\User\Auth\ForgotPasswordController as UserForgotPasswordController;
 use App\Http\Controllers\Api\User\Auth\LoginController as UserLoginController;
+use App\Http\Controllers\Api\User\UserController as UserController;
+
 use App\Http\Controllers\Api\Company\Auth\RegisterController as CompanyRegisterController;
 use App\Http\Controllers\Api\Company\Auth\LoginController as CompanyLoginController;
 use App\Http\Controllers\Api\Company\Auth\ForgetPasswordController as CompanyForgetPasswordController;
@@ -15,7 +17,6 @@ use App\Http\Controllers\Api\Company\Job\JobController as CompanyJobController;
 use App\Http\Controllers\Api\Company\Job\JobDropdownController as CompanyJobDetailController;
 
 use App\Http\Controllers\Api\location\CityController;
-use App\Http\Controllers\Api\User\Job\CandidateController;
 
 
 use Illuminate\Support\Facades\Route;
@@ -44,8 +45,8 @@ Route::group([
 ], function () {
     Route::post('register', [UserRegisterController::class, 'register']);
     Route::post('login', [UserLoginController::class, 'login']);
+    Route::get('my-profile', [UserController::class, 'myProfile']);
 
-    Route::get('get', [CandidateController::class, 'get']);
 
     Route::post('password/email', [UserForgotPasswordController::class, 'sendResetLinkEmail']);
     Route::post('verify/otp', [UserForgotPasswordController::class, 'verifyOtp']);
@@ -55,8 +56,6 @@ Route::group([
     //This for candidates which have User model
     Route::middleware(['redirectIfUser', 'auth:user'])->group(function () {
         Route::post('logout', [UserLoginController::class, 'logout']);
-
-
     });
 });
 
