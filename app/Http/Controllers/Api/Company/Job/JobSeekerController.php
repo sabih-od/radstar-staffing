@@ -17,6 +17,27 @@ class JobSeekerController extends Controller
         $this->jobSeekerService = $jobSeekerService;
     }
 
+    /**
+     * @OA\Get(
+     *     path="/company/job-seekers",
+     *     summary=" Job Seeker",
+     *     tags={"Company"},
+     *     responses={
+     *         @OA\Response(
+     *             response=200,
+     *             description="OK",
+     *             @OA\JsonContent(
+     *                 @OA\Property(
+     *                     property="success",
+     *                     type="boolean",
+     *                     example=true,
+     *                     description="A boolean value."
+     *                 ),
+     *             ),
+     *         ),
+     *     },
+     * )
+     */
     public function get(Request $request)
     {
         try

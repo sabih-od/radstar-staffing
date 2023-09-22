@@ -15,7 +15,27 @@ class UserController extends Controller
     {
         $this->userService = $userService;
     }
-
+    /**
+     * @OA\Get(
+     *     path="/candidate/my-profile",
+     *     summary=" Candidate profile",
+     *     tags={"Candidate"},
+     *     responses={
+     *         @OA\Response(
+     *             response=200,
+     *             description="OK",
+     *             @OA\JsonContent(
+     *                 @OA\Property(
+     *                     property="success",
+     *                     type="boolean",
+     *                     example=true,
+     *                     description="A boolean value."
+     *                 ),
+     *             ),
+     *         ),
+     *     },
+     * )
+     */
     public function myProfile(){
 
         $userId = Auth::guard('user')->user()->id;
