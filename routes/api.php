@@ -19,7 +19,9 @@ use App\Http\Controllers\Api\Company\Job\JobSeekerController;
 
 use App\Http\Controllers\Api\location\CityController;
 use App\Http\Controllers\Api\User\Job\CandidateController;
+
 use App\Http\Controllers\Api\Contact\ContactController;
+
 
 
 use Illuminate\Support\Facades\Route;
@@ -51,6 +53,7 @@ Route::group([
     Route::post('login', [UserLoginController::class, 'login']);
     Route::get('my-profile', [UserController::class, 'myProfile']);
 
+    Route::get('get', [CandidateController::class, 'get']);
 
     Route::post('password/email', [UserForgotPasswordController::class, 'sendResetLinkEmail']);
     Route::post('verify/otp', [UserForgotPasswordController::class, 'verifyOtp']);
@@ -60,6 +63,8 @@ Route::group([
     //This for candidates which have User model
     Route::middleware(['redirectIfUser', 'auth:user'])->group(function () {
         Route::post('logout', [UserLoginController::class, 'logout']);
+
+
     });
 });
 
