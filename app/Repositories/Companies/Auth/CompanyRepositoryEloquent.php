@@ -2,6 +2,7 @@
 
 namespace App\Repositories\Companies\Auth;
 
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
@@ -33,6 +34,29 @@ class CompanyRepositoryEloquent extends BaseRepository implements CompanyReposit
     public function boot()
     {
         $this->pushCriteria(app(RequestCriteria::class));
+    }
+
+    public function storeOTP($user_id, $otp)
+    {
+        return $this->update([
+            'otp' => $otp,
+            'otp_expire' => Carbon::now()->addMinutes(5)
+        ], $user_id);
+    }
+
+    public function resetOTP($user_id, $otp, $otp_expire)
+    {
+        return $this->update([
+            'otp' => $otp,
+            'otp_expire' => $otp_expire
+        ], $user_id);
+    }
+
+    public function resetPassword($user_id, $password)
+    {
+        return $this->update([
+            'password' => $password
+        ], $user_id);
     }
     
 }

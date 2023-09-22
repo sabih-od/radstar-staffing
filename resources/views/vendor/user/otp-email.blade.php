@@ -52,7 +52,7 @@
                 <a href="{{ route('user.enter.otp.form' , ['id' => $encryptedId]) }}" class="reset-button">Reset
                     Password</a>
             @endif
-                <br><br>
+            <br><br>
             If you did not request a password reset, no further action is required.<br><br>
             Regards,<br>
             Radstar Staffing

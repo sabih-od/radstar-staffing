@@ -10,8 +10,10 @@ use App\Http\Controllers\Api\User\Auth\ForgotPasswordController as UserForgotPas
 use App\Http\Controllers\Api\User\Auth\LoginController as UserLoginController;
 use App\Http\Controllers\Api\Company\Auth\RegisterController as CompanyRegisterController;
 use App\Http\Controllers\Api\Company\Auth\LoginController as CompanyLoginController;
+use App\Http\Controllers\Api\Company\Auth\ForgetPasswordController as CompanyForgetPasswordController;
 use App\Http\Controllers\Api\Company\Job\JobController as CompanyJobController;
 use App\Http\Controllers\Api\Company\Job\JobDropdownController as CompanyJobDetailController;
+
 use App\Http\Controllers\Api\location\CityController;
 
 
@@ -32,9 +34,9 @@ use Illuminate\Support\Facades\Route;
 //});
 
 // Routes for user authentication
-Route::get('/countries',[CountryController::class, 'getCountries']);
-Route::get('states/{countryId}',[StateController::class, 'getStates']);
-Route::get('cities/{stateId}',[CityController::class, 'getCities']);
+Route::get('/countries', [CountryController::class, 'getCountries']);
+Route::get('states/{countryId}', [StateController::class, 'getStates']);
+Route::get('cities/{stateId}', [CityController::class, 'getCities']);
 
 Route::group([
     'prefix' => 'candidate'
@@ -61,6 +63,10 @@ Route::group([
     // Routes for company authentication
     Route::post('register', [CompanyRegisterController::class, 'register']);
     Route::post('login', [CompanyLoginController::class, 'login']);
+
+    Route::post('password/email', [CompanyForgetPasswordController::class, 'sendResetLinkEmail']);
+    Route::post('verify/otp', [CompanyForgetPasswordController::class, 'verifyOtp']);
+    Route::post('password/reset', [CompanyForgetPasswordController::class, 'resetPassword']);
 
 //This for companies which have Company model
     Route::middleware(['redirectIfCompany', 'auth:company_api'])->group(function () {

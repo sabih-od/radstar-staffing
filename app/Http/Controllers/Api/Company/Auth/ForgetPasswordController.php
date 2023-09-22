@@ -1,27 +1,28 @@
 <?php
 
-namespace App\Http\Controllers\Api\User\Auth;
+namespace App\Http\Controllers\Api\Company\Auth;
 
 use App\Helpers\APIResponse;
 use App\Http\Controllers\Controller;
-use App\Services\UserService;
+use App\Services\CompanyService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-class ForgotPasswordController extends Controller
+class ForgetPasswordController extends Controller
 {
-    protected $userService;
+    protected $companyService;
 
-    public function __construct(UserService $userService)
+    public function __construct(CompanyService $companyService)
     {
-        $this->userService = $userService;
+        $this->companyService = $companyService;
     }
+
 
     /**
      * @OA\Post(
-     *     path="/candidate/password/email",
+     *     path="/company/password/email",
      *      summary="Send Forget passord reset link",
-     *     tags={"Candidate"},
+     *     tags={"Company"},
      *     requestBody={
      *         "required": true,
      *         "content": {
@@ -72,20 +73,21 @@ class ForgotPasswordController extends Controller
             return APIResponse::error('Validation errors', [], 422);
         }
 
-        $response = $this->userService->resetEmail($request->email, 'app');
+        $response = $this->companyService->resetEmail($request->email, 'app');
 
         if ($response instanceof \Exception) {
             return APIResponse::error($response->getMessage());
         }
 
         return APIResponse::success('Send reset email successfully');
+
     }
 
     /**
      * @OA\Post(
-     *     path="/candidate/verify/otp",
+     *     path="/company/verify/otp",
      *     summary="Verify Forget passord Otp",
-     *     tags={"Candidate"},
+     *     tags={"Company"},
      *     requestBody={
      *         "description": "Login Candidate",
      *         "required": true,
@@ -124,6 +126,7 @@ class ForgotPasswordController extends Controller
      * )
      */
 
+
     public function verifyOtp(Request $request)
     {
         $rules = [
@@ -141,18 +144,19 @@ class ForgotPasswordController extends Controller
 
         if ($validator->fails()) {
             return APIResponse::error('Validation errors', [], 422);
+
         }
 
-        $this->userService->verifyOtp($request->email, $request->otp);
+        $this->companyService->verifyOtp($request->email, $request->otp);
 
         return APIResponse::success('Verification Successfully');
     }
 
     /**
      * @OA\Post(
-     *     path="/candidate/password/reset",
+     *     path="/company/password/reset",
      *     summary="Reset Company Password",
-     *     tags={"Candidate"},
+     *     tags={"Company"},
      *     requestBody={
      *         "description": "Login Candidate",
      *         "required": true,
@@ -195,6 +199,7 @@ class ForgotPasswordController extends Controller
      * )
      */
 
+
     public function resetPassword(Request $request)
     {
         $rules = [
@@ -216,12 +221,14 @@ class ForgotPasswordController extends Controller
 
         if ($validator->fails()) {
             return APIResponse::error('Validation errors', [], 422);
+
         }
 
-        $user = $this->userService->resetPassword($request->email, $request->password);
+        $user = $this->companyService->resetPassword($request->email, $request->password);
 
 //        return $user;
 
         return APIResponse::success('Password Reset Successfully', $user);
+
     }
 }

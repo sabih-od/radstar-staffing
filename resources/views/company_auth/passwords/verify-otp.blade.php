@@ -6,6 +6,8 @@
     <!-- Inner Page Title start -->
     @include('includes.inner_page_title', ['page_title'=>'Reset Password'])
     <!-- Inner Page Title end -->
+    @include('flash::message')
+
     <div class="listpgWraper">
         <div class="container">
             <div class="row">
