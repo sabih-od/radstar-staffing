@@ -164,4 +164,9 @@ class CompanyService
             throw new \Exception('User does not exist');
         }
     }
+
+    public function getFollowersAndCount($users,$followers)
+    {
+        return['followers' => $users, 'followers_count' => $followers];
+    }
 }
