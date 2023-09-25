@@ -15,5 +15,8 @@ interface UserRepository extends RepositoryInterface
     public function resetOTP($user_id, $otp, $otp_expire);
     public function resetPassword($user_id, $password);
     public function getFollowers($userIdsArray);
+    public function summaryUpdate($userId,$summary);
+    public function profileCv();
+    public function profileCvList($userId);
 
 }

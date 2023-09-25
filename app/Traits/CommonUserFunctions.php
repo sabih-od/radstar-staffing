@@ -101,7 +101,7 @@ trait CommonUserFunctions
         $str .= ' ' . $user->getState('state');
         $str .= ' ' . $user->getCity('city');
         $str .= ' ' . $user->father_name;
-        $str .= ' ' . $user->date_of_birth->format('Y-m-d');
+        $str .= ' ' . ($user->date_of_birth ? $user->date_of_birth->format('Y-m-d') : '');
         $str .= ' ' . $user->phone;
         $str .= ' ' . $user->mobile_num;
         $str .= ' ' . $user->getGender('gender');

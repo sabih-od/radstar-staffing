@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api\User\Auth;
 use App\Http\Controllers\Controller;
 use App\Repositories\Users\Auth\UserRepository;
-use App\Services\UserService;
+use App\Services\Users\UserService;
 use App\User as Users;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;

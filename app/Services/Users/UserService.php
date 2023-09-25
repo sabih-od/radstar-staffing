@@ -1,23 +1,18 @@
 <?php
 
-namespace App\Services;
+namespace App\Services\Users;
 
 use App\Helpers\APIResponse;
-use App\Helpers\DataArrayHelper;
 use App\Repositories\Users\Auth\UserRepository;
-use App\User;
-use Illuminate\Http\UploadedFile;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
-use App\Traits\PHPCustomMail;
 
 
 
 class UserService
 {
-    use PHPCustomMail;
 
     /**
      * @var UserRepository
@@ -28,8 +23,7 @@ class UserService
     /**
      * @param UserRepository $userRepository
      */
-    public function __construct(UserRepository $userRepository)
-    {
+    public function __construct(UserRepository $userRepository){
         $this->userRepository = $userRepository;
     }
 
@@ -115,7 +109,6 @@ class UserService
         }
     }
 
-
     public function resetPassword($email, $password)
     {
         $user = $this->userRepository->findByField('email', $email)->first();
@@ -129,53 +122,4 @@ class UserService
         }
     }
 
-    public function profile($userId){
-
-        try {
-            $genders = DataArrayHelper::langGendersArray();
-            $maritalStatuses = DataArrayHelper::langMaritalStatusesArray();
-            $nationalities = DataArrayHelper::langNationalitiesArray();
-            $countries = DataArrayHelper::langCountriesArray();
-            $jobExperiences = DataArrayHelper::langJobExperiencesArray();
-            $careerLevels = DataArrayHelper::langCareerLevelsArray();
-            $industries = DataArrayHelper::langIndustriesArray();
-            $functionalAreas = DataArrayHelper::langFunctionalAreasArray();
-
-            $upload_max_filesize = UploadedFile::getMaxFilesize() / (1048576);
-            $user = User::findOrFail($userId);
-
-            //documents
-            $drug_test_form_url = $user->getMedia('drug_test_forms')->count() > 0 ? $user->getMedia('drug_test_forms')->first()->getUrl() : null;
-            $education_verification_form_url = $user->getMedia('education_verification_forms')->count() > 0 ? $user->getMedia('education_verification_forms')->first()->getUrl() : null;
-            $employment_history_record_url = $user->getMedia('employment_history_records')->count() > 0 ? $user->getMedia('employment_history_records')->first()->getUrl() : null;
-            $release_authorization_record_url = $user->getMedia('release_authorization_records')->count() > 0 ? $user->getMedia('release_authorization_records')->first()->getUrl() : null;
-            $hipaa_url = $user->getMedia('hipaas')->count() > 0 ? $user->getMedia('hipaas')->first()->getUrl() : null;
-            $physician_health_statement_url = $user->getMedia('physician_health_statements')->count() > 0 ? $user->getMedia('physician_health_statements')->first()->getUrl() : null;
-            $photo_id_url = $user->getMedia('photo_ids')->count() > 0 ? $user->getMedia('photo_ids')->first()->getUrl() : null;
-            $us_passport_url = $user->getMedia('us_passports')->count() > 0 ? $user->getMedia('us_passports')->first()->getUrl() : null;
-
-            return [
-                'genders' => $genders,
-                'maritalStatuses' => $maritalStatuses,
-                'nationalities' => $nationalities,
-                'countries' => $countries,
-                'jobExperiences' => $jobExperiences,
-                'careerLevels' => $careerLevels,
-                'industries' => $industries,
-                'drug_test_form_url' => $drug_test_form_url,
-                'functionalAreas' => $functionalAreas,
-                'education_verification_form_url' => $education_verification_form_url,
-                'employment_history_record_url' => $employment_history_record_url,
-                'release_authorization_record_url' => $release_authorization_record_url,
-                'hipaa_url' => $hipaa_url,
-                'physician_health_statement_url' => $physician_health_statement_url,
-                'photo_id_url' => $photo_id_url,
-                'us_passport_url' => $us_passport_url,
-                'upload_max_filesize' => $upload_max_filesize,
-            ];
-        } catch (Exception $e){
-            return $e;
-        }
-
-    }
 }
