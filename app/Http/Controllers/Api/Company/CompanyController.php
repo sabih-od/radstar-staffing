@@ -208,12 +208,31 @@ class CompanyController extends Controller
 
     }
 
-
     /**
      * @OA\Get(
-     *     path="/company/followers",
+     *     path="/company/followers/{id}/{offset}",
      *     summary=" Company followers",
-     *     tags={"Company"},
+     *     tags={"Company-Followers"},
+     *       @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         description="Company ID",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer",
+     *             format="int64"
+     *         )
+     *     ),
+     *      @OA\Parameter(
+     *         name="offset",
+     *         in="path",
+     *         description="listing offset",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer",
+     *             format="int64"
+     *         )
+     *     ),
      *     responses={
      *         @OA\Response(
      *             response=200,
@@ -230,23 +249,30 @@ class CompanyController extends Controller
      *     },
      * )
      */
-
-    public function getFollowers()
+    public function getFollowers($id,$offset)
     {
         try
         {
-            $company = $this->companyRepository->find($this->companyGuard()->id);
-            $userIdsArray = $company->getFollowerIdsArray();
-            $users = $this->userRepository->getFollowers($userIdsArray);
+            $company = $this->companyRepository->find($id);
+            if($company)
+            {
+                $userIdsArray = $company->getFollowerIdsArray();
+                $users = $this->userRepository->getFollowers($userIdsArray,$offset);
 
-            $followers = $this->companyGuard()->countFollowers();
+                $followers = $company->countFollowers();
 
-            $response = $this->companyService->getFollowersAndCount($users, $followers);
+                $response = $this->companyService->getFollowersAndCount($users, $followers);
 
-            return APIResponse::success('My Company Followers', $response);
+                return APIResponse::success($response);
+
+            }
         }
         catch (\Exception $e)
         {
+            if($e->getCode()===0)
+            {
+                return APIResponse::error('no company found');
+            }
             return APIResponse::error($e->getMessage());
         }
 

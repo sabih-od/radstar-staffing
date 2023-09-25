@@ -41,6 +41,16 @@ class JobController extends Controller
      *     path="/company/job/get",
      *     summary="Get Company Job ",
      *     tags={"Company"},
+     *    @OA\Parameter(
+     *         name="offset",
+     *         in="path",
+     *         description="listing offset",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer",
+     *             format="int64"
+     *         )
+     *     ),
      *     responses={
      *         @OA\Response(
      *             response=200,
@@ -57,13 +67,12 @@ class JobController extends Controller
      *     },
      * )
      */
-
-    public function get()
+    public function get($offset)
     {
         try {
 //            Criteria is for filter querying of job model
             $this->jobRepository->pushCriteria(ByCompanyIdCriteria::class);
-            $jobs = $this->jobRepository->paginate(null, ['*']);
+            $jobs = $this->jobRepository->paginate($offset, ['*']);
 
             return APIResponse::success('My jobs', $jobs);
         } catch (\Exception $e) {
