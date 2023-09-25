@@ -98,7 +98,7 @@ class RegisterController extends Controller
             'no-reply@radstarstaffing.com',
             $company->email,
             'Radstar Staffing - Employer Registration',
-            'Welcome on the portal. We appreciate your patience please wait for the admin approval.',
+            'Welcome to Radstar Staffing. We appreciate your patience please wait for the admin approval.',
         );
 
         return $this->registered($request, $company) ?: redirect($this->redirectPath());
