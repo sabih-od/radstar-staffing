@@ -51,7 +51,13 @@ Route::group([
 ], function () {
     Route::post('register', [UserRegisterController::class, 'register']);
     Route::post('login', [UserLoginController::class, 'login']);
+
     Route::get('my-profile', [UserController::class, 'myProfile']);
+    Route::post('profile/update', [UserController::class, 'updateProfile']);
+    Route::post('profile/summary/update', [UserController::class, 'updateSummary']);
+    Route::get('profile/Cv', [UserController::class, 'ProfileCv']);
+    Route::post('profile/add/ProfileCv', [UserController::class, 'addProfileCv']);
+    Route::post('profile/update/ProfileCv', [UserController::class, 'updateProfileCv']);
 
     Route::get('get', [CandidateController::class, 'get']);
 
@@ -63,8 +69,6 @@ Route::group([
     //This for candidates which have User model
     Route::middleware(['redirectIfUser', 'auth:user'])->group(function () {
         Route::post('logout', [UserLoginController::class, 'logout']);
-
-
     });
 });
 

@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api\User\Auth;
 
 use App\Helpers\APIResponse;
 use App\Http\Controllers\Controller;
-use App\Services\UserService;
+use App\Services\Users\UserService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
