@@ -45,7 +45,9 @@ $company = $job->getCompany();
                 @elseif(Auth::check() && Auth::user()->isAppliedOnJob($job->id))
                 <a href="javascript:;" class="btn apply applied"><i class="fas fa-paper-plane" aria-hidden="true"></i> {{__('Already Applied')}}</a>
                 @else
-                <a href="{{route('apply.job', $job->slug)}}" class="btn apply"><i class="fas fa-paper-plane" aria-hidden="true"></i> {{__('Apply Now')}}</a>
+                    @if (!Auth::guard('company')->check())
+                        <a href="{{route('apply.job', $job->slug)}}" class="btn apply"><i class="fas fa-paper-plane" aria-hidden="true"></i> {{__('Apply Now')}}</a>
+                    @endif
                 @endif
 				</div>
 
