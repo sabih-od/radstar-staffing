@@ -21,7 +21,6 @@ class UserController extends Controller
         $this->userRepository = $userRepository;
         $this->candidate = $this->userRepository->find(Auth::guard('user')->user()->id);
     }
-
     /**
      * @OA\Get(
      *     path="/candidate/my-profile",

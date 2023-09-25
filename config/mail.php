@@ -49,7 +49,7 @@ return [
      */
     'from' => [
         'address' => env('MAIL_FROM_ADDRESS', 'service@codegurru.com'),
-        'name' => env('MAIL_FROM_NAME', 'Job Portal'),
+        'name' => env('MAIL_FROM_NAME', 'Radstar Staffing'),
     ],
     /*
       |--------------------------------------------------------------------------
