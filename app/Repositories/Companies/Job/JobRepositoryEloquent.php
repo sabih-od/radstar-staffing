@@ -39,5 +39,5 @@ class JobRepositoryEloquent extends BaseRepository implements JobRepository
     }
 
 
-    
+
 }

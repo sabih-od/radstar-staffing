@@ -18,6 +18,10 @@ use App\Http\Controllers\Api\Company\Job\JobDropdownController as CompanyJobDeta
 use App\Http\Controllers\Api\Company\Job\JobSeekerController;
 
 use App\Http\Controllers\Api\location\CityController;
+use App\Http\Controllers\Api\User\Job\CandidateController;
+
+use App\Http\Controllers\Api\Contact\ContactController;
+
 
 
 use Illuminate\Support\Facades\Route;
@@ -40,14 +44,22 @@ use Illuminate\Support\Facades\Route;
 Route::get('/countries', [CountryController::class, 'getCountries']);
 Route::get('states/{countryId}', [StateController::class, 'getStates']);
 Route::get('cities/{stateId}', [CityController::class, 'getCities']);
+Route::post('contact', [ContactController::class, 'contact']);
 
 Route::group([
     'prefix' => 'candidate'
 ], function () {
     Route::post('register', [UserRegisterController::class, 'register']);
     Route::post('login', [UserLoginController::class, 'login']);
-    Route::get('my-profile', [UserController::class, 'myProfile']);
 
+    Route::get('my-profile', [UserController::class, 'myProfile']);
+    Route::post('profile/update', [UserController::class, 'updateProfile']);
+    Route::post('profile/summary/update', [UserController::class, 'updateSummary']);
+    Route::get('profile/Cv', [UserController::class, 'ProfileCv']);
+    Route::post('profile/add/ProfileCv', [UserController::class, 'addProfileCv']);
+    Route::post('profile/update/ProfileCv', [UserController::class, 'updateProfileCv']);
+
+    Route::get('get', [CandidateController::class, 'get']);
 
     Route::post('password/email', [UserForgotPasswordController::class, 'sendResetLinkEmail']);
     Route::post('verify/otp', [UserForgotPasswordController::class, 'verifyOtp']);

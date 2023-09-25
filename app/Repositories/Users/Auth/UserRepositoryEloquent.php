@@ -64,4 +64,39 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository
         return $this->model->query()->whereIn('id',$userIdsArray)->simplePaginate();
     }
 
+    public function summaryUpdate($userId,$summary)
+    {
+        $user = $this->find($userId);
+
+        if (!$user) {
+            return response()->json(['error' => 'Candidate not found'], 404);
+        }
+
+        $user->profileSummary()->update([
+            'summary' => $summary,
+        ]);
+
+        $updatedSummary = $user->profileSummary->first()->only('summary');
+
+        return $updatedSummary;
+    }
+
+    public function profileCv()
+    {
+        return $this->model->profileCvs();
+    }
+
+    public function profileCvList($userId)
+    {
+        $user = $this->find($userId);
+
+        if (!$user) {
+            return null;
+        }
+
+        $profileCv = $user->profileCvs()->get();
+
+        return $profileCv;
+    }
+
 }

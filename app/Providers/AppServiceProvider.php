@@ -3,12 +3,15 @@
 namespace App\Providers;
 
 
+use App\Repositories\ContactMessage\ContactMessageRepository;
+use App\Repositories\ContactMessage\ContactMessageRepositoryEloquent;
 use App\Repositories\Location\CityRepository;
 use App\Repositories\Location\CityRepositoryEloquent;
 use App\Repositories\Location\CountryRepository;
 use App\Repositories\Location\CountryRepositoryEloquent;
 use App\Repositories\Location\StateRepository;
 use App\Repositories\Location\StateRepositoryEloquent;
+use App\Services\ContactMessageService;
 use Illuminate\Support\ServiceProvider;
 use App\Repositories\Users\Auth\UserRepository;
 use App\Repositories\Users\Auth\UserRepositoryEloquent;
@@ -54,6 +57,9 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(StateRepository::class, StateRepositoryEloquent::class);
         // Bind CityRepository interface to CityRepositoryEloquent implementation
         $this->app->bind(CityRepository::class, CityRepositoryEloquent::class);
+        // Bind ContactMessageRepository interface to ContactMessageRepositoryEloquent implementation
+        $this->app->bind(ContactMessageRepository::class, ContactMessageRepositoryEloquent::class);
+
     }
 
 }
