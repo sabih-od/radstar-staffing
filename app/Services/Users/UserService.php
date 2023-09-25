@@ -4,6 +4,7 @@ namespace App\Services\Users;
 
 use App\Helpers\APIResponse;
 use App\Repositories\Users\Auth\UserRepository;
+use App\Traits\PHPCustomMail;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -13,6 +14,7 @@ use Illuminate\Support\Facades\Log;
 
 class UserService
 {
+    use PHPCustomMail;
 
     /**
      * @var UserRepository
