@@ -54,58 +54,42 @@ class JobSeekerController extends Controller
         $limit = 10;
         $jobSeekers = $this->fetchJobSeekers($search, $industry_ids, $functional_area_ids, $country_ids, $state_ids, $city_ids, $career_level_ids, $gender_ids, $job_experience_ids, $current_salary, $expected_salary, $salary_currency, $order_by, $limit);
 
-        /*         * ************************************************** */
 
         $jobSeekerIdsArray = $this->fetchIdsArray($search, $industry_ids, $functional_area_ids, $country_ids, $state_ids, $city_ids, $career_level_ids, $gender_ids, $job_experience_ids, $current_salary, $expected_salary, $salary_currency, 'users.id');
 
-        /*         * ************************************************** */
 
         $skillIdsArray = $this->fetchSkillIdsArray($jobSeekerIdsArray);
 
-        /*         * ************************************************** */
 
         $countryIdsArray = $this->fetchIdsArray($search, $industry_ids, $functional_area_ids, $country_ids, $state_ids, $city_ids, $career_level_ids, $gender_ids, $job_experience_ids, $current_salary, $expected_salary, $salary_currency, 'users.country_id');
 
-        /*         * ************************************************** */
 
         $stateIdsArray = $this->fetchIdsArray($search, $industry_ids, $functional_area_ids, $country_ids, $state_ids, $city_ids, $career_level_ids, $gender_ids, $job_experience_ids, $current_salary, $expected_salary, $salary_currency, 'users.state_id');
 
-        /*         * ************************************************** */
 
         $cityIdsArray = $this->fetchIdsArray($search, $industry_ids, $functional_area_ids, $country_ids, $state_ids, $city_ids, $career_level_ids, $gender_ids, $job_experience_ids, $current_salary, $expected_salary, $salary_currency, 'users.city_id');
 
-        /*         * ************************************************** */
 
         $industryIdsArray = $this->fetchIdsArray($search, $industry_ids, $functional_area_ids, $country_ids, $state_ids, $city_ids, $career_level_ids, $gender_ids, $job_experience_ids, $current_salary, $expected_salary, $salary_currency, 'users.industry_id');
 
-        /*         * ************************************************** */
-
-
-        /*         * ************************************************** */
 
         $functionalAreaIdsArray = $this->fetchIdsArray($search, $industry_ids, $functional_area_ids, $country_ids, $state_ids, $city_ids, $career_level_ids, $gender_ids, $job_experience_ids, $current_salary, $expected_salary, $salary_currency, 'users.functional_area_id');
 
-        /*         * ************************************************** */
 
         $careerLevelIdsArray = $this->fetchIdsArray($search, $industry_ids, $functional_area_ids, $country_ids, $state_ids, $city_ids, $career_level_ids, $gender_ids, $job_experience_ids, $current_salary, $expected_salary, $salary_currency, 'users.career_level_id');
 
-        /*         * ************************************************** */
 
         $genderIdsArray = $this->fetchIdsArray($search, $industry_ids, $functional_area_ids, $country_ids, $state_ids, $city_ids, $career_level_ids, $gender_ids, $job_experience_ids, $current_salary, $expected_salary, $salary_currency, 'users.gender_id');
 
-        /*         * ************************************************** */
 
         $jobExperienceIdsArray = $this->fetchIdsArray($search, $industry_ids, $functional_area_ids, $country_ids, $state_ids, $city_ids, $career_level_ids, $gender_ids, $job_experience_ids, $current_salary, $expected_salary, $salary_currency, 'users.job_experience_id');
 
-        /*         * ************************************************** */
 
         $seoArray = $this->getSEO($functional_area_ids, $country_ids, $state_ids, $city_ids, $career_level_ids, $gender_ids, $job_experience_ids);
 
-        /*         * ************************************************** */
 
         $currencies = DataArrayHelper::currenciesArray();
 
-        /*         * ************************************************** */
 
         $seo = (object) array(
                     'seo_title' => $seoArray['description'],
@@ -113,6 +97,7 @@ class JobSeekerController extends Controller
                     'seo_keywords' => $seoArray['keywords'],
                     'seo_other' => ''
         );
+
         return view('user.list')
                         ->with('functionalAreas', $this->functionalAreas)
                         ->with('countries', $this->countries)
