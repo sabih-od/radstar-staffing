@@ -45,7 +45,9 @@ $company = $job->getCompany();
                 @elseif(Auth::check() && Auth::user()->isAppliedOnJob($job->id))
                 <a href="javascript:;" class="btn apply applied"><i class="fas fa-paper-plane" aria-hidden="true"></i> {{__('Already Applied')}}</a>
                 @else
-                <a href="{{route('apply.job', $job->slug)}}" class="btn apply"><i class="fas fa-paper-plane" aria-hidden="true"></i> {{__('Apply Now')}}</a>
+                    @if (!Auth::guard('company')->check())
+                        <a href="{{route('apply.job', $job->slug)}}" class="btn apply"><i class="fas fa-paper-plane" aria-hidden="true"></i> {{__('Apply Now')}}</a>
+                    @endif
                 @endif
 				</div>
 
@@ -127,7 +129,9 @@ $company = $job->getCompany();
 			<hr>
             <div class="jobButtons">
 {{--                <a href="{{route('email.to.friend', $job->slug)}}" class="btn"><i class="fas fa-envelope" aria-hidden="true"></i> {{__('Email to Friend')}}</a>--}}
-                @if(Auth::check() && Auth::user()->isFavouriteJob($job->slug)) <a href="{{route('remove.from.favourite', $job->slug)}}" class="btn"><i class="fas fa-floppy-o" aria-hidden="true"></i> {{__('Favourite Job')}} </a> @else <a href="{{route('add.to.favourite', $job->slug)}}" class="btn"><i class="fas fa-floppy-o" aria-hidden="true"></i> {{__('Add to Favourite')}}</a> @endif
+                @if (!Auth::guard('company')->check())
+                    @if(Auth::check() && Auth::user()->isFavouriteJob($job->slug)) <a href="{{route('remove.from.favourite', $job->slug)}}" class="btn"><i class="fas fa-floppy-o" aria-hidden="true"></i> {{__('Favourite Job')}} </a> @else <a href="{{route('add.to.favourite', $job->slug)}}" class="btn"><i class="fas fa-floppy-o" aria-hidden="true"></i> {{__('Add to Favourite')}}</a> @endif
+                @endif
 {{--                <a href="{{route('report.abuse', $job->slug)}}" class="btn report"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> {{__('Report Abuse')}}</a>--}}
             </div>
         </div>
