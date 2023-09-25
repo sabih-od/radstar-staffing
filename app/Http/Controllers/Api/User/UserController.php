@@ -252,69 +252,79 @@ class UserController extends Controller
     /**
      * @OA\Post(
      *     path="/candidate/profile/add/ProfileCv",
-     *     summary="Get Candidate Profile CV",
+     *     summary="Add Candidate Profile CV",
      *     tags={"Candidate"},
-     *     requestBody={
-     *         "required": true,
-     *         "content": {
-     *             "application/json": {
-     *                 "schema": {
-     *                     "type": "object",
-     *                     "properties": {
-     *                         "cv_file": {
-     *                             "type": "string",
-     *                             "example": "resume.pdf"
-     *                         }
-     *                     "properties": {
-     *                         "title": {
-     *                             "type": "string",
-     *                             "example": "resume"
-     *                         }
-     *                     "properties": {
-     *                         "is_default": {
-     *                             "type": "integrer",
-     *                             "example": "1,0"
-     *                         }
-     *                     }
-     *                 }
-     *             }
-     *         }
-     *     },
-     *     responses={
-     *         @OA\Response(
-     *             response=200,
-     *             description="OK",
-     *             @OA\JsonContent(
+     *     @OA\RequestBody(
+     *         required=true,
+     *         description="Candidate Profile CV data",
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 required={"cv_file"},
      *                 @OA\Property(
-     *                     property="success",
-     *                     type="boolean",
-     *                     example=true,
-     *                     description="A boolean value."
+     *                     property="cv_file",
+     *                     type="string",
+     *                     example="resume.pdf",
+     *                     description="The name of the CV file."
+     *                 ),
+     *                 @OA\Property(
+     *                     property="title",
+     *                     type="string",
+     *                     example="resume",
+     *                     description="The title of the CV."
+     *                 ),
+     *                 @OA\Property(
+     *                     property="is_default",
+     *                     type="integer",
+     *                     example=1,
+     *                     description="1 for default, 0 for non-default."
      *                 )
      *             )
      *         )
-     *     }
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successful operation",
+     *         @OA\JsonContent(
+     *             @OA\Property(
+     *                 property="success",
+     *                 type="boolean",
+     *                 example=true,
+     *                 description="A boolean value indicating success."
+     *             ),
+     *             @OA\Property(
+     *                 property="message",
+     *                 type="string",
+     *                 description="A message indicating the result of the operation."
+     *             )
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=400,
+     *         description="Bad Request",
+     *         @OA\JsonContent(
+     *             @OA\Property(
+     *                 property="error",
+     *                 type="string",
+     *                 description="An error message describing the issue."
+     *             )
+     *         )
+     *     )
      * )
      */
     public function addProfileCv(Request $request){
-
         $response = $this->userProfileService->addProfileCv($this->candidate,$request);
-
         if ($response instanceof \Exception) {
             return APIResponse::error($response->getMessage());
         }
-
         return APIResponse::success('Profile CV add successfully',$response);
     }
 
     public function updateProfileCv(Request $request){
-
         $response = $this->userProfileService->updateProfileCv($this->candidate,$request);
-
         if ($response instanceof \Exception) {
             return APIResponse::error($response->getMessage());
         }
-
         return APIResponse::success('Profile CV update successfully',$response);
     }
 }

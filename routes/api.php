@@ -46,6 +46,9 @@ Route::get('states/{countryId}', [StateController::class, 'getStates']);
 Route::get('cities/{stateId}', [CityController::class, 'getCities']);
 Route::post('contact', [ContactController::class, 'contact']);
 
+//Get specific company follower
+Route::get('company/followers/{id}/{offset}', [CompanyController::class, 'getFollowers']);
+
 Route::group([
     'prefix' => 'candidate'
 ], function () {
@@ -90,14 +93,12 @@ Route::group([
         Route::post('logout', [CompanyLoginController::class, 'logout']);
         Route::post('update', [CompanyController::class, 'update']);
         Route::get('job-seekers', [JobSeekerController::class, 'get']);
-        Route::get('followers', [CompanyController::class, 'getFollowers']);
-
         Route::group([
             'prefix' => 'job'
         ], function () {
-            Route::get('get', [CompanyJobController::class, 'get']);
+            Route::get('get/{offset}', [CompanyJobController::class, 'get']);
             Route::post('create', [CompanyJobController::class, 'create']);
-            Route::get('job_dropdown_data', [CompanyJobDetailController::class, 'JobRelatedData']);
+            Route::get('dropdown_data', [CompanyJobDetailController::class, 'JobRelatedData']);
         });
     });
 

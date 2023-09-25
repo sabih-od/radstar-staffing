@@ -14,7 +14,7 @@ class JobDropdownController extends JobController
 
     /**
      * @OA\Get(
-     *     path="/company/job/job_dropdown_data",
+     *     path="/company/job/dropdown_data",
      *     summary=" Job Related Data",
      *     tags={"Company"},
      *     responses={
@@ -41,6 +41,5 @@ class JobDropdownController extends JobController
         } catch (\Exception $e) {
             return APIResponse::error($e->getMessage());
         }
-
     }
 }
