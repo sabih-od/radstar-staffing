@@ -69,8 +69,6 @@ Route::group([
     //This for candidates which have User model
     Route::middleware(['redirectIfUser', 'auth:user'])->group(function () {
         Route::post('logout', [UserLoginController::class, 'logout']);
-
-
     });
 });
 
