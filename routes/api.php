@@ -96,11 +96,15 @@ Route::group([
 //This for companies which have Company model
     Route::middleware(['redirectIfCompany', 'auth:company_api'])->group(function () {
         Route::post('logout', [CompanyLoginController::class, 'logout']);
+//        This is for company profile update
         Route::post('update', [CompanyController::class, 'update']);
         Route::group([
             'prefix' => 'job'
         ], function () {
             Route::get('all/{id}/{limit}/{page}', [CompanyJobController::class, 'get']);
+//            Those users who applied for specific job
+            Route::get('list-applied-users/{id}', [CompanyJobDetailController::class, 'listJobAppliedUsers']);
+
             Route::post('create', [CompanyJobController::class, 'create']);
             Route::get('dropdown_data', [CompanyJobDetailController::class, 'JobRelatedData']);
         });
