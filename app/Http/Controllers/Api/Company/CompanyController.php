@@ -210,6 +210,41 @@ class CompanyController extends Controller
 
     /**
      * @OA\Get(
+     *     path="company/details/{id}",
+     *     summary="Get Company Details by ID",
+     *     tags={"Company"},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         description="ID of the company to fetch details for",
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Company details",
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Company not found",
+     *     ),
+     * )
+     */
+
+    public function getCompanyDetail($id)
+    {
+        try
+        {
+            $company = $this->companyRepository->find($id);
+            return APIResponse::success('Company Details', $company);
+        }
+        catch (\Exception $e) {
+            return APIResponse::error($e->getMessage());
+        }
+    }
+
+    /**
+     * @OA\Get(
      *     path="/company/followers/{id}/{limit}/{page}",
      *     summary=" Company followers",
      *     tags={"Company"},
