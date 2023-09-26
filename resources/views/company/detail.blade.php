@@ -122,10 +122,12 @@
                         @endif
                     @endif
 {{--                    report abuse--}}
-{{--                    <a href="{{route('report.abuse.company', $company->slug)}}" class="btn report">--}}
-{{--                        <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>--}}
-{{--                        {{__('Report Abuse')}}--}}
-                    </a>
+                    @if(Auth::check() && !Auth::guard('company')->check())
+                        <a href="{{route('report.abuse.company', $company->slug)}}" class="btn report">
+                            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                            {{__('Report Abuse')}}
+                        </a>
+                    @endif
                 @endif
 {{--                <a href="javascript:;" onclick="send_message()" class="btn">--}}
 {{--                    <i class="fa fa-envelope"--}}

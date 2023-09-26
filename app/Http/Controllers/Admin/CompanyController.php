@@ -554,6 +554,8 @@ class CompanyController extends Controller
 
                     'companies.is_featured',
 
+                    'companies.slug',
+
         ]);
 
         return Datatables::of($companies)
@@ -596,6 +598,15 @@ class CompanyController extends Controller
 
                             return ((bool) $companies->is_featured) ? 'Yes' : 'No';
 
+                        })
+
+                        ->addColumn('reported_by', function ($company) {
+                            $string = "";
+                            foreach ($company->reports($company->slug) as $report) {
+                                $string .= "<p>*" . $report->your_name . " (". Carbon::parse($report->created_at)->format('d M Y, h:i A') .") </p> <br />";
+                            }
+
+                            return $string;
                         })
 
                         ->addColumn('action', function ($companies) {
@@ -682,7 +693,7 @@ class CompanyController extends Controller
 
                         })
 
-                        ->rawColumns(['action', 'is_active', 'is_featured'])
+                        ->rawColumns(['action', 'is_active', 'is_featured', 'reported_by'])
 
                         ->setRowId(function($companies) {
 
