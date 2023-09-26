@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\Contact;
 
 use App\ContactMessage;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Api\Contact\ContactApiFormRequest;
 use Illuminate\Http\Request;
 use App\Helpers\APIResponse;
 use App\Services\ContactMessageService;
@@ -26,7 +27,7 @@ class ContactController extends Controller
 
     }
 
-    public function contact(Request $request)
+    public function contact(ContactApiFormRequest $request)
     {
         try {
             $contactMessageData = $this->contactMessageService->getFormFields($request);
