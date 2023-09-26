@@ -30,11 +30,11 @@
 
                <div class="tab-content">
                    <div id="candidate" class="formpanel mt-0 tab-pane {{($c_or_e == 'candidate')? 'active':''}}">
-                       <div class="socialLogin">
+{{--                       <div class="socialLogin">--}}
 {{--                                   <h5>{{__('Login with Social')}}</h5>--}}
-{{--                                   <a href="{{ url('login/jobseeker/facebook')}}" class="fb"><i class="fab fa-facebook" aria-hidden="true"></i></a><a href="{{ url('login/jobseeker/twitter')}}" class="tw"><i class="fab fa-twitter" aria-hidden="true"></i></a> </div>--}}
+{{--                                   <a href="{{ url('login/jobseeker/facebook')}}" class="fb"><i class="fab fa-facebook" aria-hidden="true"></i></a><a href="{{ url('login/jobseeker/twitter')}}" class="tw"><i class="fab fa-twitter" aria-hidden="true"></i></a>--}}
+{{--                       </div>--}}
 
-{{--                                   <div class="divider-text-center"><span>{{__('Or login with your account')}}</span></div>--}}
                                    <div class="divider-text-center"><span>{{__('Login with your account')}}</span></div>
 
 
@@ -77,15 +77,13 @@
                                 </div>
                                 <div id="employer"
                                      class="formpanel mt-0 tab-pane fade {{($c_or_e == 'employer')? 'active':''}}">
-                                    <div class="socialLogin">
+{{--                                    <div class="socialLogin">--}}
 {{--                                        <h5>{{__('Login with Social')}}</h5>--}}
 {{--                                        <a href="{{ url('login/employer/facebook')}}" class="fb"><i--}}
 {{--                                                    class="fab fa-facebook" aria-hidden="true"></i></a> <a--}}
 {{--                                                href="{{ url('login/employer/twitter')}}" class="tw"><i--}}
 {{--                                                    class="fab fa-twitter" aria-hidden="true"></i></a></div>--}}
 
-{{--                                    <div class="divider-text-center"><span>{{__('Or login with your account')}}</span>--}}
-{{--                                    </div>--}}
                                     <div class="divider-text-center"><span>{{__('Login with your account')}}</span>
                                     </div>
 
