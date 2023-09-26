@@ -24,7 +24,7 @@ class ResetPasswordController extends Controller
       |
      */
 
-use ResetsPasswords;
+    use ResetsPasswords;
 
     /**
      * Where to redirect users after resetting their password.
@@ -43,10 +43,11 @@ use ResetsPasswords;
         $this->middleware('guest');
     }
 
-    public function showResetForm(Request $request, $token = null)
+    public function showResetForm($token)
     {
+        $user = User::where('email', decrypt($token))->first();
         return view('user_auth.passwords.reset')->with(
-            ['token' => $token, 'email' => $request->email]
+            ['email' => $user->email]
         );
     }
 
@@ -71,8 +72,9 @@ use ResetsPasswords;
         event(new PasswordReset($user));
 
         $this->guard()->login($user);
-
-        return redirect('/')->with('message','Password reset successfully');
+        flash(__('Password Reset Successfully'))->success();
+        return redirect('/');
+//        return redirect('/')->with('message', 'Password reset successfully');
     }
 
     /**

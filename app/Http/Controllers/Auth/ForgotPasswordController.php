@@ -76,7 +76,7 @@ class ForgotPasswordController extends Controller
             flash(__($users->getMessage()))->error();
             return redirect()->back();
         }
-        $encryptedId = $users->getDate();
+        $encryptedId = encrypt($request->email);
 
         flash(__('Verification Successfully'))->success();
         return redirect()->route('user.password.reset.form', ['token' => $encryptedId]);

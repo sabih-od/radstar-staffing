@@ -11,7 +11,6 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 
 
-
 class UserService
 {
     use PHPCustomMail;
@@ -25,7 +24,8 @@ class UserService
     /**
      * @param UserRepository $userRepository
      */
-    public function __construct(UserRepository $userRepository){
+    public function __construct(UserRepository $userRepository)
+    {
         $this->userRepository = $userRepository;
     }
 
@@ -76,8 +76,8 @@ class UserService
             $subject = "Forgot Password";
             $message = view('vendor.user.otp-email', compact('otp', 'encryptedId', 'type'));
 
-            $this->customMail($from, $to, $subject, $message);
-
+//            $this->customMail($from, $to, $subject, $message);
+            send_mail($from, $to, $subject, $message);
             return true;
 
         } catch (\Exception $e) {
