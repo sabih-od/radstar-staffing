@@ -64,12 +64,13 @@ class ForgotPasswordController extends Controller
 
 
         $to = $company->email;
-        $from = 'noreply@gmail.com';
+        $from = 'no-reply@radstarstaffing.com';
         $subject = "Forgot Password";
         $message = view('vendor.company.otp-email', compact('otp', 'encryptedId'));
 //        $message = 'Dear ' . $user->name . ', <a href="' . route('verification.email') . '">Click Here</a> to Verify .';
 
-        $this->customMail($from, $to, $subject, $message);
+//        $this->customMail();
+        send_mail($from, $to, $subject, $message);
 
         flash(__('Otp Sanded Successfully! Please check your email'))->success();
         return redirect()->back();
