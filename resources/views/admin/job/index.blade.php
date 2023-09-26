@@ -203,6 +203,19 @@
         });
     </script>
     <script>
+        $(document).ready(function () {
+            $.urlParam = function(name){
+                var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+                return results[1] || 0;
+            }
+
+            if ($.urlParam('company_id')) {
+                $('#company_id').val($.urlParam('company_id'));
+                $('#company_id').trigger('change');
+            } else {
+                // alert('not found');
+            }
+        });
         $(function () {
             var oTable = $('#jobDatatableAjax').DataTable({
                 processing: true,

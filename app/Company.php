@@ -262,6 +262,12 @@ class Company extends Authenticatable
 
     }
 
+    public function reports ($slug)
+    {
+//        return $this->hasMany(ReportAbuseCompanyMessage::class)->where('')
+        return ReportAbuseCompanyMessage::where('company_url', route('company.detail', $slug))->get();
+    }
+
     public function countMessages($id)
 
     {
