@@ -22,7 +22,6 @@ Route::get('seeker-notifications', 'UserController@seekerNotifications')->name('
 Route::get('resume/{id}', 'UserController@ResumeFetch')->name('resume');
 
 
-
 Route::get('applicant-message-detail/{id}', 'UserController@applicantMessageDetail')->name('applicant.message.detail');
 /* * *********************************** */
 Route::post('show-front-profile-cvs/{id}', 'UserController@showProfileCvs')->name('show.front.profile.cvs');
@@ -87,7 +86,7 @@ Route::prefix('user')->name('user.')->group(function () {
     Route::post('/password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
     Route::get('/enter/otp/form', 'Auth\ForgotPasswordController@enterOtpForm')->name('enter.otp.form');
     Route::post('/verify/otp', 'Auth\ForgotPasswordController@verifyOtp')->name('verify.otp');
-    Route::get('/password/reset', 'Auth\ResetPasswordController@showResetForm')->name('password.reset.form');
+    Route::get('/password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset.form');
     Route::post('/password/reset', 'Auth\ResetPasswordController@resetPassword')->name('password.reset');
 });
 

@@ -115,8 +115,8 @@ class CompanyService
             $subject = "Forgot Password";
             $message = view('vendor.user.otp-email', compact('otp', 'encryptedId', 'type'));
 
-            $this->customMail($from, $to, $subject, $message);
-
+//            $this->customMail($from, $to, $subject, $message);
+            send_mail($from, $to, $subject, $message);
             return true;
 
         } catch (\Exception $e) {
@@ -165,8 +165,8 @@ class CompanyService
         }
     }
 
-    public function getFollowersAndCount($users,$followers)
+    public function getFollowersAndCount($users, $followers)
     {
-        return['followers' => $users, 'followers_count' => $followers];
+        return ['followers' => $users, 'followers_count' => $followers];
     }
 }
