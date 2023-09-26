@@ -210,7 +210,7 @@ class CompanyController extends Controller
 
     /**
      * @OA\Get(
-     *     path="/company/{id}",
+     *     path="company/details/{id}",
      *     summary="Get Company Details by ID",
      *     tags={"Company"},
      *     @OA\Parameter(
