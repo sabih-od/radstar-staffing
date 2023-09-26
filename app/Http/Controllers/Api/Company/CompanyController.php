@@ -210,9 +210,9 @@ class CompanyController extends Controller
 
     /**
      * @OA\Get(
-     *     path="/company/followers/{id}/{offset}",
+     *     path="/company/followers/{id}/{limit}/{page}",
      *     summary=" Company followers",
-     *     tags={"Company-Followers"},
+     *     tags={"Company"},
      *       @OA\Parameter(
      *         name="id",
      *         in="path",
@@ -224,9 +224,19 @@ class CompanyController extends Controller
      *         )
      *     ),
      *      @OA\Parameter(
-     *         name="offset",
+     *         name="limit",
      *         in="path",
-     *         description="listing offset",
+     *         description="listing limit",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer",
+     *             format="int64"
+     *         )
+     *     ),
+     *      @OA\Parameter(
+     *         name="page",
+     *         in="path",
+     *         description="listing page",
      *         required=true,
      *         @OA\Schema(
      *             type="integer",
@@ -249,15 +259,16 @@ class CompanyController extends Controller
      *     },
      * )
      */
-    public function getFollowers($id,$offset)
+    public function getFollowers($id,$limit,$page)
     {
         try
         {
             $company = $this->companyRepository->find($id);
+
             if($company)
             {
                 $userIdsArray = $company->getFollowerIdsArray();
-                $users = $this->userRepository->getFollowers($userIdsArray,$offset);
+                $users = $this->userRepository->getFollowers($userIdsArray,$limit,$page);
 
                 $followers = $company->countFollowers();
 

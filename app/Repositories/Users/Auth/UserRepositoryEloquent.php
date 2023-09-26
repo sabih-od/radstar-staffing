@@ -59,9 +59,9 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository
         ], $user_id);
     }
 
-    public function getFollowers($userIdsArray,$offset)
+    public function getFollowers($userIdsArray,$limit,$page)
     {
-        return $this->model->query()->whereIn('id',$userIdsArray)->simplePaginate($offset);
+        return $this->model->query()->whereIn('id',$userIdsArray)->simplePaginate($limit, ['*'], 'page', $page);
     }
 
     public function summaryUpdate($userId,$summary)

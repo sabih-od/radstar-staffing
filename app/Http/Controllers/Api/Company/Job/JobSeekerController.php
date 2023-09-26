@@ -19,9 +19,29 @@ class JobSeekerController extends Controller
 
     /**
      * @OA\Get(
-     *     path="/company/job-seekers",
+     *     path="/job-seekers/{limit}/{page}",
      *     summary=" Job Seeker",
-     *     tags={"Company"},
+     *     tags={"jobs"},
+     *           @OA\Parameter(
+     *         name="limit",
+     *         in="path",
+     *         description="listing limit",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer",
+     *             format="int64"
+     *         )
+     *     ),
+     *          *           @OA\Parameter(
+     *         name="page",
+     *         in="path",
+     *         description="listing page",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer",
+     *             format="int64"
+     *         )
+     *     ),
      *     responses={
      *         @OA\Response(
      *             response=200,
@@ -38,11 +58,11 @@ class JobSeekerController extends Controller
      *     },
      * )
      */
-    public function get(Request $request)
+    public function get(Request $request , $limit , $page)
     {
         try
         {
-            $data = $this->jobSeekerService->getJobSeekers($request);
+            $data = $this->jobSeekerService->getJobSeekers($request , $limit , $page);
             return APIResponse::success("All Job Seekers",$data);
         }
         catch (\Exception $e)

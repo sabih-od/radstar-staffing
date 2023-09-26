@@ -38,13 +38,34 @@ class JobController extends Controller
 
     /**
      * @OA\Get(
-     *     path="/company/job/get",
+     *     path="/company/job/all/{id}/{limit}/{page}",
      *     summary="Get Company Job ",
      *     tags={"Company"},
-     *    @OA\Parameter(
-     *         name="offset",
+     *
+     *       @OA\Parameter(
+     *         name="id",
      *         in="path",
-     *         description="listing offset",
+     *         description="company ID",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer",
+     *             format="int64"
+     *         )
+     *     ),
+     *    @OA\Parameter(
+     *         name="limit",
+     *         in="path",
+     *         description="listing limit",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer",
+     *             format="int64"
+     *         )
+     *     ),
+     *        @OA\Parameter(
+     *         name="page",
+     *         in="path",
+     *         description="listing page",
      *         required=true,
      *         @OA\Schema(
      *             type="integer",
@@ -67,12 +88,14 @@ class JobController extends Controller
      *     },
      * )
      */
-    public function get($offset)
+    public function get($id ,$limit,$page)
     {
         try {
+
+
 //            Criteria is for filter querying of job model
-            $this->jobRepository->pushCriteria(ByCompanyIdCriteria::class);
-            $jobs = $this->jobRepository->paginate($offset, ['*']);
+            $this->jobRepository->pushCriteria(new ByCompanyIdCriteria($id));
+            $jobs = $this->jobRepository->paginate($limit = $limit, $columns = ['*']);
 
             return APIResponse::success('My jobs', $jobs);
         } catch (\Exception $e) {
@@ -225,7 +248,7 @@ class JobController extends Controller
 
             DB::commit();
 
-            return APIResponse::success("Job Posted Successfully");
+            return APIResponse::success("Job Posted Successfully",$job);
         } catch (\Exception $e) {
             DB::rollBack();
 
