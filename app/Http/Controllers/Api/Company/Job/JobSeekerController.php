@@ -21,7 +21,7 @@ class JobSeekerController extends Controller
      * @OA\Get(
      *     path="/job-seekers/{limit}/{page}",
      *     summary=" Job Seeker",
-     *     tags={"jobs"},
+     *     tags={"Jobs"},
      *           @OA\Parameter(
      *         name="limit",
      *         in="path",

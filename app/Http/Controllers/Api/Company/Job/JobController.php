@@ -11,6 +11,7 @@ use App\Traits\Skills;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Repositories\Companies\Job\JobRepository;
+use App\Repositories\Companies\Job\JobApplyRepository;
 use App\Repositories\Companies\Auth\CompanyRepository;
 use Illuminate\Support\Facades\DB;
 
@@ -19,11 +20,12 @@ class JobController extends Controller
 {
     use Skills;
 
-    protected $jobRepository, $companyRepository, $jobService, $companyService;
+    protected $jobRepository, $jobApplyRepository, $companyRepository, $jobService, $companyService;
 
     public function __construct
     (
         JobRepository $jobRepository,
+        JobApplyRepository $jobApplyRepository,
         CompanyRepository $companyRepository,
         JobService $jobService,
         CompanyService $companyService
@@ -31,6 +33,7 @@ class JobController extends Controller
 
     {
         $this->jobRepository = $jobRepository;
+        $this->jobApplyRepository = $jobApplyRepository;
         $this->companyRepository = $companyRepository;
         $this->jobService = $jobService;
         $this->companyService = $companyService;
