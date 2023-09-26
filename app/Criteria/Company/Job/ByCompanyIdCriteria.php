@@ -21,15 +21,15 @@ class ByCompanyIdCriteria implements CriteriaInterface
      *
      * @return mixed
      */
-//    protected $companyId;
+    protected $companyId;
 
-//    public function __construct($companyId)
-//    {
-//        $this->companyId = $companyId;
-//    }
+    public function __construct($companyId)
+    {
+        $this->companyId = $companyId;
+    }
 
     public function apply($model, RepositoryInterface $repository)
     {
-        return $model->where('company_id', Auth::guard('company_api')->user()->id);
+        return $model->where('company_id', $this->companyId);
     }
 }

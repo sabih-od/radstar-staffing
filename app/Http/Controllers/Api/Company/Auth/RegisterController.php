@@ -43,10 +43,6 @@ class RegisterController extends Controller
      *                             "type": "string",
      *                             "example": "John",
      *                         },
-     *                         "last_name": {
-     *                             "type": "string",
-     *                             "example": "Smith",
-     *                         },
      *                         "email": {
      *                             "type": "string",
      *                             "example": "john@gmail.com",
@@ -83,7 +79,6 @@ class RegisterController extends Controller
             $password = Hash::make($request->input('password'));
             $array = [
                 'name' => $request->input('name'),
-                'last_name' => $request->input('last_name'),
                 'email' => $request->input('email'),
                 'password' => $password,
                 // Add other fields and their values as needed
