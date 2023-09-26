@@ -4,12 +4,12 @@
     .table td, .table th {
         font-size: 12px;
         line-height: 2.42857 !important;
-    }	
+    }
 </style>
-<div class="page-content-wrapper"> 
+<div class="page-content-wrapper">
     <!-- BEGIN CONTENT BODY -->
-    <div class="page-content"> 
-        <!-- BEGIN PAGE HEADER--> 
+    <div class="page-content">
+        <!-- BEGIN PAGE HEADER-->
         <!-- BEGIN PAGE BAR -->
         <div class="page-bar">
             <ul class="page-breadcrumb">
@@ -17,13 +17,13 @@
                 <li> <span>Companies</span> </li>
             </ul>
         </div>
-        <!-- END PAGE BAR --> 
+        <!-- END PAGE BAR -->
         <!-- BEGIN PAGE TITLE-->
         <h3 class="page-title">Manage Companies <small>Companies</small> </h3>
-        <!-- END PAGE TITLE--> 
+        <!-- END PAGE TITLE-->
         <!-- END PAGE HEADER-->
         <div class="row">
-            <div class="col-md-12"> 
+            <div class="col-md-12">
                 <!-- Begin: life time stats -->
                 <div class="portlet light portlet-fit portlet-datatable bordered">
                     <div class="portlet-title">
@@ -53,6 +53,7 @@
                                         <tr role="row" class="heading">
                                             <th>Name</th>
                                             <th>Email</th>
+                                            <th>Reports</th>
                                             <th>Is Active?</th>
                                             <th>Is Featured?</th>
                                             <th>Actions</th>
@@ -68,10 +69,10 @@
             </div>
         </div>
     </div>
-    <!-- END CONTENT BODY --> 
+    <!-- END CONTENT BODY -->
 </div>
 @endsection
-@push('scripts') 
+@push('scripts')
 <script>
     $(function () {
         var oTable = $('#companyDatatableAjax').DataTable({
@@ -79,8 +80,8 @@
             serverSide: true,
             stateSave: true,
             searching: false,
-            /*		
-             "order": [[1, "asc"]],            
+            /*
+             "order": [[1, "asc"]],
              paging: true,
              info: true,
              */
@@ -95,6 +96,7 @@
             }, columns: [
                 {data: 'name', name: 'name'},
                 {data: 'email', name: 'email'},
+                {data: 'reported_by', name: 'reported_by'},
                 {data: 'is_active', name: 'is_active'},
                 {data: 'is_featured', name: 'is_featured'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
@@ -189,5 +191,5 @@
                     }
                 });
     }
-</script> 
+</script>
 @endpush
