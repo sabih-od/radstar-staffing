@@ -13,6 +13,6 @@ Route::prefix('company')->name('company.')->group(function () {
     Route::post('/password/email', 'Company\Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
     Route::get('/enter/otp/form', 'Company\Auth\ForgotPasswordController@enterOtpForm')->name('enter.otp.form');
     Route::post('/verify/otp', 'Company\Auth\ForgotPasswordController@verifyOtp')->name('verify.otp');
-    Route::get('/password/reset', 'Company\Auth\ResetPasswordController@showResetForm')->name('password.reset.form');
+    Route::get('/password/reset/{token}', 'Company\Auth\ResetPasswordController@showResetForm')->name('password.reset.form');
     Route::post('/password/reset', 'Company\Auth\ResetPasswordController@resetPassword')->name('password.reset');
 });

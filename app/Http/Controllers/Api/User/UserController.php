@@ -42,7 +42,8 @@ class UserController extends Controller
      *     },
      * )
      */
-    public function myProfile(){
+    public function myProfile()
+    {
 
         $response = $this->userProfileService->profile($this->candidate);
 
@@ -50,7 +51,7 @@ class UserController extends Controller
             return APIResponse::error($response->getMessage());
         }
 
-        return APIResponse::success('Candidate profile',$response);
+        return APIResponse::success('Candidate profile', $response);
     }
 
 
@@ -167,15 +168,16 @@ class UserController extends Controller
      *     }
      * )
      */
-    public function updateProfile(Request $request){
+    public function updateProfile(Request $request)
+    {
 
-        $response = $this->userProfileService->updateProfile($request,$this->candidate);
+        $response = $this->userProfileService->updateProfile($request, $this->candidate);
 
         if ($response instanceof \Exception) {
             return APIResponse::error($response->getMessage());
         }
 
-        return APIResponse::success('You have updated your profile successfully',$response);
+        return APIResponse::success('You have updated your profile successfully', $response);
     }
 
     /**
@@ -215,15 +217,16 @@ class UserController extends Controller
      *     }
      * )
      */
-    public function updateSummary(Request $request){
+    public function updateSummary(Request $request)
+    {
         $summary = $request->input('summary');
-        $response = $this->userProfileService->updateProfileSummary($this->candidate,$summary);
+        $response = $this->userProfileService->updateProfileSummary($this->candidate, $summary);
 
         if ($response instanceof \Exception) {
             return APIResponse::error($response->getMessage());
         }
 
-        return APIResponse::success('You have updated your profile summary successfully',$response);
+        return APIResponse::success('You have updated your profile summary successfully', $response);
     }
 
     /**
@@ -239,14 +242,15 @@ class UserController extends Controller
      *     },
      * )
      */
-    public function ProfileCv(){
+    public function ProfileCv()
+    {
 
         $response = $this->userProfileService->ProfileCv($this->candidate);
         if ($response instanceof \Exception) {
             return APIResponse::error($response->getMessage());
         }
 
-        return APIResponse::success('Profile CVs',$response);
+        return APIResponse::success('Profile CVs', $response);
     }
 
     /**
