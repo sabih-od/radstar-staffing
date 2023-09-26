@@ -54,10 +54,13 @@ class ResetPasswordController extends Controller
      * @param string|null $token
      * @return \Illuminate\Http\Response
      */
-    public function showResetForm(Request $request, $token = null)
+    public function showResetForm($token)
     {
+
+        $company = Company::where('id', decrypt($token))->first();
+
         return view('company_auth.passwords.reset')->with(
-            ['token' => $token, 'email' => $request->email]
+            ['email' => $company->email]
         );
     }
 
