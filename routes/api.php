@@ -88,6 +88,8 @@ Route::group([
     Route::post('password/reset', [CompanyForgetPasswordController::class, 'resetPassword']);
  //   End Initial setup
 
+//Get specific company detail
+    Route::get('/detail/{id}/', [CompanyController::class, 'getCompanyDetail']);
  //Get specific company follower
     Route::get('/followers/{id}/{limit}/{page}', [CompanyController::class, 'getFollowers']);
 //Get specific company Job
