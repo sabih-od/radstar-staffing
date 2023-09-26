@@ -14,7 +14,7 @@ use App\Http\Controllers\Api\Company\Auth\RegisterController as CompanyRegisterC
 use App\Http\Controllers\Api\Company\Auth\LoginController as CompanyLoginController;
 use App\Http\Controllers\Api\Company\Auth\ForgetPasswordController as CompanyForgetPasswordController;
 use App\Http\Controllers\Api\Company\Job\JobController as CompanyJobController;
-use App\Http\Controllers\Api\Company\Job\JobDropdownController as CompanyJobDetailController;
+use App\Http\Controllers\Api\Company\Job\JobDetailController as CompanyJobDetailController;
 use App\Http\Controllers\Api\Company\Job\JobSeekerController;
 
 use App\Http\Controllers\Api\location\CityController;
@@ -46,8 +46,8 @@ Route::get('states/{countryId}', [StateController::class, 'getStates']);
 Route::get('cities/{stateId}', [CityController::class, 'getCities']);
 Route::post('contact', [ContactController::class, 'contact']);
 
-//Get specific company follower
-Route::get('company/followers/{id}/{offset}', [CompanyController::class, 'getFollowers']);
+Route::get('job-seekers/{limit}/{page}', [JobSeekerController::class, 'get']);
+
 
 Route::group([
     'prefix' => 'candidate'
@@ -88,15 +88,19 @@ Route::group([
     Route::post('password/reset', [CompanyForgetPasswordController::class, 'resetPassword']);
  //   End Initial setup
 
+ //Get specific company follower
+    Route::get('/followers/{id}/{limit}/{page}', [CompanyController::class, 'getFollowers']);
+//Get specific company Job
+    Route::get('job-detail/{id}', [CompanyJobDetailController::class, 'getJobDetails']);
+
 //This for companies which have Company model
     Route::middleware(['redirectIfCompany', 'auth:company_api'])->group(function () {
         Route::post('logout', [CompanyLoginController::class, 'logout']);
         Route::post('update', [CompanyController::class, 'update']);
-        Route::get('job-seekers', [JobSeekerController::class, 'get']);
         Route::group([
             'prefix' => 'job'
         ], function () {
-            Route::get('get/{offset}', [CompanyJobController::class, 'get']);
+            Route::get('all/{id}/{limit}/{page}', [CompanyJobController::class, 'get']);
             Route::post('create', [CompanyJobController::class, 'create']);
             Route::get('dropdown_data', [CompanyJobDetailController::class, 'JobRelatedData']);
         });

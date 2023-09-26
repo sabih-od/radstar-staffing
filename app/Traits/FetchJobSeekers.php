@@ -63,7 +63,7 @@ trait FetchJobSeekers
         'users.search'
     );
 
-    public function fetchJobSeekers($search = '', $industry_ids = array(), $functional_area_ids = array(), $country_ids = array(), $state_ids = array(), $city_ids = array(), $career_level_ids = array(), $gender_ids = array(), $job_experience_ids = array(), $current_salary = 0, $expected_salary = 0, $salary_currency = '', $order_by = 'id', $limit = 10)
+    public function fetchJobSeekers($search = '', $industry_ids = array(), $functional_area_ids = array(), $country_ids = array(), $state_ids = array(), $city_ids = array(), $career_level_ids = array(), $gender_ids = array(), $job_experience_ids = array(), $current_salary = 0, $expected_salary = 0, $salary_currency = '', $order_by = 'id', $limit = 10 , $page = null)
     {
         $asc_desc = 'DESC';
         $query = User::select($this->fields);
@@ -71,7 +71,14 @@ trait FetchJobSeekers
 
         $query->orderBy('users.id', 'DESC');
         //echo $query->toSql();exit;
-        return $query->paginate($limit);
+
+        if($page == null)
+        {
+            return $query->paginate($limit);
+        }
+        return $query->paginate($limit,$page);
+
+
     }
 
     public function fetchIdsArray($search = '', $industry_ids = array(), $functional_area_ids = array(), $country_ids = array(), $state_ids = array(), $city_ids = array(), $career_level_ids = array(), $gender_ids = array(), $job_experience_ids = array(), $current_salary = 0, $expected_salary = 0, $salary_currency = '', $field = 'users.id')
