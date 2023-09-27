@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Company;
 use App\Helpers\APIResponse;
 use App\Repositories\Companies\Auth\CompanyRepository;
 use App\Traits\PHPCustomMail;
@@ -168,5 +169,11 @@ class CompanyService
     public function getFollowersAndCount($users, $followers)
     {
         return ['followers' => $users, 'followers_count' => $followers];
+    }
+
+    public function generateAndSetSlug(Company $company)
+    {
+        $slug = Str::slug($company->name, '-') . '-' . $company->id;
+        $company->slug = $slug;
     }
 }

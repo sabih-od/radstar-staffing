@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\CompanyApiRegisterFormRequest;
 use App\Http\Requests\Front\CompanyFrontRegisterFormRequest;
 use App\Repositories\Companies\Auth\CompanyRepository;
+use App\Services\CompanyService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use OA\PathItem;
@@ -22,9 +23,10 @@ class RegisterController extends Controller
 
     protected $companyRepository;
 
-    public function __construct(CompanyRepository $companyRepository)
+    public function __construct(CompanyRepository $companyRepository, CompanyService $companyService)
     {
         $this->companyRepository = $companyRepository;
+        $this->companyService = $companyService;
     }
     /**
      * @OA\Post(
@@ -77,6 +79,7 @@ class RegisterController extends Controller
     {
         try {
             $password = Hash::make($request->input('password'));
+
             $array = [
                 'name' => $request->input('name'),
                 'email' => $request->input('email'),
@@ -84,6 +87,8 @@ class RegisterController extends Controller
                 // Add other fields and their values as needed
             ];
             $company = $this->companyRepository->create($array);
+            $this->companyService->generateAndSetSlug($company);
+            $company->update();
             $token = $company->createToken('MyApp')->accessToken;
 
             return APIResponse::success(
